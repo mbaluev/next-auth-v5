@@ -6,8 +6,7 @@ export default function Home() {
   return (
     <main
       className="flex h-full flex-col items-center justify-center
-        bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 to-gray-950
-        "
+        bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 to-gray-950"
     >
       <div className="space-y-6 text-center">
         <div className="flex flex-row gap-x-4 items-center justify-center">

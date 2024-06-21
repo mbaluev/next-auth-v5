@@ -70,7 +70,7 @@ export const LoginForm = () => {
           </div>
           <FormError message="something went wrong" />
           <FormSuccess message="email sent" />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" size="lg">
             login
           </Button>
         </form>
