@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { LoginButton } from '@/components/auth/login-button';
+import { LockClosedIcon } from '@radix-ui/react-icons';
 
 export default function Home() {
   return (
@@ -10,7 +11,10 @@ export default function Home() {
         "
     >
       <div className="space-y-6 text-center">
-        <h1 className="text-6xl text-white">🤙 Auth</h1>
+        <div className="flex flex-row gap-x-4 items-center justify-center">
+          <LockClosedIcon className="h-14 w-14 text-white" />
+          <h1 className="text-6xl text-white font-semibold">auth</h1>
+        </div>
         <p className="text-lg text-white">a simple authentication service</p>
         <div>
           <LoginButton>
