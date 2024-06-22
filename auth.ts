@@ -23,11 +23,17 @@ export const {
     },
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existingUser = await getUserById(user.id);
-    //   if (!existingUser || !existingUser.emailVerified) return false;
-    //   return true;
-    // },
+    async signIn({ user, account }) {
+      // allow oauth without email verification
+      if (account?.provider !== 'credentials') return true;
+
+      // prevent sign in without  email verification
+      const existingUser = await getUserById(user.id as string);
+      if (!existingUser?.emailVerified) return false;
+
+      // todo: add 2fa check
+      return true;
+    },
     async jwt({ token }) {
       if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);
