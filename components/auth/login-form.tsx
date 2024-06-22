@@ -46,6 +46,7 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
+      loading={isPending}
       headerLabel="welcome back"
       backButtonLabel="don't have an account?"
       backButtonHref="/auth/register"
