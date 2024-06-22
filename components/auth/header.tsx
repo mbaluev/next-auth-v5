@@ -1,4 +1,5 @@
-import { LockClosedIcon, ReloadIcon } from '@radix-ui/react-icons';
+import { LockClosedIcon } from '@radix-ui/react-icons';
+import { Spinner } from '@/components/ui/spinner';
 
 interface HeaderProps {
   label: string;
@@ -10,7 +11,7 @@ export const Header = ({ label, loading }: HeaderProps) => {
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <div className="flex flex-row gap-x-4 items-center">
         {loading ? (
-          <ReloadIcon className="h-6 w-6 animate-spin" />
+          <Spinner className="h-6 w-6 animate-spin" />
         ) : (
           <LockClosedIcon className="h-6 w-6" />
         )}
