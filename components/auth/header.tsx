@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 interface HeaderProps {
-  label: string;
+  label?: string;
   loading?: boolean;
 }
 
@@ -21,7 +21,7 @@ export const Header = ({ label, loading }: HeaderProps) => {
           <Link href="/">auth</Link>
         </Button>
       </div>
-      <p className="text-muted-foreground">{label}</p>
+      {label && <p className="text-muted-foreground">{label}</p>}
     </div>
   );
 };
