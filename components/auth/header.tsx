@@ -1,5 +1,7 @@
 import { LockClosedIcon } from '@radix-ui/react-icons';
 import { Spinner } from '@/components/ui/spinner';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface HeaderProps {
   label: string;
@@ -9,13 +11,15 @@ interface HeaderProps {
 export const Header = ({ label, loading }: HeaderProps) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <div className="flex flex-row gap-x-4 items-center">
+      <div className="flex flex-row items-center">
         {loading ? (
-          <Spinner className="h-6 w-6 animate-spin" />
+          <Spinner className="h-8 w-8 animate-spin" />
         ) : (
-          <LockClosedIcon className="h-6 w-6" />
+          <LockClosedIcon className="h-8 w-8" />
         )}
-        <h1 className="text-3xl font-semibold">auth</h1>
+        <Button variant="link" className="text-3xl font-semibold" asChild>
+          <Link href="/">auth</Link>
+        </Button>
       </div>
       <p className="text-muted-foreground">{label}</p>
     </div>
