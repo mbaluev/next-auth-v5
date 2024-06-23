@@ -13,7 +13,7 @@ export default function Home() {
           <LockClosedIcon className="h-14 w-14 text-white" />
           <h1 className="text-6xl text-white font-semibold">auth</h1>
         </div>
-        <p className="text-lg text-white">a simple authentication service</p>
+        <p className="text-lg text-muted-foreground">a simple authentication service</p>
         <div>
           <LoginButton>
             <Button variant="secondary" size="lg">
