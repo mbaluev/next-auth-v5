@@ -47,6 +47,7 @@ export const RegisterForm = () => {
 
   return (
     <CardWrapper
+      loading={isPending}
       headerLabel="create an account"
       backButtonLabel="already have an account?"
       backButtonHref="/auth/login"
