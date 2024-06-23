@@ -33,7 +33,7 @@ export const login = async (values: z.infer<typeof loginSchema>) => {
   }
 
   try {
-    await signIn('credentials', {
+    return await signIn('credentials', {
       email,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,

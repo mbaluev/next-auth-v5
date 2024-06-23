@@ -23,9 +23,14 @@ export const registerSchema = z.object({
     .email({
       message: 'invalid email',
     }),
-  password: z.string().min(6, {
-    message: 'minimum 6 characters required',
-  }),
+  password: z
+    .string()
+    .min(1, {
+      message: 'password is required',
+    })
+    .min(6, {
+      message: 'minimum 6 characters required',
+    }),
   name: z.string().min(1, {
     message: 'name is required',
   }),
