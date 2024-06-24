@@ -12,11 +12,11 @@ import { getVerificationTokenByToken } from '@/data/verification-token';
 import { router } from 'next/client';
 
 export const NewVerificationForm = () => {
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
-
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
+
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
 
   const onSubmit = useCallback(() => {
     if (!token) {
