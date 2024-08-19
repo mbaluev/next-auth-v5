@@ -1,4 +1,4 @@
-import { ResetForm } from '@/components/auth/reest-form';
+import { ResetForm } from '@/components/auth/reset-form';
 
 const NewVerificationPage = () => {
   return <ResetForm />;

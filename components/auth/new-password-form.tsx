@@ -18,7 +18,6 @@ import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
-import { reset } from '@/actions/reset';
 import { useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
 
