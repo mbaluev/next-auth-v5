@@ -1,18 +1,22 @@
-import { auth, signOut } from '@/auth';
+'use client';
 
-const SettingsPage = async () => {
-  const session = await auth();
+import { Button } from '@/components/ui/button';
+import { signOut } from 'next-auth/react';
+import { logout } from '@/actions/logout';
+import { useCurrentUser } from '@/hooks/use-current-user';
+
+const SettingsPage = () => {
+  const user = useCurrentUser();
+  const onClick = async () => {
+    await logout();
+    await signOut();
+  };
   return (
-    <div>
-      {JSON.stringify(session)}
-      <form
-        action={async () => {
-          'use server';
-          await signOut();
-        }}
-      >
-        <button type="submit">sign out</button>
-      </form>
+    <div className="flex flex-col gap-4">
+      <p className="break-words">{user ? JSON.stringify(user, null, 4) : '{ ... }'}</p>
+      <Button onClick={onClick} className="w-fit">
+        sign out
+      </Button>
     </div>
   );
 };

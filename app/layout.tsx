@@ -1,5 +1,7 @@
 import { JetBrains_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -10,10 +12,13 @@ export const metadata: Metadata = {
   description: 'next-auth-v5',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const session = await auth();
   return (
-    <html lang="en">
-      <body className={font.className}>{children}</body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body className={font.className}>{children}</body>
+      </html>
+    </SessionProvider>
   );
 }
