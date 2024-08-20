@@ -9,7 +9,7 @@ import { UserButton } from '@/components/auth/user-button';
 export const Navbar = () => {
   const pathname = usePathname();
   return (
-    <Card className="flex justify-between items-center p-4 rounded-md shadow-sm">
+    <Card className="flex justify-between items-center p-4 rounded-md shadow-sm w-full">
       <div className="flex gap-x-2">
         <Button asChild variant={pathname === '/server' ? 'default' : 'ghost'}>
           <Link href="/server">server</Link>

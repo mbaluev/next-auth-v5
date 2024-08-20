@@ -9,7 +9,7 @@ interface UserInfoProps {
 
 export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
-    <Card className="rounded-md shadow-sm">
+    <Card className="rounded-md shadow-sm max-w-[500px] w-full">
       <CardHeader>
         <p className="text-xl">{label}</p>
       </CardHeader>
