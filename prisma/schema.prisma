@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum UseRole {
+enum UserRole {
   ADMIN
   USER
 }
@@ -19,7 +19,7 @@ model User {
   emailVerified         DateTime?
   image                 String?
   password              String?
-  role                  UseRole                @default(USER)
+  role                  UserRole               @default(USER)
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?

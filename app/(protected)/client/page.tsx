@@ -5,7 +5,7 @@ import { useCurrentUser } from '@/hooks/use-current-user';
 
 const ClientPage = () => {
   const user = useCurrentUser();
-  return <UserInfo user={user} label="📱 client component" />;
+  return <UserInfo user={user} label="😎 client component" />;
 };
 
 export default ClientPage;

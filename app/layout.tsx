@@ -1,8 +1,9 @@
+import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
-import type { Metadata } from 'next';
+import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
@@ -17,7 +18,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={font.className}>{children}</body>
+        <body className={font.className}>
+          {children}
+          <Toaster richColors closeButton theme="light" className={font.className} />
+        </body>
       </html>
     </SessionProvider>
   );
