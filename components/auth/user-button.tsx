@@ -1,6 +1,6 @@
 'use client';
 
-import { PersonIcon } from '@radix-ui/react-icons';
+import { AvatarIcon } from '@radix-ui/react-icons';
 import { ExitIcon } from '@radix-ui/react-icons';
 import {
   DropdownMenu,
@@ -20,7 +20,7 @@ export const UserButton = () => {
         <Avatar>
           <AvatarImage src={user?.image || ''} />
           <AvatarFallback className="bg-gray-100">
-            <PersonIcon />
+            <AvatarIcon className="h-8 w-8" />
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

@@ -1,23 +1,36 @@
 'use client';
 
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { signOut } from 'next-auth/react';
-import { logout } from '@/actions/logout';
-import { useCurrentUser } from '@/hooks/use-current-user';
+import { settings } from '@/actions/settings';
+import { useTransition } from 'react';
+import { useSession } from 'next-auth/react';
 
 const SettingsPage = () => {
-  const user = useCurrentUser();
-  const onClick = async () => {
-    await logout();
-    await signOut();
+  const { update } = useSession();
+  const [isPending, startTransition] = useTransition();
+
+  const onClick = () => {
+    startTransition(() => {
+      settings({
+        name: 'something different 1',
+      }).then(() => {
+        update();
+      });
+    });
   };
+
   return (
-    <div className="flex flex-col gap-4">
-      <p className="break-words">{user ? JSON.stringify(user, null, 4) : '{ ... }'}</p>
-      <Button onClick={onClick} className="w-fit">
-        sign out
-      </Button>
-    </div>
+    <Card className="rounded-md shadow-sm w-full">
+      <CardHeader>
+        <p className="text-xl">⚙️ settings</p>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Button disabled={isPending} onClick={onClick}>
+          update name
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 

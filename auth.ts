@@ -43,19 +43,25 @@ export const {
 
       return true;
     },
+    async session({ token, session }) {
+      if (session.user && token.sub) session.user.id = token.sub;
+      if (session.user && token.role) session.user.role = token.role;
+      if (session.user) session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+      if (session.user) {
+        session.user.name = token.name;
+        session.user.email = token.email as string;
+      }
+      return session;
+    },
     async jwt({ token }) {
       if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
       return token;
-    },
-    async session({ token, session }) {
-      if (token.sub && session.user) session.user.id = token.sub;
-      if (token.role && session.user) session.user.role = token.role;
-      if (session.user) session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-      return session;
     },
   },
   adapter: PrismaAdapter(db),
