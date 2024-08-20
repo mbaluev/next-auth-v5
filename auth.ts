@@ -48,11 +48,13 @@ export const {
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
       token.role = existingUser.role;
+      token.isTwoFactorEnableed = existingUser.isTwoFactorEnabled;
       return token;
     },
     async session({ token, session }) {
       if (token.sub && session.user) session.user.id = token.sub;
       if (token.role && session.user) session.user.role = token.role;
+      if (session.user) session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
       return session;
     },
   },
