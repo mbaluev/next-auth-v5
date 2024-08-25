@@ -15,7 +15,7 @@ export default function Home() {
         </div>
         <p className="text-lg text-muted-foreground">a simple authentication service</p>
         <div>
-          <LoginButton>
+          <LoginButton mode="redirect" asChild>
             <Button variant="secondary" size="lg">
               Sign in
             </Button>
