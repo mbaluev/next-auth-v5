@@ -13,7 +13,7 @@ const SettingsPage = () => {
   const onClick = () => {
     startTransition(() => {
       settings({
-        name: 'something different 1',
+        name: 'something different',
       }).then(() => {
         update();
       });
