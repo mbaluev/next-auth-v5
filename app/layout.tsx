@@ -18,6 +18,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <SessionProvider session={session}>
       <html lang="en">
+        <head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
+        </head>
         <body className={font.className}>
           {children}
           <Toaster richColors closeButton theme="light" className={font.className} />

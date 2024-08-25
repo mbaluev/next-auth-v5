@@ -1,8 +1,23 @@
 import * as z from 'zod';
+import { UserRole } from '@prisma/client';
 
-export const settingsSchema = z.object({
-  name: z.optional(z.string()),
-});
+export const settingsSchema = z
+  .object({
+    name: z.optional(z.string()),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+    role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    email: z.optional(z.string().email()),
+    password: z.optional(z.string().min(1)),
+    newPassword: z.optional(z.string().min(1)),
+  })
+  .refine((data) => !(data.newPassword && !data.password), {
+    message: 'password is required',
+    path: ['password'],
+  })
+  .refine((data) => !(data.password && !data.newPassword), {
+    message: 'new password is required',
+    path: ['newPassword'],
+  });
 
 export const loginSchema = z.object({
   email: z
