@@ -19,6 +19,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <SessionProvider session={session}>
       <html lang="en">
         <head>
+          <link rel="icon" type="image/png" sizes="64x64" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+          <meta name="msapplication-square70x70logo" content="/favicon.ico" />
+          <meta name="msapplication-square150x150logo" content="/favicon.ico" />
+          <meta name="msapplication-square310x310logo" content="/favicon.ico" />
+          <meta name="msapplication-wide310x150logo" content="/favicon.ico" />
+          <meta name="msapplication-TileColor" content="#111" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
