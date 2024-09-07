@@ -12,6 +12,8 @@
 .idea
 .DS_Store
 *.pem
+client.cert
+client.key
 
 # debug
 npm-debug.log*

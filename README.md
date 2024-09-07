@@ -15,3 +15,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## docker compose
+### One command
+`docker compose down --rmi all && docker compose pull && docker compose up -d`
+### Separate commands
+1. `docker system prune -a` - clean up
+2. `docker compose down --rmi all` - stop all containers
+3. `docker compose pull` - pull all images
+4. `docker compose up --build -d` - up containers
