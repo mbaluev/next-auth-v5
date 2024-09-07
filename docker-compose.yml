@@ -2,9 +2,9 @@ version: '3'
 
 services:
 
-  postgres:
+  auth-postgres:
     image: postgres
-    container_name: postgres
+    container_name: auth-postgres
     restart: always
     tty: true
     env_file:
@@ -20,19 +20,19 @@ services:
     networks:
       - node-network
 
-  client:
+  auth-client:
     image: mbaluev/next-auth-v5:latest
     platform: linux/x86_64
-    container_name: client
+    container_name: auth-client
     networks:
       - node-network
     ports:
       - "3000:3000"
 
-  nginx:
+  auth-nginx:
     build:
       context: _nginx
-    container_name: nginx
+    container_name: auth-nginx
     restart: always
     tty: true
     ports:
@@ -40,8 +40,8 @@ services:
     networks:
       - node-network
     depends_on:
-      - client
-      - postgres
+      - auth-client
+      - auth-postgres
 
 networks:
   node-network:
