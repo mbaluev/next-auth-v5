@@ -10,13 +10,13 @@ services:
     env_file:
       - ./.env.local
     expose:
-      - "5433"
+      - "5432"
     ports:
-      - "5433:5433"
+      - "5432:5432"
     volumes:
       - ./_db_backups:/home/postgres
       - ./_db_data:/var/lib/postgresql/data
-    command: -p 5433
+    command: -p 5432
     networks:
       - node-network
 
