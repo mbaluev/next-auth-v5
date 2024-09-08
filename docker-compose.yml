@@ -14,8 +14,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./_db_backups:/home/postgres
-      - ./_db_data:/var/lib/postgresql/data
+      - ./_backups:/home/postgres
+      - ./_data:/var/lib/postgresql/data
     command: -p 5432
     networks:
       - node-network

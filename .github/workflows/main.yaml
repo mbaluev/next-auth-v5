@@ -24,8 +24,8 @@ jobs:
           echo APP_URL=${{ vars.APP_URL }} >> .env
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
           echo AUTH_SECRET=${{ secrets.AUTH_SECRET }} >> .env
-          echo GITHUB_CLIENT_ID=${{ secrets.GITHUB_CLIENT_ID }} >> .env
-          echo GITHUB_CLIENT_SECRET=${{ secrets.GITHUB_CLIENT_SECRET }} >> .env
+          echo GIT_CLIENT_ID=${{ secrets.GIT_CLIENT_ID }} >> .env
+          echo GIT_CLIENT_SECRET=${{ secrets.GIT_CLIENT_SECRET }} >> .env
           echo GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} >> .env
           echo GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} >> .env
           echo RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} >> .env
