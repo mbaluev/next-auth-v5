@@ -14,6 +14,8 @@
 *.pem
 client.cert
 client.key
+_data
+_backups
 
 # debug
 npm-debug.log*
