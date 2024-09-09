@@ -23,3 +23,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 2. `docker compose down --rmi all` - stop all containers
 3. `docker compose pull` - pull all images
 4. `docker compose up --build -d` - up containers
+
+`psql -h localhost -p 5433 -d auth -U sa -W`
+`psql -h <REMOTE HOST> -p <REMOTE PORT> -U <DB_USER> <DB_NAME>`
+`SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';`
