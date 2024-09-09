@@ -29,7 +29,7 @@ services:
 
   auth-nginx:
     build:
-      context: _nginx
+      context: nginx
     container_name: auth-nginx
     restart: always
     tty: true
