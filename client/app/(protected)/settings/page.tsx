@@ -72,10 +72,6 @@ const SettingsPage = () => {
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-4">
-              <FormItem>
-                <FormLabel>app-url</FormLabel>
-                <FormControl>{process.env.APP_URL}</FormControl>
-              </FormItem>
               {!user?.isOAuth && (
                 <Fragment>
                   <FormField
