@@ -24,9 +24,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### psql
 1. `psql -h <REMOTE HOST> -p <REMOTE PORT> -U <DB_USER> <DB_NAME>` - connect to db example
 2. `psql -h localhost -p 5433 -d auth -U sa -W` - connect to db
-3. `SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';` - select table names
+3. `SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public';` - select table names
 
 ### prisma
 1. `prisma generate --schema=./prisma/schema.prisma` - generate client
 2. `prisma migrate dev --name init` - create the first migration
-2. `prisma migrate deploy --schema=./prisma/schema.prisma` - deploy migrations
+3. `prisma migrate deploy --schema=./prisma/schema.prisma` - deploy migrations

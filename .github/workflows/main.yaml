@@ -14,19 +14,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-#      - name: create .env file
-#        uses: SpicyPizza/create-envfile@v2.0
-#        with:
-#          envkey_APP_URL: ${{ vars.APP_URL }}
-#          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-#          envkey_AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-#          envkey_GIT_CLIENT_ID: ${{ secrets.GIT_CLIENT_ID }}
-#          envkey_GIT_CLIENT_SECRET: ${{ secrets.GIT_CLIENT_SECRET }}
-#          envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-#          envkey_GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-#          envkey_RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-#          directory: client
-#          file_name: .env
       - name: create client/.env file
         run: |
           cd client
