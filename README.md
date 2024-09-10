@@ -12,8 +12,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. Install dependencies: `yarn`
 2. Run the development server: `yarn dev`
-
-2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### docker compose
 1. `docker system prune -a` - clean up
@@ -27,6 +26,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 3. `SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public';` - select table names
 
 ### prisma
-1. `prisma generate --schema=./prisma/schema.prisma` - generate client
-2. `prisma migrate dev --name init` - create the first migration
-3. `prisma migrate deploy --schema=./prisma/schema.prisma` - deploy migrations
+1. `npx prisma studio` - open prisma studio
+2. `npx prisma generate --schema=./prisma/schema.prisma` - generate client
+3. `npx prisma migrate dev --name init` - create the first migration
+4. `npx prisma migrate deploy --schema=./prisma/schema.prisma` - deploy migrations
+
+### shadcn/ui
+1. `npx shadcn-ui@latest add dialog` - add dialog to library
