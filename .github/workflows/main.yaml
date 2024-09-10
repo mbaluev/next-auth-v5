@@ -27,8 +27,9 @@ jobs:
 #          envkey_RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 #          directory: client
 #          file_name: .env
-      - name: create .env file
+      - name: create client/.env file
         run: |
+          cd client
           touch .env
           echo APP_URL=${{ vars.APP_URL }} >> .env
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
