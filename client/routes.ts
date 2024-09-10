@@ -3,10 +3,7 @@
  * these routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = [
-  `${process.env.APP_URL}`,
-  `${process.env.APP_URL}/auth/new-verification`,
-];
+export const publicRoutes: string[] = ['/', '/auth/new-verification'];
 
 /**
  * an array of routes that are used for authentication
@@ -14,11 +11,11 @@ export const publicRoutes: string[] = [
  * @type {string[]}
  */
 export const authRoutes: string[] = [
-  `${process.env.APP_URL}/auth/login`,
-  `${process.env.APP_URL}/auth/register`,
-  `${process.env.APP_URL}/auth/error`,
-  `${process.env.APP_URL}/auth/reset`,
-  `${process.env.APP_URL}/auth/new-password`,
+  '/auth/login',
+  '/auth/register',
+  '/auth/error',
+  '/auth/reset',
+  '/auth/new-password',
 ];
 
 /**
@@ -26,10 +23,10 @@ export const authRoutes: string[] = [
  * routes that start with this prefix are used for API authentication purposes
  * @type {string}
  */
-export const apiAuthPrefix: string = `${process.env.APP_URL}/api/auth`;
+export const apiAuthPrefix: string = '/api/auth';
 
 /**
  * the default redirect path after logging in
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT: string = `${process.env.APP_URL}/settings`;
+export const DEFAULT_LOGIN_REDIRECT: string = '/settings';
