@@ -58,7 +58,7 @@ export const login = async (values: z.infer<typeof loginSchema>, callbackUrl?: s
     }
   }
 
-  const redirectTo = `${process.env.APP_URL}${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
+  const redirectTo = `http://localhost:3000${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
   console.log('--> redirectTo:', redirectTo);
 
   try {
