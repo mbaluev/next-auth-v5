@@ -58,11 +58,13 @@ export const login = async (values: z.infer<typeof loginSchema>, callbackUrl?: s
     }
   }
 
+  const redirectTo = `${process.env.APP_URL}${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
+  console.log(redirectTo);
   try {
     return await signIn('credentials', {
       email,
       password,
-      redirectTo: `${process.env.APP_URL}${callbackUrl || DEFAULT_LOGIN_REDIRECT}`,
+      redirectTo,
     });
   } catch (err) {
     if (err instanceof AuthError) {
