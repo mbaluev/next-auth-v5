@@ -11,8 +11,9 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const onClick = async (provider: 'google' | 'github') => {
+    const redirectTo = `http://localhost:3000${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
     await signIn(provider, {
-      callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      callbackUrl: redirectTo,
     });
   };
   return (
