@@ -58,14 +58,11 @@ export const login = async (values: z.infer<typeof loginSchema>, callbackUrl?: s
     }
   }
 
-  const redirectTo = `http://localhost:3000${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
-  console.log('--> redirectTo:', redirectTo);
-
   try {
     return await signIn('credentials', {
       email,
       password,
-      redirectTo,
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
   } catch (err) {
     if (err instanceof AuthError) {
