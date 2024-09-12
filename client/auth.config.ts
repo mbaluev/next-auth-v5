@@ -11,12 +11,10 @@ export default {
     Google({
       clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
       clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET,
-      redirectProxyUrl: process.env.AUTH_REDIRECT_PROXY_URL,
     }),
     GitHub({
       clientId: process.env.AUTH_GITHUB_CLIENT_ID,
       clientSecret: process.env.AUTH_GITHUB_CLIENT_SECRET,
-      redirectProxyUrl: process.env.AUTH_REDIRECT_PROXY_URL,
     }),
     Credentials({
       async authorize(credentials) {
