@@ -11,10 +11,9 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const onClick = async (provider: 'google' | 'github') => {
-    const redirectTo = `http://localhost:3000${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
-    await signIn(provider, {
-      callbackUrl: redirectTo,
-    });
+    // const redirectTo = `http://localhost:3000${callbackUrl || DEFAULT_LOGIN_REDIRECT}`;
+    const callbackUri = new URL(callbackUrl || DEFAULT_LOGIN_REDIRECT, window.location.href).href;
+    await signIn(provider, { callbackUrl: callbackUri });
   };
   return (
     <div className="flex items-center w-full gap-x-6">
