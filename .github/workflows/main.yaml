@@ -56,14 +56,13 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
-      - name: Stop running container
+      - name: Stop and remove docker containers
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker stop auth-client || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker rm auth-client || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
-      - name: Pull Docker image
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker system prune -a'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker compose down --rmi all'
+      - name: Pull docker compose
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker pull mbaluev/next-auth-v5:latest'
-      - name: Run new container
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'docker compose pul'
+      - name: Run docker compose
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker run -d --name auth-client -p 80:3000 mbaluev/next-auth-v5:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker compose up --build -d'
