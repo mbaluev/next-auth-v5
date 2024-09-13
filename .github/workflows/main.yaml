@@ -63,7 +63,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
       - name: Git pull
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'cd /root/next-auth-v5'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo cd /root/next-auth-v5'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo git pull'
       - name: Pull docker compose
         run: |
