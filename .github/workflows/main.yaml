@@ -16,6 +16,7 @@ jobs:
       - name: create client/.env file
         run: |
           cd client
+          rm .env
           touch .env
           echo APP_URL=${{ vars.APP_URL }} >> .env
           echo AUTH_URL=${{ vars.AUTH_URL }} >> .env
