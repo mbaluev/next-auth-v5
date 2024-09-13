@@ -63,7 +63,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
       - name: Pull docker compose
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'docker compose pul'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'docker compose pull'
       - name: Run docker compose
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker compose up --build -d'
