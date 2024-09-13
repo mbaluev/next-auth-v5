@@ -58,8 +58,9 @@ jobs:
           chmod 600 key.pem
       - name: Stop and remove docker containers
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker system prune -a'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker compose down --rmi all'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker stop auth-client || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker rm auth-client || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'sudo docker image prune -a --force'
       - name: Pull docker compose
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ec2-16-171-146-170.eu-north-1.compute.amazonaws.com 'docker compose pul'
