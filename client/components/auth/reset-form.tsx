@@ -58,7 +58,6 @@ export const ResetForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -75,7 +74,7 @@ export const ResetForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             send reset email
           </Button>
         </form>

@@ -40,13 +40,13 @@ const AdminPage = () => {
         </RoleGate>
         <div className="flex flex-row items-center justify-between rounded-md px-4 py-2 border border-gray-200">
           <p>admin-only api route</p>
-          <Button variant="link" onClick={onApiRouteClick}>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={onApiRouteClick}>
             click to test
           </Button>
         </div>
         <div className="flex flex-row items-center justify-between rounded-md px-4 py-2 border border-gray-200">
           <p>admin-only server action</p>
-          <Button variant="link" onClick={onServerActionClick}>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={onServerActionClick}>
             click to test
           </Button>
         </div>

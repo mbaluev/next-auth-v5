@@ -62,7 +62,6 @@ export const RegisterForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -80,7 +79,6 @@ export const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -99,7 +97,6 @@ export const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>password</FormLabel>
                   <FormControl>
                     <InputPassword
                       {...field}
@@ -115,7 +112,7 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             create an account
           </Button>
         </form>

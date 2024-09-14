@@ -6,14 +6,7 @@ import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
@@ -84,7 +77,6 @@ export const LoginForm = () => {
                 name="code"
                 render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <FormLabel>two factor code</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -105,7 +97,6 @@ export const LoginForm = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="space-y-4">
-                      <FormLabel>email</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -124,7 +115,6 @@ export const LoginForm = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem className="space-y-4">
-                      <FormLabel>password</FormLabel>
                       <FormControl>
                         <InputPassword
                           {...field}
@@ -134,18 +124,18 @@ export const LoginForm = () => {
                         />
                       </FormControl>
                       <FormMessage />
-                      <Button variant="link" className="px-0" asChild>
-                        <Link href="/auth/reset">forgot password?</Link>
-                      </Button>
                     </FormItem>
                   )}
                 />
+                <Button variant="link" className="px-0 py-0 h-auto" asChild>
+                  <Link href="/auth/reset">forgot password?</Link>
+                </Button>
               </Fragment>
             )}
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             {showTwoFactor ? 'confirm' : 'login'}
           </Button>
         </form>
