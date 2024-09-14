@@ -19,6 +19,7 @@ import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
 import { register } from '@/actions/register';
+import { InputPassword } from '@/components/ui/input-password';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -100,11 +101,10 @@ export const RegisterForm = () => {
                 <FormItem className="space-y-4">
                   <FormLabel>password</FormLabel>
                   <FormControl>
-                    <Input
+                    <InputPassword
                       {...field}
                       disabled={isPending}
                       placeholder="enter password"
-                      type="password"
                       autoComplete="new-password"
                     />
                   </FormControl>

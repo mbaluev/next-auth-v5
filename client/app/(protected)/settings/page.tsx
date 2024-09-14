@@ -31,6 +31,7 @@ import {
 } from '@/components/ui/select';
 import { UserRole } from '@prisma/client';
 import { Switch } from '@/components/ui/switch';
+import { InputPassword } from '@/components/ui/input-password';
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -59,7 +60,7 @@ const SettingsPage = () => {
           if (data.error) setError(data.error);
           if (data.success) update().then(() => setSuccess(data.success));
         })
-        .catch((err) => setError('something went wrong'));
+        .catch(() => setError('something went wrong'));
     });
   };
 
@@ -94,11 +95,10 @@ const SettingsPage = () => {
                       <FormItem>
                         <FormLabel>password</FormLabel>
                         <FormControl>
-                          <Input
+                          <InputPassword
                             {...field}
                             placeholder="password"
                             autoComplete="new-password"
-                            type="password"
                             disabled={isPending}
                           />
                         </FormControl>
@@ -113,11 +113,10 @@ const SettingsPage = () => {
                       <FormItem>
                         <FormLabel>new password</FormLabel>
                         <FormControl>
-                          <Input
+                          <InputPassword
                             {...field}
                             placeholder="new password"
                             autoComplete="new-password"
-                            type="password"
                             disabled={isPending}
                           />
                         </FormControl>
@@ -162,11 +161,10 @@ const SettingsPage = () => {
                       <FormItem>
                         <FormLabel>password</FormLabel>
                         <FormControl>
-                          <Input
+                          <InputPassword
                             {...field}
                             placeholder="password"
                             autoComplete="new-password"
-                            type="password"
                             disabled={isPending}
                           />
                         </FormControl>
@@ -181,11 +179,10 @@ const SettingsPage = () => {
                       <FormItem>
                         <FormLabel>new password</FormLabel>
                         <FormControl>
-                          <Input
+                          <InputPassword
                             {...field}
                             placeholder="new password"
                             autoComplete="new-password"
-                            type="password"
                             disabled={isPending}
                           />
                         </FormControl>
