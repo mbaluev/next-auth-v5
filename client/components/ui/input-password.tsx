@@ -1,6 +1,6 @@
 import { Input, InputProps } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/core/utils/cn';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 

@@ -1,12 +1,12 @@
 'use server';
 
 import * as z from 'zod';
-import { db } from '@/lib/db';
-import { settingsSchema } from '@/schemas';
-import { getUserByEmail, getUserById } from '@/data/user';
-import { currentUser } from '@/lib/auth';
-import { generateVerificationToken } from '@/lib/tokens';
-import { sendVerificationEmail } from '@/lib/mail';
+import { db } from '@/core/utils/db';
+import { settingsSchema } from '@/core/auth/schemas';
+import { getUserByEmail, getUserById } from '@/core/auth/data/user';
+import { currentUser } from '@/core/auth/lib/current-user';
+import { generateVerificationToken } from '@/core/utils/tokens';
+import { sendVerificationEmail } from '@/core/utils/mail';
 import bcrypt from 'bcryptjs';
 
 export const settings = async (values: z.infer<typeof settingsSchema>) => {

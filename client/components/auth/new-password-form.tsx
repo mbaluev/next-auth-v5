@@ -4,7 +4,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { newPasswordSchema } from '@/schemas';
+import { newPasswordSchema } from '@/core/auth/schemas';
 import {
   Form,
   FormControl,
@@ -18,7 +18,7 @@ import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { newPassword } from '@/actions/new-password';
+import { newPassword } from '@/core/auth/actions/new-password';
 import { InputPassword } from '@/components/ui/input-password';
 
 export const NewPasswordForm = () => {

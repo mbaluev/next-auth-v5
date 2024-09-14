@@ -6,7 +6,7 @@ import { FormSuccess } from '@/components/form-success';
 import { UserRole } from '@prisma/client';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { admin } from '@/actions/admin';
+import { admin } from '@/core/auth/actions/admin';
 
 const AdminPage = () => {
   const onApiRouteClick = () => {

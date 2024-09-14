@@ -4,7 +4,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '@/schemas';
+import { loginSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
 import {
   Form,
@@ -17,7 +17,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
-import { login } from '@/actions/login';
+import { login } from '@/core/auth/actions/login';
 import { Fragment, useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { InputPassword } from '@/components/ui/input-password';
