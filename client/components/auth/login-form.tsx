@@ -20,6 +20,7 @@ import { FormSuccess } from '@/components/form-success';
 import { login } from '@/actions/login';
 import { Fragment, useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { InputPassword } from '@/components/ui/input-password';
 import Link from 'next/link';
 
 export const LoginForm = () => {
@@ -125,11 +126,10 @@ export const LoginForm = () => {
                     <FormItem className="space-y-4">
                       <FormLabel>password</FormLabel>
                       <FormControl>
-                        <Input
+                        <InputPassword
                           {...field}
                           disabled={isPending}
                           placeholder="enter password"
-                          type="password"
                           autoComplete="new-password"
                         />
                       </FormControl>

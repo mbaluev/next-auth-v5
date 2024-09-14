@@ -1,9 +1,9 @@
 # dependencies
-/node_modules
+node_modules
 
 # next.js
-/.next/
-/out/
+/client/.next/
+/client/out/
 
 # production
 /build
@@ -14,8 +14,8 @@
 *.pem
 client.cert
 client.key
-data
-backups
+/data
+/backups
 
 # debug
 npm-debug.log*

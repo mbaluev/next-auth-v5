@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { newPasswordSchema } from '@/schemas';
-import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -20,6 +19,7 @@ import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
+import { InputPassword } from '@/components/ui/input-password';
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -64,11 +64,10 @@ export const NewPasswordForm = () => {
                 <FormItem className="space-y-4">
                   <FormLabel>password</FormLabel>
                   <FormControl>
-                    <Input
+                    <InputPassword
                       {...field}
                       disabled={isPending}
                       placeholder="enter password"
-                      type="password"
                       autoComplete="new-password"
                     />
                   </FormControl>
