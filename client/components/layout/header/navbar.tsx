@@ -11,16 +11,16 @@ export const Navbar = () => {
   if (!user) return null;
   return (
     <div className="flex-grow flex flex-wrap gap-4">
-      <Button asChild variant={pathname === '/server' ? 'default' : 'ghost'}>
+      <Button asChild variant={pathname === '/server' ? 'secondary' : 'ghost'}>
         <Link href="/server">server</Link>
       </Button>
-      <Button asChild variant={pathname === '/client' ? 'default' : 'ghost'}>
+      <Button asChild variant={pathname === '/client' ? 'secondary' : 'ghost'}>
         <Link href="/client">client</Link>
       </Button>
-      <Button asChild variant={pathname === '/admin' ? 'default' : 'ghost'}>
+      <Button asChild variant={pathname === '/admin' ? 'secondary' : 'ghost'}>
         <Link href="/admin">admin</Link>
       </Button>
-      <Button asChild variant={pathname === '/settings' ? 'default' : 'ghost'}>
+      <Button asChild variant={pathname === '/settings' ? 'secondary' : 'ghost'}>
         <Link href="/settings">settings</Link>
       </Button>
     </div>
