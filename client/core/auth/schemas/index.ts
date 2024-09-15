@@ -3,8 +3,8 @@ import { UserRole } from '@prisma/client';
 
 export const settingsSchema = z
   .object({
-    name: z.string().min(1, { message: 'name is required' }),
-    email: z.string().min(1, { message: 'email is required' }).email({ message: 'invalid email' }),
+    name: z.optional(z.string()),
+    email: z.optional(z.string().email({ message: 'invalid email' })),
     password: z.optional(z.string().min(6, { message: 'minimum 6 characters required' })),
     newPassword: z.optional(z.string().min(6, { message: 'minimum 6 characters required' })),
     isTwoFactorEnabled: z.optional(z.boolean()),
