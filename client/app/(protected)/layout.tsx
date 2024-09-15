@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Navbar } from '@/app/(protected)/_components/navbar';
+import { Header } from '@/components/layout/header';
 
 interface ProtectedLayoutProps {
   children: ReactNode;
@@ -7,9 +7,12 @@ interface ProtectedLayoutProps {
 
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
-    <div className="flex flex-col pb-20 min-h-full bg-gray-100">
-      <Navbar />
-      <div className="p-4">{children}</div>
+    <div className="flex flex-col pb-20 min-h-full bg-background">
+      <Header />
+      <hr />
+      <div className="flex justify-center pt-10 px-4">
+        <div className="w-[400px]">{children}</div>
+      </div>
     </div>
   );
 };

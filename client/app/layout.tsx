@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import { Toaster } from '@/components/ui/sonner';
+import { ThemeProvider } from '@/core/providers/theme-provider';
 import './globals.css';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
@@ -17,7 +18,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const session = await auth();
   return (
     <SessionProvider session={session}>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <head>
           <link rel="icon" type="image/png" sizes="64x64" href="/favicon.ico" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
@@ -32,7 +33,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           />
         </head>
         <body className={font.className}>
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
           <Toaster richColors closeButton theme="light" className={font.className} />
         </body>
       </html>

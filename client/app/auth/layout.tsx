@@ -1,8 +1,12 @@
 import { ReactNode } from 'react';
+import { Header } from '@/components/layout/header';
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex justify-center p-4 pt-20 pb-20 min-h-full bg-gray-100">{children}</div>
+    <div className="min-h-full bg-background">
+      <Header />
+      <div className="flex justify-center p-4 pt-0">{children}</div>
+    </div>
   );
 };
 

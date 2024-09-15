@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { logout } from '@/actions/logout';
+import { logout } from '@/core/auth/actions/logout';
 import { signOut } from 'next-auth/react';
 
 interface LogoutButtonProps {

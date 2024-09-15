@@ -4,7 +4,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema } from '@/schemas';
+import { registerSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
 import {
   Form,
@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
-import { register } from '@/actions/register';
+import { register } from '@/core/auth/actions/register';
 import { InputPassword } from '@/components/ui/input-password';
 
 export const RegisterForm = () => {
@@ -62,7 +62,6 @@ export const RegisterForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -80,7 +79,6 @@ export const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -99,7 +97,6 @@ export const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>password</FormLabel>
                   <FormControl>
                     <InputPassword
                       {...field}
@@ -115,7 +112,7 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             create an account
           </Button>
         </form>

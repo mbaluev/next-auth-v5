@@ -4,21 +4,14 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { newPasswordSchema } from '@/schemas';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { newPasswordSchema } from '@/core/auth/schemas';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { newPassword } from '@/actions/new-password';
+import { newPassword } from '@/core/auth/actions/new-password';
 import { InputPassword } from '@/components/ui/input-password';
 
 export const NewPasswordForm = () => {
@@ -62,7 +55,6 @@ export const NewPasswordForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel>password</FormLabel>
                   <FormControl>
                     <InputPassword
                       {...field}
@@ -78,7 +70,7 @@ export const NewPasswordForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             reset password
           </Button>
         </form>
