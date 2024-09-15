@@ -9,11 +9,11 @@ interface UserInfoProps {
 
 export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
-    <Card className="rounded-md shadow-sm w-full">
-      <CardHeader>
+    <Card className="border-none space-y-6">
+      <CardHeader className="p-0">
         <p className="text-xl">{label}</p>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 p-0">
         <div className="flex flex-row items-center justify-between">
           <p className="font-medium">id</p>
           <p>{user?.id}</p>

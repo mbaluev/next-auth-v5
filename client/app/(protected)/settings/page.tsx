@@ -65,11 +65,11 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className="rounded-md shadow-sm w-full">
-      <CardHeader>
+    <Card className="border-none space-y-6">
+      <CardHeader className="p-0">
         <p className="text-xl">⚙️ settings</p>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-6 p-0">
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-4">

@@ -24,7 +24,7 @@ input:-webkit-autofill:active {
 
 @layer base {
   :root {
-    --background: 0 0% 97%;
+    --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -58,10 +58,10 @@ input:-webkit-autofill:active {
   }
 
   .dark {
-    --background: 225 67% 2%;
+    --background: 218 30% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 218 30% 7%;
+    --card: 218 30% 4%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222.2 84% 4.9%;
