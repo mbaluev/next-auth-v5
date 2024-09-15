@@ -11,23 +11,26 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { LogoutButton } from '@/components/auth/logout-button';
+import { Button } from '@/components/ui/button';
 
 export const UserButton = () => {
   const user = useCurrentUser();
   if (!user) return null;
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-0">
-        <Avatar className="w-11 h-11">
-          <AvatarImage src={user?.image || ''} />
-          <AvatarFallback className="bg-transparent hover:bg-secondary hover:text-secondary-foreground">
-            <PersonIcon />
-          </AvatarFallback>
-        </Avatar>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Avatar>
+            <AvatarImage src={user?.image || ''} />
+            <AvatarFallback className="bg-transparent hover:bg-secondary hover:text-secondary-foreground">
+              <PersonIcon />
+            </AvatarFallback>
+          </Avatar>
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-80" align="end">
+      <DropdownMenuContent align="end">
         <LogoutButton>
-          <DropdownMenuItem className="text-md">
+          <DropdownMenuItem>
             <ExitIcon className="mr-4" />
             logout
           </DropdownMenuItem>
