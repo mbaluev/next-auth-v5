@@ -30,6 +30,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+            key="meta_description"
           />
         </head>
         <body className={font.className}>
