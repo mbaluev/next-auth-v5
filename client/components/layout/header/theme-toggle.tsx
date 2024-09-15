@@ -6,6 +6,7 @@ import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip';
+import { TooltipArrow } from '@radix-ui/react-tooltip';
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
@@ -20,7 +21,10 @@ export function ThemeToggle() {
             <span className="sr-only">Switch Theme</span>
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">Switch Theme</TooltipContent>
+        <TooltipContent side="left">
+          Switch Theme
+          <TooltipArrow className="fill-primary" />
+        </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
