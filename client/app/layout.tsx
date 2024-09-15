@@ -35,8 +35,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
+            <Toaster richColors className={font.className} />
           </ThemeProvider>
-          <Toaster richColors closeButton theme="light" className={font.className} />
         </body>
       </html>
     </SessionProvider>

@@ -9,11 +9,11 @@ interface UserInfoProps {
 
 export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
-    <Card className="border-none space-y-6">
-      <CardHeader className="p-0">
+    <Card>
+      <CardHeader>
         <p className="text-xl">{label}</p>
       </CardHeader>
-      <CardContent className="space-y-4 p-0">
+      <CardContent className="space-y-4">
         <div className="flex flex-row items-center justify-between">
           <p className="font-medium">id</p>
           <p>{user?.id}</p>
@@ -37,7 +37,7 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
         <div className="flex flex-row items-center justify-between">
           <p className="font-medium">two factor authentication</p>
           <Badge variant={user?.isTwoFactorEnabled ? 'success' : 'destructive'}>
-            {user?.isTwoFactorEnabled ? 'ON' : 'OFF'}
+            {user?.isTwoFactorEnabled ? 'on' : 'off'}
           </Badge>
         </div>
       </CardContent>
