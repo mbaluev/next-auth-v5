@@ -28,13 +28,17 @@ const AdminPage = () => {
       }
     });
   };
+  const success = () => toast.success('success');
+  const warning = () => toast.warning('warning');
+  const error = () => toast.error('error');
+  const info = () => toast.info('info');
 
   return (
     <Card>
       <CardHeader>
         <p className="text-xl">🔑 admin</p>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         <RoleGate allowedRole={UserRole.ADMIN}>
           <FormSuccess message="you are allowed to see this content" />
         </RoleGate>
@@ -48,6 +52,26 @@ const AdminPage = () => {
           <p>admin-only server action</p>
           <Button variant="link" className="px-0 py-0 h-auto" onClick={onServerActionClick}>
             click to test
+          </Button>
+        </div>
+        <div>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={success}>
+            click to success
+          </Button>
+        </div>
+        <div>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={warning}>
+            click to warning
+          </Button>
+        </div>
+        <div>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={error}>
+            click to error
+          </Button>
+        </div>
+        <div>
+          <Button variant="link" className="px-0 py-0 h-auto" onClick={info}>
+            click to info
           </Button>
         </div>
       </CardContent>
