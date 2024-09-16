@@ -29,13 +29,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <footer className="flex flex-wrap gap-x-4 gap-y-2 items-center justify-between px-4 md:px-6 py-6">
-        <div className="flex flex-wrap gap-x-4 gap-y-2">
+      <footer className="flex flex-wrap gap-x-4 gap-y-2 justify-between px-4 md:px-6 py-6">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 items-center">
           <p className="text-muted-foreground">© 2024 mbaluev</p>
           <DotFilledIcon className="text-muted h-4 w-4" />
           <p className="text-muted-foreground">All rights reserved</p>
         </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-2">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 items-center">
           <Button variant="link" className="px-0 py-0 h-auto" asChild>
             <Link href="#">Terms of Service</Link>
           </Button>
