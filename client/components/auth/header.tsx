@@ -12,13 +12,15 @@ export const Header = ({ label, loading }: HeaderProps) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <div className="flex flex-row items-center gap-x-3">
-        {loading ? (
-          <Spinner className="h-8 w-8 animate-spin" />
-        ) : (
-          <LockClosedIcon className="h-8 w-8" />
-        )}
-        <Button variant="link" className="px-0 py-0 h-auto text-3xl font-semibold" asChild>
-          <Link href="/">auth</Link>
+        <Button variant="ghost" className="text-3xl font-semibold" asChild>
+          <Link href="/">
+            {loading ? (
+              <Spinner className="h-8 w-8 mr-3 animate-spin" />
+            ) : (
+              <LockClosedIcon className="h-8 w-8 mr-3" />
+            )}
+            auth
+          </Link>
         </Button>
       </div>
       {label && <p className="text-muted-foreground">{label}</p>}

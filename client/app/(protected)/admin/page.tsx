@@ -42,35 +42,35 @@ const AdminPage = () => {
         <RoleGate allowedRole={UserRole.ADMIN}>
           <FormSuccess message="you are allowed to see this content" />
         </RoleGate>
-        <div className="flex flex-row items-center justify-between rounded-md px-4 py-2 border border-gray-200">
+        <div className="flex flex-row items-center justify-between rounded-md p-4 border">
           <p>admin-only api route</p>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={onApiRouteClick}>
+          <Button variant="ghost" onClick={onApiRouteClick}>
             click to test
           </Button>
         </div>
-        <div className="flex flex-row items-center justify-between rounded-md px-4 py-2 border border-gray-200">
+        <div className="flex flex-row items-center justify-between rounded-md p-4 border">
           <p>admin-only server action</p>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={onServerActionClick}>
+          <Button variant="ghost" onClick={onServerActionClick}>
             click to test
           </Button>
         </div>
         <div>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={success}>
+          <Button variant="ghost" onClick={success}>
             click to success
           </Button>
         </div>
         <div>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={warning}>
+          <Button variant="ghost" onClick={warning}>
             click to warning
           </Button>
         </div>
         <div>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={error}>
+          <Button variant="ghost" onClick={error}>
             click to error
           </Button>
         </div>
         <div>
-          <Button variant="link" className="px-0 py-0 h-auto" onClick={info}>
+          <Button variant="ghost" onClick={info}>
             click to info
           </Button>
         </div>

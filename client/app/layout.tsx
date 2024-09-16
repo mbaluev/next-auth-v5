@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               toastOptions={{
                 unstyled: true,
                 classNames: {
-                  toast: 'flex gap-x-3 px-5 py-4 w-full rounded-lg border bg-popover',
+                  toast: 'flex gap-x-3 px-5 py-4 w-full rounded-lg border bg-card',
                   title: '',
                   icon: 'm-0',
                   closeButton: 'bg-background hover:bg-secondary border-none',
