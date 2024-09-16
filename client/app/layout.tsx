@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <div className="bg-destructive" />
             <Toaster
               // expand
-              visibleToasts={5}
+              visibleToasts={3}
               className={font.className}
               toastOptions={{
                 unstyled: true,
