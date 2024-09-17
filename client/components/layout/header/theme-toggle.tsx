@@ -23,7 +23,7 @@ export function ThemeToggle() {
         </TooltipTrigger>
         <TooltipContent side="left">
           Switch Theme
-          <TooltipArrow className="fill-primary" />
+          <TooltipArrow className="fill-foreground" />
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
