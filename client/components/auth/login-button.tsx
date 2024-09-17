@@ -37,7 +37,7 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
               <DialogDescription>login to application</DialogDescription>
             </DialogHeader>
           </VisuallyHidden>
-          <LoginForm mode="modal" />
+          <LoginForm flat />
         </DialogContent>
       </Dialog>
     );
