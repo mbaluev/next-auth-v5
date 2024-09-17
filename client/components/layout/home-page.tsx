@@ -20,10 +20,15 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground">authentication service</p>
             <p className="text-lg text-muted-foreground">landing page</p>
           </div>
-          <div>
+          <div className="flex gap-x-8">
             <LoginButton mode="redirect" asChild>
               <Button variant="default" size="lg">
                 sign in
+              </Button>
+            </LoginButton>
+            <LoginButton mode="modal" asChild>
+              <Button variant="outline" size="lg">
+                sign in modal
               </Button>
             </LoginButton>
           </div>

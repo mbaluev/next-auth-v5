@@ -2,8 +2,16 @@
 
 import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { LoginForm } from '@/components/auth/login-form';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface LoginButtonProps {
   children?: ReactNode;
@@ -22,8 +30,14 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
     return (
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
-        <DialogContent className="p-0 w-auto bg-transparent border-none">
-          <LoginForm />
+        <DialogContent className="max-w-lg">
+          <VisuallyHidden>
+            <DialogHeader>
+              <DialogTitle>login</DialogTitle>
+              <DialogDescription>login to application</DialogDescription>
+            </DialogHeader>
+          </VisuallyHidden>
+          <LoginForm mode="modal" />
         </DialogContent>
       </Dialog>
     );

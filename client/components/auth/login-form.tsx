@@ -25,19 +25,21 @@ import Link from 'next/link';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 
-export const LoginForm = () => {
+interface IProps {
+  mode: 'modal' | 'card';
+}
+
+export const LoginForm = (props: IProps) => {
+  const { mode } = props;
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
-  const urlError =
-    searchParams.get('error') === 'OAuthAccountNotLinked'
-      ? 'email already in use with different provider'
-      : '';
+  const isAuthError = searchParams.get('error') === 'OAuthAccountNotLinked';
+  const urlError = isAuthError ? 'email already in use with different provider' : '';
 
   const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false);
-
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState<string | undefined>();
+  const [error, setError] = useState<string | undefined>();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -46,7 +48,6 @@ export const LoginForm = () => {
       password: '',
     },
   });
-
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
     setError(undefined);
     setSuccess(undefined);
@@ -71,6 +72,7 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
+      mode={mode}
       loading={isPending}
       headerLabel="welcome back"
       backButtonLabel="don't have an account?"
