@@ -8,20 +8,6 @@ body,
   height: 100%;
 }
 
-@-webkit-keyframes autofill {
-  0%,
-  100% {
-    background: transparent;
-  }
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-background-clip: text;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -125,7 +111,16 @@ input:-webkit-autofill:active {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  input:-webkit-autofill,
+  select:-webkit-autofill,
+  textarea:-webkit-autofill {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: hsl(var(--foreground));
+    -webkit-box-shadow: none;
   }
 }
