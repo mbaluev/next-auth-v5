@@ -44,18 +44,18 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-3 top-3" asChild>
-        <Button variant="ghost" size="icon">
-          <Cross2Icon />
-        </Button>
-      </DialogPrimitive.Close>
+      {/*<DialogPrimitive.Close className="absolute right-3 top-3" asChild>*/}
+      {/*  <Button variant="ghost" size="icon">*/}
+      {/*    <Cross2Icon />*/}
+      {/*  </Button>*/}
+      {/*</DialogPrimitive.Close>*/}
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-4 text-left', className)} {...props} />
+  <div className={cn('flex flex-col space-y-2 text-left', className)} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
 
@@ -85,11 +85,38 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-muted-foreground', className)}
+    className={cn('text-muted-foreground leading-normal', className)}
     {...props}
   />
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+interface DialogToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
+  close?: boolean;
+  buttons?: React.ReactElement;
+}
+const DialogToolbar = ({
+  className,
+  title,
+  close = true,
+  buttons,
+  ...props
+}: DialogToolbarProps) => (
+  <DialogTitle>
+    <div className="flex gap-x-1 m-[-0.5rem]" {...props}>
+      <p className="flex-1 p-2 flex items-start leading-normal">{title}</p>
+      {buttons}
+      {close && (
+        <DialogPrimitive.Close asChild>
+          <Button variant="ghost" size="icon">
+            <Cross2Icon />
+          </Button>
+        </DialogPrimitive.Close>
+      )}
+    </div>
+  </DialogTitle>
+);
+DialogFooter.displayName = 'DialogToolbar';
 
 export {
   Dialog,
@@ -102,4 +129,5 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  DialogToolbar,
 };

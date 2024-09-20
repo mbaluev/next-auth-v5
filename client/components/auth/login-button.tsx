@@ -8,7 +8,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
+  DialogToolbar,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
@@ -33,7 +33,7 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
         <DialogContent className="max-w-lg">
           <VisuallyHidden>
             <DialogHeader>
-              <DialogTitle>login</DialogTitle>
+              <DialogToolbar title="login to application login to application login to application login to application" />
               <DialogDescription>login to application</DialogDescription>
             </DialogHeader>
           </VisuallyHidden>

@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import { Toaster } from '@/components/ui/sonner';
-import { ThemeProvider } from '@/core/providers/theme-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 import {
   CheckIcon,
   InfoCircledIcon,
@@ -20,6 +20,20 @@ const font = JetBrains_Mono({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'auth',
   description: 'a simple authentication service',
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/favicon.ico',
+        href: '/favicon.ico',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/favicon.ico',
+        href: '/favicon.ico',
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -34,9 +48,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="icon" type="image/png" sizes="64x64" href="/favicon.ico" />
-        </head>
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
