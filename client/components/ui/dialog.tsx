@@ -5,6 +5,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/core/utils/cn';
+import { DialogContentProps } from '@radix-ui/react-dialog';
 
 const Dialog = DialogPrimitive.Root;
 
@@ -29,10 +30,13 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
+interface DialogContentCustomProps extends DialogContentProps {
+  close?: boolean;
+}
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  DialogContentCustomProps
+>(({ className, children, close = true, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -44,16 +48,17 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
+      {close && (
+        <DialogPrimitive.Close className="absolute right-4 top-4 z-[2]" asChild>
+          <Button variant="ghost" size="icon">
+            <Cross2Icon />
+          </Button>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
-
-// {/*<DialogPrimitive.Close className="absolute right-3 top-3" asChild>*/}
-// {/*  <Button variant="ghost" size="icon">*/}
-// {/*    <Cross2Icon />*/}
-// {/*  </Button>*/}
-// {/*</DialogPrimitive.Close>*/}
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={cn('flex flex-col space-y-2 text-left', className)} {...props} />

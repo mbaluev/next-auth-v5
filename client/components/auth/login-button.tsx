@@ -30,7 +30,7 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
     return (
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg" close>
           <VisuallyHidden>
             <DialogHeader>
               <DialogToolbar title="login to application login to application login to application login to application" />

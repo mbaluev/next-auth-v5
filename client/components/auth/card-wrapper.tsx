@@ -27,7 +27,7 @@ export const CardWrapper = ({
   flat,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn('w-full max-w-[400px] h-fit', flat && 'border-none shadow-none')}>
+    <Card className={cn('w-full max-w-[400px] h-fit z-[1]', flat && 'border-none shadow-none')}>
       <CardHeader className={cn(flat && 'pt-0 px-0')}>
         <Header loading={loading} label={headerLabel} />
       </CardHeader>
