@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { cn } from '@/core/utils/cn';
 import { usePathname } from 'next/navigation';
-import { Logo } from '@/layout/logo';
+import { Logo } from '@/components/layout/logo';
 
 export const LogoBtn = (props: ButtonProps) => {
   const pathname = usePathname();

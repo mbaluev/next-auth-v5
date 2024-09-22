@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Spinner } from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';
-import { Logo } from '@/layout/logo';
+import { Logo } from '@/components/layout/logo';
 
 interface HeaderProps {
   label?: string;

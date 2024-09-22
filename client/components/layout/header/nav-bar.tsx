@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { ToggleBtn } from '@/layout/header/toggle-btn';
-import { LogoBtn } from '@/layout/header/logo-btn';
+import { ToggleBtn } from '@/components/layout/header/toggle-btn';
+import { LogoBtn } from '@/components/layout/header/logo-btn';
 
 export const NavBar = () => {
   const pathname = usePathname();

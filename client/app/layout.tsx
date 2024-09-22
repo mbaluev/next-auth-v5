@@ -14,8 +14,8 @@ import {
 } from '@radix-ui/react-icons';
 import './globals.css';
 import { Spinner } from '@/components/ui/spinner';
-import { Header } from '@/layout/header';
-import Footer from '@/layout/footer';
+import { Header } from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { NavBar } from '@/layout/header/nav-bar';
-import { SettingsBar } from '@/layout/header/settings-bar';
+import { NavBar } from '@/components/layout/header/nav-bar';
+import { SettingsBar } from '@/components/layout/header/settings-bar';
 
 export const Header = () => {
   return (

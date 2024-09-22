@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { LoginButton } from '@/components/auth/login-button';
 import { useIsAuth } from '@/core/auth/hooks/use-is-auth';
-import { Logo } from '@/layout/logo';
+import { Logo } from '@/components/layout/logo';
 
 export default function HomePage() {
   const auth = useIsAuth();
