@@ -4,13 +4,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { ToggleBtn } from '@/layout/header/toggle-btn';
+import { LogoBtn } from '@/layout/header/logo-btn';
 
-export const Navbar = () => {
+export const NavBar = () => {
   const pathname = usePathname();
   const user = useCurrentUser();
   if (!user) return null;
   return (
-    <div className="flex-grow flex flex-wrap gap-4">
+    <nav className="flex-grow flex flex-wrap gap-4">
+      <ToggleBtn />
+      <LogoBtn />
       <Button asChild variant={pathname === '/server' ? 'secondary' : 'ghost'}>
         <Link href="/server">server</Link>
       </Button>
@@ -23,6 +27,6 @@ export const Navbar = () => {
       <Button asChild variant={pathname === '/settings' ? 'secondary' : 'ghost'}>
         <Link href="/settings">settings</Link>
       </Button>
-    </div>
+    </nav>
   );
 };

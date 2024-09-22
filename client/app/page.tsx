@@ -1,11 +1,5 @@
-import { Header } from '@/components/layout/header';
-import HomePage from '@/components/layout/home-page';
+import HomePage from '@/pages';
 
 export default function Home() {
-  return (
-    <main className="flex h-full flex-col bg-background">
-      <Header />
-      <HomePage />
-    </main>
-  );
+  return <HomePage />;
 }

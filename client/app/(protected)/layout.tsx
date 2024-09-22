@@ -1,18 +1,10 @@
 import { ReactNode } from 'react';
-import { Header } from '@/components/layout/header';
 
-interface ProtectedLayoutProps {
-  children: ReactNode;
-}
-
-const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+const ProtectedLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex flex-col pb-20 min-h-full bg-background">
-      <Header />
-      <div className="flex justify-center pt-10 px-4">
-        <div className="w-[400px]">{children}</div>
-      </div>
-    </div>
+    <section className="flex flex-grow items-center justify-center w-full">
+      <div className="h-fit w-[400px] px-4">{children}</div>
+    </section>
   );
 };
 

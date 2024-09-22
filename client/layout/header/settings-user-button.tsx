@@ -13,7 +13,7 @@ import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { LogoutButton } from '@/components/auth/logout-button';
 import { Button } from '@/components/ui/button';
 
-export const UserButton = () => {
+export const SettingsUserButton = () => {
   const user = useCurrentUser();
   if (!user) return null;
   return (

@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Header } from '@/components/auth/header';
+import { CardHeaderContent } from '@/components/auth/card-header-content';
 import { Social } from '@/components/auth/social';
 import { BackButton } from '@/components/auth/back-button';
 import { cn } from '@/core/utils/cn';
@@ -29,9 +29,9 @@ export const CardWrapper = ({
   padding = true,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn('w-full max-w-[400px] h-fit z-[1]', !border && 'border-none shadow-none')}>
+    <Card className={cn(!border && 'border-none shadow-none')}>
       <CardHeader className={cn(!padding && 'pt-0 px-0')}>
-        <Header loading={loading} label={headerLabel} />
+        <CardHeaderContent loading={loading} label={headerLabel} />
       </CardHeader>
       <CardContent className={cn(!padding && 'px-0')}>{children}</CardContent>
       {showSocial && (

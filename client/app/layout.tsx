@@ -14,6 +14,8 @@ import {
 } from '@radix-ui/react-icons';
 import './globals.css';
 import { Spinner } from '@/components/ui/spinner';
+import { Header } from '@/layout/header';
+import Footer from '@/layout/footer';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
 
@@ -24,13 +26,13 @@ export const metadata: Metadata = {
     icon: [
       {
         media: '(prefers-color-scheme: light)',
-        url: '/favicon.ico',
-        href: '/favicon.ico',
+        url: '/logo.svg',
+        href: '/logo.svg',
       },
       {
         media: '(prefers-color-scheme: dark)',
-        url: '/favicon.ico',
-        href: '/favicon.ico',
+        url: '/logo-dark.svg',
+        href: '/logo-dark.svg',
       },
     ],
   },
@@ -50,8 +52,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <div className="bg-destructive" />
+            <div className="flex flex-col min-h-full bg-background">
+              <Header />
+              <main className="flex flex-grow justify-center">{children}</main>
+              <Footer />
+            </div>
             <Toaster
               // expand
               visibleToasts={3}

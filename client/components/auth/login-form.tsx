@@ -15,8 +15,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
+import { FormError } from '@/components/form-alerts/form-error';
+import { FormSuccess } from '@/components/form-alerts/form-success';
 import { login } from '@/core/auth/actions/login';
 import { Fragment, useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';

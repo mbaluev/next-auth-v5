@@ -1,5 +1,5 @@
 import { CardWrapper } from '@/components/auth/card-wrapper';
-import { FormError } from '@/components/form-error';
+import { FormError } from '@/components/form-alerts/form-error';
 
 export default function NotFound() {
   return (

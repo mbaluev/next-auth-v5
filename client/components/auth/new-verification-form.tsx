@@ -4,9 +4,9 @@ import { CardWrapper } from '@/components/auth/card-wrapper';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '@/core/auth/actions/new-verification';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { FormInfo } from '@/components/form-info';
+import { FormError } from '@/components/form-alerts/form-error';
+import { FormSuccess } from '@/components/form-alerts/form-success';
+import { FormInfo } from '@/components/form-alerts/form-info';
 import { router } from 'next/client';
 
 export const NewVerificationForm = () => {

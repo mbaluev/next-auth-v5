@@ -3,7 +3,7 @@
 import { Fragment, ReactNode } from 'react';
 import { UserRole } from '@prisma/client';
 import { useCurrentRole } from '@/core/auth/hooks/use-current-role';
-import { FormError } from '@/components/form-error';
+import { FormError } from '@/components/form-alerts/form-error';
 
 interface RoleGateProps {
   children?: ReactNode;
