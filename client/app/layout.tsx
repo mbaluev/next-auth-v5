@@ -26,13 +26,13 @@ export const metadata: Metadata = {
     icon: [
       {
         media: '(prefers-color-scheme: light)',
-        url: '/logo.svg',
-        href: '/logo.svg',
+        url: '/assets/logo.svg',
+        href: '/assets/logo.svg',
       },
       {
         media: '(prefers-color-scheme: dark)',
-        url: '/logo-dark.svg',
-        href: '/logo-dark.svg',
+        url: '/assets/logo-dark.svg',
+        href: '/assets/logo-dark.svg',
       },
     ],
   },
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex flex-col min-h-full bg-background">
               <Header />
-              <main className="flex flex-grow justify-center">{children}</main>
+              <main className="flex flex-grow">{children}</main>
               <Footer />
             </div>
             <Toaster

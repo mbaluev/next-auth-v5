@@ -29,7 +29,7 @@ export const CardWrapper = ({
   padding = true,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn(!border && 'border-none shadow-none')}>
+    <Card className={cn(!border && 'border-none shadow-none z-[10]')}>
       <CardHeader className={cn(!padding && 'pt-0 px-0')}>
         <CardHeaderContent loading={loading} label={headerLabel} />
       </CardHeader>

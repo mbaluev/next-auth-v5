@@ -49,7 +49,7 @@ const DialogContent = React.forwardRef<
     >
       {children}
       {close && (
-        <DialogPrimitive.Close className="absolute right-4 top-4 z-[2]" asChild>
+        <DialogPrimitive.Close className="absolute right-4 top-4 z-50" asChild>
           <Button variant="ghost" size="icon">
             <Cross2Icon />
           </Button>
