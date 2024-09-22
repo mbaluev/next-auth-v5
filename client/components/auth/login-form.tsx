@@ -26,11 +26,11 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 
 interface IProps {
-  flat?: boolean;
+  border?: boolean;
+  padding?: boolean;
 }
 
 export const LoginForm = (props: IProps) => {
-  const { flat } = props;
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const isAuthError = searchParams.get('error') === 'OAuthAccountNotLinked';
@@ -72,7 +72,7 @@ export const LoginForm = (props: IProps) => {
 
   return (
     <CardWrapper
-      flat={flat}
+      {...props}
       loading={isPending}
       headerLabel="welcome back"
       backButtonLabel="don't have an account?"

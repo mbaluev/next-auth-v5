@@ -14,7 +14,8 @@ interface CardWrapperProps {
   backButtonHref: string;
   showSocial?: boolean;
   loading?: boolean;
-  flat?: boolean;
+  border?: boolean;
+  padding?: boolean;
 }
 
 export const CardWrapper = ({
@@ -24,20 +25,21 @@ export const CardWrapper = ({
   backButtonHref,
   showSocial,
   loading,
-  flat,
+  border = true,
+  padding = true,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn('w-full max-w-[400px] h-fit z-[1]', flat && 'border-none shadow-none')}>
-      <CardHeader className={cn(flat && 'pt-0 px-0')}>
+    <Card className={cn('w-full max-w-[400px] h-fit z-[1]', !border && 'border-none shadow-none')}>
+      <CardHeader className={cn(!padding && 'pt-0 px-0')}>
         <Header loading={loading} label={headerLabel} />
       </CardHeader>
-      <CardContent className={cn(flat && 'px-0')}>{children}</CardContent>
+      <CardContent className={cn(!padding && 'px-0')}>{children}</CardContent>
       {showSocial && (
-        <CardFooter className={cn(flat && 'px-0')}>
+        <CardFooter className={cn(!padding && 'px-0')}>
           <Social />
         </CardFooter>
       )}
-      <CardFooter className={cn(flat && 'p-0')}>
+      <CardFooter className={cn(!padding && 'p-0')}>
         <BackButton href={backButtonHref} label={backButtonLabel} />
       </CardFooter>
     </Card>
