@@ -60,6 +60,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <Toaster
               // expand
               visibleToasts={3}
+              position="bottom-center"
               className={font.className}
               toastOptions={{
                 unstyled: true,
