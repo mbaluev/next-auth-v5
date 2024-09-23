@@ -14,7 +14,6 @@ export const NotFoundPage = () => {
           headerLabel="a simple authentication service"
           backButtonLabel="back home"
           backButtonHref="/"
-          border={false}
         >
           <FormError message="page not found" />
         </CardWrapper>
