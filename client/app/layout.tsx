@@ -52,7 +52,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex flex-col min-h-full bg-background pt-[4.75rem]">
+            <div className="flex flex-col min-h-full bg-background">
               <Header />
               <main className="flex flex-grow">{children}</main>
               <Footer />
