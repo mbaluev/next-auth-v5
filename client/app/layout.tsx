@@ -6,6 +6,8 @@ import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import { Spinner } from '@/components/ui/spinner';
+import { Layout } from '@/components/layout/layout';
 import {
   CheckIcon,
   InfoCircledIcon,
@@ -13,9 +15,6 @@ import {
   CircleBackslashIcon,
 } from '@radix-ui/react-icons';
 import './globals.css';
-import { Spinner } from '@/components/ui/spinner';
-import { Header } from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
 
@@ -52,11 +51,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex flex-col min-h-full bg-background">
-              <Header />
-              <main className="flex flex-grow">{children}</main>
-              <Footer />
-            </div>
+            <Layout>{children}</Layout>
             <Toaster
               visibleToasts={3}
               position="bottom-center"

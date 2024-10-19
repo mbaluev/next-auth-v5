@@ -32,7 +32,7 @@ import { UserRole } from '@prisma/client';
 import { Switch } from '@/components/ui/switch';
 import { InputPassword } from '@/components/ui/input-password';
 
-const SettingsForm = () => {
+export const SettingsForm = () => {
   const user = useCurrentUser();
   const { update } = useSession();
 
@@ -192,5 +192,3 @@ const SettingsForm = () => {
     </Form>
   );
 };
-
-export default SettingsForm;

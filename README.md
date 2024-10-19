@@ -14,6 +14,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 2. Run the development server: `yarn dev`
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Docs
+
 ### docker compose
 1. `docker system prune -a` - clean up
 2. `docker compose down --rmi all` - stop all containers
@@ -61,3 +63,7 @@ sudo usermod -aG docker $USER
 docker -v
 sudo docker run hello-world
 ```
+
+### count lines of code
+`brew install cloc`
+`cloc $(git ls-files)`

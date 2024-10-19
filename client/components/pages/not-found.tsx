@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const NotFoundPage = () => {
   return (
-    <section className="flex flex-grow items-center justify-center w-full">
+    <section className="flex flex-grow items-center justify-center w-full relative">
       <div className="w-full h-full max-w-[600px] max-h-[600px] absolute">
         <Image src="/assets/no-signal.svg" alt="not-found" objectFit="cover" fill />
       </div>

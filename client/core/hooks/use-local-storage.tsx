@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 
 export default function useLocalStorage(
@@ -16,7 +18,7 @@ export default function useLocalStorage(
     if (value !== newValue) {
       setValue(newValue || initialValue);
     }
-  });
+  }, [value, key, initialValue]);
 
   const handleStorage = useCallback(
     (event: StorageEvent) => {
@@ -24,7 +26,7 @@ export default function useLocalStorage(
         setValue(event.newValue || initialValue);
       }
     },
-    [value]
+    [value, key, initialValue]
   );
 
   useEffect(() => {
@@ -32,5 +34,6 @@ export default function useLocalStorage(
     return () => window.removeEventListener('storage', handleStorage);
   }, [handleStorage]);
 
+  console.log('value', value);
   return [value, setItem];
 }
