@@ -17,10 +17,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Docs
 
 ### docker compose
-1. `docker system prune -a` - clean up
-2. `docker compose down --rmi all` - stop all containers
-3. `docker compose pull` - pull all images
-4. `docker compose up --build -d` - up containers
+1. `docker stop auth-client || true` - stop auth-client containers
+2. `docker rm auth-client || true` - remove auth-client image
+3. `docker image prune -a --force` - clean up
+4. `docker compose pull` - pull containers
+5. `docker compose up --build -d` - up containers
 
 ### docker
 1. `docker exec -it <container_id> sh` - run docker shell 
