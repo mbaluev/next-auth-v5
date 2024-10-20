@@ -14,6 +14,7 @@ import { useIsMobile } from '@/core/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { DoubleArrowRightIcon } from '@radix-ui/react-icons';
 import useLocalStorage from '@/core/hooks/use-local-storage';
+import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar:state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -117,6 +118,9 @@ type SidebarProps = ComponentProps<'div'> & SidebarBaseProps;
 const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const { className, children, ..._props } = props;
   const { isMobile, open, openMobile } = useSidebar();
+
+  const user = useCurrentUser();
+  if (!user) return null;
 
   if (isMobile) {
     return (
