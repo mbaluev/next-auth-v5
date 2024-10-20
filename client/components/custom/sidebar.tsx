@@ -13,9 +13,9 @@ import { cn } from '@/core/utils/cn';
 import { useIsMobile } from '@/core/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { DoubleArrowRightIcon } from '@radix-ui/react-icons';
+import useLocalStorage from '@/core/hooks/use-local-storage';
 
-const SIDEBAR_COOKIE_NAME = 'sidebar:state';
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+const SIDEBAR_STORAGE_NAME = 'sidebar:state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const SIDEBAR_DEFAULT_OPEN = false;
 
@@ -42,8 +42,9 @@ type SidebarProviderBaseProps = {
 };
 type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
 const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
+  const [_, setOpenStorage] = useLocalStorage(SIDEBAR_STORAGE_NAME, String(SIDEBAR_DEFAULT_OPEN));
   const {
-    defaultOpen = SIDEBAR_DEFAULT_OPEN,
+    defaultOpen = window.localStorage.getItem(SIDEBAR_STORAGE_NAME) === 'true',
     open: openProp,
     onOpenChange: setOpenProp,
     className,
@@ -59,11 +60,12 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   const open = openProp ?? _open;
   const setOpen = useCallback(
     (value: boolean | ((value: boolean) => boolean)) => {
-      if (setOpenProp) return setOpenProp?.(typeof value === 'function' ? value(open) : value);
+      const res = typeof value === 'function' ? value(open) : value;
+      if (setOpenProp) return setOpenProp?.(res);
+      setOpenStorage(String(res));
       _setOpen(value);
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
-    [setOpenProp, open]
+    [setOpenProp, open, setOpenStorage]
   );
 
   // Helper to toggle the sidebar.
@@ -120,7 +122,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     return (
       <nav
         className={cn(
-          'w-[calc(100%-12px)] bg-secondary fixed z-10 top-[57px] bottom-4 rounded-r-md border-t border-r border-b',
+          'w-[calc(100%-12px)] bg-secondary fixed z-[10] top-[57px] bottom-4 rounded-r-md border-t border-r border-b',
           'transition-all duration-100',
           openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]',
           className
