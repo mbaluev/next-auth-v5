@@ -105,7 +105,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <div className={cn('flex min-h-full bg-background', className)} ref={ref} {..._props}>
+      <div className={cn('flex min-h-full', className)} ref={ref} {..._props}>
         {children}
       </div>
     </SidebarContext.Provider>
@@ -126,7 +126,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     return (
       <nav
         className={cn(
-          'w-[calc(100%-12px)] bg-secondary fixed z-[10] top-[57px] bottom-4 rounded-r-md border-t border-r border-b',
+          'w-[calc(100%-12px)] bg-popover fixed z-[10] top-[57px] bottom-4 shadow-md rounded-r-md border-t border-r border-b',
           'transition-all duration-100',
           openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]',
           className
@@ -142,7 +142,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   return (
     <nav
       className={cn(
-        'w-[240px] bg-secondary border-r min-h-full',
+        'w-[240px] bg-popover border-r min-h-full',
         'transition-all duration-100',
         !open && 'ml-[-240px]',
         className

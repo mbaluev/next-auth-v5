@@ -10,7 +10,7 @@ export const Nav = () => {
 
   return (
     <div className="flex flex-col p-4">
-      <Button variant="sidebar">navigation</Button>
+      <Button variant="ghost">navigation</Button>
     </div>
   );
 };
