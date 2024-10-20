@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import { Toaster } from '@/components/ui/sonner';
-import { ThemeProvider } from '@/components/providers/theme-provider';
+import { ThemeProvider } from '@/components/providers/theme';
 import { Spinner } from '@/components/ui/spinner';
 import { Layout } from '@/components/layout/layout';
 import {

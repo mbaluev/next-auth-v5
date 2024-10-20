@@ -34,6 +34,5 @@ export default function useLocalStorage(
     return () => window.removeEventListener('storage', handleStorage);
   }, [handleStorage]);
 
-  console.log('value', value);
   return [value, setItem];
 }
