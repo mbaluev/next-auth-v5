@@ -3,14 +3,14 @@
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 
-export const Sidebar = () => {
+export const Nav = () => {
   const user = useCurrentUser();
 
   if (!user) return null;
 
   return (
-    <nav className="flex flex-col min-h-full p-4 w-[240px] bg-secondary border-r">
+    <div className="flex flex-col p-4">
       <Button variant="sidebar">navigation</Button>
-    </nav>
+    </div>
   );
 };
