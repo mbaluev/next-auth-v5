@@ -1,5 +1,5 @@
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { Check, TriangleAlert } from 'lucide-react';
 import { Spinner } from '@/components/ui/spinner';
 
 interface FormAlertProps {
@@ -10,7 +10,7 @@ const FormError = ({ message }: FormAlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="destructive">
-      <ExclamationTriangleIcon className="h-6 w-6" />
+      <TriangleAlert className="h-6 w-6" />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
@@ -30,7 +30,7 @@ const FormSuccess = ({ message }: FormAlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="emerald">
-      <CheckIcon className="h-6 w-6" />
+      <Check className="h-6 w-6" />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );

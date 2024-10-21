@@ -8,6 +8,11 @@ body,
   height: 100%;
 }
 
+svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -16,11 +21,11 @@ body,
     --card: 0 0% 100%;
     --card-foreground: 45 8% 20%;
 
-    --popover: 60 3% 97%;
+    --popover: 0 0% 100%;
     --popover-foreground: 45 8% 20%;
 
-    /*--navbar: 60 11% 98%;*/
-    /*--navbar-foreground: 45 8% 20%;*/
+    --sidebar: 0 0% 96%;
+    --sidebar-foreground: 45 8% 20%;
 
     --primary: 210 77% 51%;
     --primary-foreground: 0 0% 100%;
@@ -53,8 +58,8 @@ body,
     --popover: 0 0% 15%;
     --popover-foreground: 0 0% 90%;
 
-    /*--navbar: 0 0% 15%;*/
-    /*--navbar-foreground: 20 0% 90%;*/
+    --sidebar: 0 0% 15%;
+    --sidebar-foreground: 20 0% 90%;
 
     --primary: 210 77% 70%;
     --primary-foreground: 0 0% 10%;

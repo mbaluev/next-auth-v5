@@ -12,11 +12,11 @@ import {
 import { cn } from '@/core/utils/cn';
 import { useIsMobile } from '@/core/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
-import { DoubleArrowRightIcon } from '@radix-ui/react-icons';
-import useLocalStorage from '@/core/hooks/use-local-storage';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import useLocalStorage from '@/core/hooks/use-local-storage';
 
-const SIDEBAR_STORAGE_NAME = 'sidebar:state';
+const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const SIDEBAR_DEFAULT_OPEN = false;
 
@@ -122,21 +122,30 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const user = useCurrentUser();
   if (!user) return null;
 
-  const classNamesMobile = cn(
-    'w-[calc(100%-12px)] fixed z-[10] top-[57px] bottom-4 shadow-md rounded-r-md border-t border-r border-b',
+  const classNavDesktop = cn(
+    'w-[240px] min-h-full flex-grow-0 flex-shrink-0 flex-basis-auto',
+    !open && 'ml-[-240px]'
+  );
+  const classNavMobile = cn(
+    'w-[calc(100%-12px)] fixed top-[57px] bottom-4 z-[10]',
     openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
   );
-  const classNamesDesktop = cn('w-[240px] min-h-full border-r', !open && 'ml-[-240px]');
-  const classNames = cn(
-    'bg-popover',
+  const classNav = cn(
     'transition-all duration-250',
-    isMobile ? classNamesMobile : classNamesDesktop,
+    isMobile ? classNavMobile : classNavDesktop,
     className
   );
 
+  const classDivMobile = cn('h-full shadow-md rounded-r-lg border border-l-0');
+  const classDivDesktop = cn('fixed w-[240px] h-full border-r');
+  const classDiv = cn(
+    'bg-sidebar text-sidebar-foreground',
+    isMobile ? classDivMobile : classDivDesktop
+  );
+
   return (
-    <nav className={classNames} ref={ref} {..._props}>
-      {children}
+    <nav className={classNav} ref={ref} {..._props}>
+      <div className={classDiv}>{children}</div>
     </nav>
   );
 });
@@ -157,19 +166,8 @@ const SidebarTrigger = forwardRef<ElementRef<typeof Button>, SidebarTriggerProps
       }}
       {..._props}
     >
-      <DoubleArrowRightIcon
-        className={cn(
-          'rotate-180 scale-0 transition-transform ease-in-out duration-500',
-          !(isMobile ? openMobile : open) && 'rotate-0 scale-100'
-        )}
-      />
-      <DoubleArrowRightIcon
-        className={cn(
-          'rotate-0 scale-0 transition-transform ease-in-out duration-500 absolute',
-          (isMobile ? openMobile : open) && 'rotate-180 scale-100'
-        )}
-      />
-      <span className="sr-only">Switch Theme</span>
+      {!(isMobile ? openMobile : open) && <ChevronsRight />}
+      {(isMobile ? openMobile : open) && <ChevronsLeft />}
     </Button>
   );
 });

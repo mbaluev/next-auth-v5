@@ -14,7 +14,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { ExitIcon, MoonIcon, PersonIcon, SunIcon } from '@radix-ui/react-icons';
+import { LogOut, Moon, UserCog, Sun } from 'lucide-react';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogoutButton } from '@/components/auth/logout-button';
@@ -116,9 +116,8 @@ const HeaderRightThemeBtn = () => {
       <Tooltip delayDuration={100}>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" onClick={handleChangeTheme} className="flex-grow-0">
-            <MoonIcon className="rotate-90 scale-0 transition-transform ease-in-out duration-500 dark:rotate-0 dark:scale-100" />
-            <SunIcon className="rotate-0 scale-1000 transition-transform ease-in-out duration-500 dark:-rotate-90 dark:scale-0 absolute" />
-            <span className="sr-only">Switch Theme</span>
+            <Moon className="rotate-90 scale-0 transition-transform ease-in-out duration-500 dark:rotate-0 dark:scale-100" />
+            <Sun className="rotate-0 scale-1000 transition-transform ease-in-out duration-500 dark:-rotate-90 dark:scale-0 absolute" />
           </Button>
         </TooltipTrigger>
         <TooltipContent side="left">
@@ -140,7 +139,7 @@ const HeaderRightUserBtn = () => {
           <Avatar>
             <AvatarImage src={user?.image || ''} />
             <AvatarFallback className="bg-transparent hover:bg-secondary hover:text-secondary-foreground">
-              <PersonIcon />
+              <UserCog />
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -148,7 +147,7 @@ const HeaderRightUserBtn = () => {
       <DropdownMenuContent align="end">
         <LogoutButton>
           <DropdownMenuItem>
-            <ExitIcon className="mr-4" />
+            <LogOut className="mr-4" />
             logout
           </DropdownMenuItem>
         </LogoutButton>

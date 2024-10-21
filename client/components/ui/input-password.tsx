@@ -1,7 +1,7 @@
 import { Input, InputProps } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/core/utils/cn';
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Eye, EyeOff } from 'lucide-react';
 import { forwardRef, useState } from 'react';
 
 const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -19,7 +19,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         className={cn('relative pr-9', inputProps.className)}
       />
       <Button size="adornment" variant="ghost" onClick={handleVisible} asChild={true}>
-        {visible ? <EyeOpenIcon /> : <EyeClosedIcon />}
+        {visible ? <Eye /> : <EyeOff />}
       </Button>
     </div>
   );

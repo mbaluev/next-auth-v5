@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/core/utils/cn';
 import { DialogContentProps } from '@radix-ui/react-dialog';
@@ -51,7 +51,7 @@ const DialogContent = React.forwardRef<
       {close && (
         <DialogPrimitive.Close className="absolute right-4 top-4 z-50" asChild>
           <Button variant="ghost" size="icon">
-            <Cross2Icon />
+            <X />
           </Button>
         </DialogPrimitive.Close>
       )}
@@ -115,7 +115,7 @@ const DialogToolbar = ({
       {close && (
         <DialogPrimitive.Close asChild>
           <Button variant="ghost" size="icon">
-            <Cross2Icon />
+            <X />
           </Button>
         </DialogPrimitive.Close>
       )}

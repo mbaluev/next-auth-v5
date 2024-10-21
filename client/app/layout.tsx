@@ -8,12 +8,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/providers/theme';
 import { Spinner } from '@/components/ui/spinner';
 import { Layout } from '@/components/layout/layout';
-import {
-  CheckIcon,
-  InfoCircledIcon,
-  ExclamationTriangleIcon,
-  CircleBackslashIcon,
-} from '@radix-ui/react-icons';
+import { Check, Info, OctagonX, TriangleAlert } from 'lucide-react';
 import './globals.css';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
@@ -54,7 +49,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <Layout>{children}</Layout>
             <Toaster
               visibleToasts={3}
-              position="bottom-center"
+              position="bottom-right"
               className={font.className}
               toastOptions={{
                 unstyled: true,
@@ -70,13 +65,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 },
               }}
               icons={{
-                success: <CheckIcon />,
-                info: <InfoCircledIcon />,
-                warning: <ExclamationTriangleIcon />,
-                error: <CircleBackslashIcon />,
+                success: <Check />,
+                info: <Info />,
+                warning: <TriangleAlert />,
+                error: <OctagonX />,
                 loading: <Spinner />,
               }}
-              // expand
+              expand
             />
           </ThemeProvider>
         </body>

@@ -9,7 +9,7 @@ export const NotFoundPage = () => {
         <Image src="/assets/no-signal.svg" alt="not-found" objectFit="cover" fill />
       </div>
       <div className="absolute w-full h-full top-0 left-0 z-[5] bg-background opacity-90" />
-      <div className="h-fit w-[400px] px-4 z-10">
+      <div className="h-fit w-[min(400px,100%)] px-4 z-[8]">
         <CardWrapper
           headerLabel="a simple authentication service"
           backButtonLabel="back home"

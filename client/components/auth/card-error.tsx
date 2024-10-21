@@ -1,7 +1,7 @@
 'use client';
 
 import { CardWrapper } from '@/components/auth/card-wrapper';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { TriangleAlert } from 'lucide-react';
 
 export const CardError = () => {
   return (
@@ -11,7 +11,7 @@ export const CardError = () => {
       backButtonHref="/auth/login"
     >
       <div className="w-full flex items-center justify-center">
-        <ExclamationTriangleIcon className="w-12 h-12 text-destructive" />
+        <TriangleAlert className="w-12 h-12 text-destructive" />
       </div>
     </CardWrapper>
   );
