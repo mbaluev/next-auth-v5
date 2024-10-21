@@ -1,15 +1,19 @@
 import { ExtendedUser } from '@/next-auth';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import * as React from 'react';
+import { cn } from '@/core/utils/cn';
+import { forwardRef, HTMLAttributes } from 'react';
 
-interface UserInfoProps {
+interface UserInfoProps extends HTMLAttributes<HTMLDivElement> {
   user?: ExtendedUser;
   label: string;
 }
 
-export const UserInfo = ({ user, label }: UserInfoProps) => {
+const UserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
+  const { user, label, ..._props } = props;
   return (
-    <Card>
+    <Card ref={ref} {..._props}>
       <CardHeader>
         <p className="text-xl">{label}</p>
       </CardHeader>
@@ -43,4 +47,7 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
       </CardContent>
     </Card>
   );
-};
+});
+UserInfo.displayName = 'Card';
+
+export { UserInfo };
