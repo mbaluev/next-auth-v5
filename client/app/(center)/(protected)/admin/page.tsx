@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { RoleGate } from '@/components/auth/role-gate';
-import { FormSuccess } from '@/components/custom/form-alerts';
+import { FormSuccess } from '@/components/layout/form-alerts';
 import { UserRole } from '@prisma/client';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';

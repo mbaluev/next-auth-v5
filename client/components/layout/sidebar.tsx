@@ -122,34 +122,20 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const user = useCurrentUser();
   if (!user) return null;
 
-  if (isMobile) {
-    return (
-      <nav
-        className={cn(
-          'w-[calc(100%-12px)] bg-popover fixed z-[10] top-[57px] bottom-4 shadow-md rounded-r-md border-t border-r border-b',
-          'transition-all duration-100',
-          openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]',
-          className
-        )}
-        ref={ref}
-        {..._props}
-      >
-        {children}
-      </nav>
-    );
-  }
+  const classNamesMobile = cn(
+    'w-[calc(100%-12px)] fixed z-[10] top-[57px] bottom-4 shadow-md rounded-r-md border-t border-r border-b',
+    openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
+  );
+  const classNamesDesktop = cn('w-[240px] min-h-full border-r', !open && 'ml-[-240px]');
+  const classNames = cn(
+    'bg-popover',
+    'transition-all duration-250',
+    isMobile ? classNamesMobile : classNamesDesktop,
+    className
+  );
 
   return (
-    <nav
-      className={cn(
-        'w-[240px] bg-popover border-r min-h-full',
-        'transition-all duration-100',
-        !open && 'ml-[-240px]',
-        className
-      )}
-      ref={ref}
-      {..._props}
-    >
+    <nav className={classNames} ref={ref} {..._props}>
       {children}
     </nav>
   );

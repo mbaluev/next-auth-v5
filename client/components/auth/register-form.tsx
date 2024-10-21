@@ -8,7 +8,7 @@ import { registerSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { FormSuccess, FormError } from '@/components/custom/form-alerts';
+import { FormSuccess, FormError } from '@/components/layout/form-alerts';
 import { useState, useTransition } from 'react';
 import { register } from '@/core/auth/actions/register';
 import { InputPassword } from '@/components/ui/input-password';

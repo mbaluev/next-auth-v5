@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { Footer } from '@/components/layout/footer';
-import { SidebarProvider, Sidebar } from '@/components/custom/sidebar';
+import { SidebarProvider, Sidebar } from '@/components/layout/sidebar';
 import { Nav } from '@/components/layout/nav';
 import { Header } from '@/components/layout/header';
 

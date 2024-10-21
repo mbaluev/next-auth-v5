@@ -1,5 +1,5 @@
 import { CardWrapper } from '@/components/auth/card-wrapper';
-import { FormError } from '@/components/custom/form-alerts';
+import { FormError } from '@/components/layout/form-alerts';
 import Image from 'next/image';
 
 export const NotFoundPage = () => {

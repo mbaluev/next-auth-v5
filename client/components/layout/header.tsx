@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useDeviceSize } from '@/core/hooks/use-device-size';
 import { MEDIA_SM, useWindowSize } from '@/core/hooks/use-window-size';
-import { SidebarTrigger } from '@/components/custom/sidebar';
+import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
