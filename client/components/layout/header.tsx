@@ -122,7 +122,7 @@ const HeaderRightThemeBtn = () => {
         </TooltipTrigger>
         <TooltipContent side="left">
           Switch Theme
-          <TooltipArrow className="fill-foreground" />
+          <TooltipArrow className="fill-foreground w-2.5 h-1.5" />
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
