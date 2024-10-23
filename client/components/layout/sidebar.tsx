@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ComponentProps,
   createContext,
@@ -14,7 +16,7 @@ import { useIsMobile } from '@/core/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import useLocalStorage from '@/core/hooks/use-local-storage';
+import { useCookies } from 'next-client-cookies';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -43,9 +45,13 @@ type SidebarProviderBaseProps = {
 };
 type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
 const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
-  const [_, setOpenStorage] = useLocalStorage(SIDEBAR_STORAGE_NAME, String(SIDEBAR_DEFAULT_OPEN));
+  // const [_, setOpenStorage] = useLocalStorage(SIDEBAR_STORAGE_NAME, String(SIDEBAR_DEFAULT_OPEN));
+
+  const cookies = useCookies();
+  const _defaultOpen = cookies.get(SIDEBAR_STORAGE_NAME) === 'true';
+
   const {
-    defaultOpen = window.localStorage.getItem(SIDEBAR_STORAGE_NAME) === 'true',
+    defaultOpen = _defaultOpen,
     open: openProp,
     onOpenChange: setOpenProp,
     className,
@@ -63,10 +69,10 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     (value: boolean | ((value: boolean) => boolean)) => {
       const res = typeof value === 'function' ? value(open) : value;
       if (setOpenProp) return setOpenProp?.(res);
-      setOpenStorage(String(res));
+      cookies.set(SIDEBAR_STORAGE_NAME, String(res));
       _setOpen(value);
     },
-    [setOpenProp, open, setOpenStorage]
+    [setOpenProp, open]
   );
 
   // Helper to toggle the sidebar.
