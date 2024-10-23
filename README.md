@@ -23,6 +23,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 4. `docker compose pull` - pull containers
 5. `docker compose up --build -d` - up containers
 
+### Docker build
+
+1. Build your container: `docker build -t next-auth-v5 .`
+2. Run your container: `docker run -p 80:3000 next-auth-v5`
+
 ### docker
 1. `docker exec -it <container_id> sh` - run docker shell 
 2. `docker logs <container_id>` - logs

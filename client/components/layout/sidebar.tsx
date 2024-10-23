@@ -20,7 +20,7 @@ import { useCookies } from 'next-client-cookies';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
-const SIDEBAR_DEFAULT_OPEN = false;
+const SIDEBAR_DEFAULT_OPEN = true;
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -45,10 +45,9 @@ type SidebarProviderBaseProps = {
 };
 type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
 const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
-  // const [_, setOpenStorage] = useLocalStorage(SIDEBAR_STORAGE_NAME, String(SIDEBAR_DEFAULT_OPEN));
-
   const cookies = useCookies();
-  const _defaultOpen = cookies.get(SIDEBAR_STORAGE_NAME) === 'true';
+  let _defaultOpen: any = cookies.get(SIDEBAR_STORAGE_NAME);
+  _defaultOpen = _defaultOpen ? _defaultOpen === 'true' : SIDEBAR_DEFAULT_OPEN;
 
   const {
     defaultOpen = _defaultOpen,
@@ -72,7 +71,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
       cookies.set(SIDEBAR_STORAGE_NAME, String(res));
       _setOpen(value);
     },
-    [setOpenProp, open]
+    [setOpenProp, open, cookies]
   );
 
   // Helper to toggle the sidebar.
