@@ -82,7 +82,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     window.dispatchEvent(new Event(SIDEBAR_EVENT_START));
     setTimeout(() => {
       window.dispatchEvent(new Event(SIDEBAR_EVENT_END));
-    }, SIDEBAR_TRANSITION_DURATION);
+    }, SIDEBAR_TRANSITION_DURATION * 1.5);
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
 

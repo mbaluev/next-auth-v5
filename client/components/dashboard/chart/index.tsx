@@ -42,7 +42,7 @@ export const DashboardCharts = () => {
   }, [chart, create]);
 
   return (
-    <Card className="flex-grow px-4 py-[110px]">
+    <Card className="flex-grow px-4 py-8">
       <div ref={ref} className="w-full h-full" />
     </Card>
   );

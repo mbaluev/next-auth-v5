@@ -26,14 +26,17 @@ export const dashboardChartsCreate = (
   const opacityLine = 1;
   const opacityDots = 1;
   const strokeWidth = 2;
-  const tooltipThreshold = 20;
+  const tooltipThreshold = 10;
 
   // init
   let dims: any = undefined;
   let margin: any = undefined;
   let svg: any = undefined;
-  function init() {
+  function remove() {
     d3.selectAll(`#${id}`).remove();
+  }
+  function init() {
+    remove();
 
     // declare the chart dimensions and _margins.
     dims = { width: ref.current.clientWidth, height: ref.current.clientHeight };
@@ -648,13 +651,13 @@ export const dashboardChartsCreate = (
     if (item && elemSvg && elemTooltip) {
       const elemRect = elemSvg.getBoundingClientRect();
       const elemTRect = elemTooltip.getBoundingClientRect();
-      const offsetY = elemRect.top - elemTRect.height - bodyRect.top - 5;
-      const offsetX = elemRect.left - elemTRect.width / 2 - bodyRect.left;
+      const offsetY = elemRect.top - bodyRect.top - 5;
+      const offsetX = elemRect.left - bodyRect.left + tooltipThreshold; // - elemTRect.width / 2;
 
-      const tooltipY = offsetY;
+      const tooltipY = offsetY + tooltipThreshold;
       let tooltipX = offsetX + x(item.date) + x.bandwidth() / 2;
       if (tooltipX + elemTRect.width > bodyRect.right - tooltipThreshold)
-        tooltipX = bodyRect.right - tooltipThreshold - elemTRect.width;
+        tooltipX = bodyRect.right - elemTRect.width - tooltipThreshold;
       if (tooltipX < tooltipThreshold) tooltipX = tooltipThreshold;
 
       renderTooltip(item);
@@ -724,13 +727,6 @@ export const dashboardChartsCreate = (
     updateRect();
     updateLine();
     change(layout, prevType);
-  }
-  function remove() {
-    removeRect();
-    removeArea();
-    removeLine();
-    removeDot();
-    removeDotLine();
   }
   create(data, type);
 
