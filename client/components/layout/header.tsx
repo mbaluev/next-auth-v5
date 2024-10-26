@@ -14,7 +14,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { LogOut, Moon, UserCog, Sun } from 'lucide-react';
+import { LogOut, Moon, UserCog, Sun, LayoutDashboard } from 'lucide-react';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogoutButton } from '@/components/auth/logout-button';
@@ -48,7 +48,16 @@ const HeaderLeftBar = () => {
   return (
     <nav className="flex-grow flex flex-wrap gap-4">
       <SidebarTrigger />
-      <HeaderLeftLogoBtn />
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/">
+          <Logo className="w-6 h-6" />
+        </Link>
+      </Button>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/dashboard">
+          <LayoutDashboard />
+        </Link>
+      </Button>
       {!less && (
         <Fragment>
           <Button asChild variant={pathname === '/server' ? 'secondary' : 'ghost'}>
@@ -66,36 +75,6 @@ const HeaderLeftBar = () => {
         </Fragment>
       )}
     </nav>
-  );
-};
-
-const HeaderLeftLogoBtn = (props: ButtonProps) => {
-  const { width } = useWindowSize();
-  const [icon, setIcon] = useState(false);
-  const user = useCurrentUser();
-
-  useEffect(() => {
-    if (width < MEDIA_SM) setIcon(true);
-    else setIcon(false);
-  }, [width]);
-
-  if (icon) {
-    return (
-      <Button variant="ghost" size="icon" asChild {...props}>
-        <Link href={user ? DEFAULT_LOGIN_REDIRECT : '/'}>
-          <Logo className="w-6 h-6" />
-        </Link>
-      </Button>
-    );
-  }
-
-  return (
-    <Button variant="ghost" className={cn('space-x-4', props.className)} asChild {...props}>
-      <Link href={user ? DEFAULT_LOGIN_REDIRECT : '/'}>
-        <Logo className="w-6 h-6" />
-        <p>auth</p>
-      </Link>
-    </Button>
   );
 };
 

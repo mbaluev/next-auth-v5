@@ -55,8 +55,8 @@ const AdminPage = () => {
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={success}>
-            click to success
+          <Button variant="ghost" onClick={error}>
+            click to error
           </Button>
         </div>
         <div>
@@ -65,8 +65,8 @@ const AdminPage = () => {
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={error}>
-            click to error
+          <Button variant="ghost" onClick={success}>
+            click to success
           </Button>
         </div>
         <div>

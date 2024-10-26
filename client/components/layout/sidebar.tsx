@@ -21,6 +21,9 @@ import { useCookies } from 'next-client-cookies';
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const SIDEBAR_DEFAULT_OPEN = true;
+const SIDEBAR_TRANSITION_DURATION = 100;
+const SIDEBAR_EVENT_START = 'sidebar-start';
+const SIDEBAR_EVENT_END = 'sidebar-end';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -76,6 +79,10 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
 
   // Helper to toggle the sidebar.
   const toggleSidebar = useCallback(() => {
+    window.dispatchEvent(new Event(SIDEBAR_EVENT_START));
+    setTimeout(() => {
+      window.dispatchEvent(new Event(SIDEBAR_EVENT_END));
+    }, SIDEBAR_TRANSITION_DURATION);
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
 
@@ -136,7 +143,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
   );
   const classNav = cn(
-    'transition-all duration-250',
+    `transition-all duration-${SIDEBAR_TRANSITION_DURATION}`,
     isMobile ? classNavMobile : classNavDesktop,
     className
   );
@@ -178,4 +185,11 @@ const SidebarTrigger = forwardRef<ElementRef<typeof Button>, SidebarTriggerProps
 });
 SidebarTrigger.displayName = 'SidebarTrigger';
 
-export { SidebarProvider, Sidebar, SidebarTrigger, useSidebar };
+export {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+  useSidebar,
+  SIDEBAR_EVENT_START,
+  SIDEBAR_EVENT_END,
+};

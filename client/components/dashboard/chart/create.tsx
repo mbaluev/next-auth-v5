@@ -19,14 +19,14 @@ export const dashboardChartsCreate = (
 
   // props
   const lang = 'en';
-  const duration = 200;
-  const durationOpacity = 500;
+  const duration = 100;
   const opacityHover = 0.5;
   const opacityRect = 1;
   const opacityArea = 0.7;
   const opacityLine = 1;
   const opacityDots = 1;
   const strokeWidth = 2;
+  const tooltipThreshold = 20;
 
   // init
   let dims: any = undefined;
@@ -37,7 +37,7 @@ export const dashboardChartsCreate = (
 
     // declare the chart dimensions and _margins.
     dims = { width: ref.current.clientWidth, height: ref.current.clientHeight };
-    margin = { top: 10, right: 0, bottom: 20, left: 0 };
+    margin = { top: 10, right: 0, bottom: 10, left: 0 };
 
     // create the SVG container.
     svg = d3
@@ -122,7 +122,6 @@ export const dashboardChartsCreate = (
   let x: any = undefined;
   let y: any = undefined;
   let z: any = undefined;
-  let z2: any = undefined;
   function scales() {
     // declare the x (horizontal position) scale.
     x = d3
@@ -144,7 +143,6 @@ export const dashboardChartsCreate = (
       .range([dims.height - margin.bottom, margin.top]);
 
     z = d3.scaleOrdinal().range(legend.map((d) => d.color));
-    z2 = d3.scaleOrdinal().range(legend.map((d) => d.color2));
   }
 
   // x-axis
@@ -226,7 +224,7 @@ export const dashboardChartsCreate = (
       .data(_stacked)
       .join('g')
       .attr('class', 'group')
-      .attr('fill', (d: any) => z2(d.key));
+      .attr('fill', (d: any) => z(d.key));
   }
   function updateGroups() {
     group.data(_stacked);
@@ -235,10 +233,9 @@ export const dashboardChartsCreate = (
   // x-functions
   const xGrouped = (d: any) => {
     const value = x(d.data.date) as number;
-    const padding = x.bandwidth() * 0.1;
-    return value + (x.bandwidth() / _keys.length + padding) * d.data.index - padding;
+    return value + (x.bandwidth() / _keys.length) * d.data.index;
   };
-  const xStacked = (d: any) => x(d.data.date) + x.bandwidth() / 4;
+  const xStacked = (d: any) => x(d.data.date);
 
   // y-functions rect
   const yGrouped = (d: any) => (d[0] < 0 ? y(0) : y(d[1] - d[0]));
@@ -256,7 +253,7 @@ export const dashboardChartsCreate = (
 
   // width-functions
   const widthGrouped = () => x.bandwidth() / _keys.length;
-  const widthStacked = () => x.bandwidth() / 2;
+  const widthStacked = () => x.bandwidth();
 
   // height-functions
   const heightBar = (d: any) => Math.abs(y(d[0]) - y(d[1]));
@@ -268,25 +265,18 @@ export const dashboardChartsCreate = (
       .selectAll('rect')
       .data((d: any) => d)
       .join('rect')
-      .attr('opacity', 1e-6);
-    rect.transition().duration(durationOpacity).attr('opacity', opacityRect);
+      .attr('y', y(0));
     if (layout === EChartType.groupedBarChart) {
-      rect
-        .attr('x', xGrouped)
-        .attr('y', yGrouped)
-        .attr('width', widthGrouped())
-        .attr('height', heightBar);
+      rect.attr('x', xGrouped).attr('width', widthGrouped());
+      rect.transition().duration(duration).attr('y', yGrouped).attr('height', heightBar);
     }
     if (layout === EChartType.stackedBarChart) {
-      rect
-        .attr('x', xStacked)
-        .attr('y', yStacked)
-        .attr('width', widthStacked())
-        .attr('height', heightBar);
+      rect.attr('x', xStacked).attr('width', widthStacked());
+      rect.transition().duration(duration).attr('y', yStacked).attr('height', heightBar);
     }
   }
   function removeRect() {
-    rect.transition().duration(durationOpacity).attr('opacity', 1e-6).remove();
+    rect?.transition().duration(duration).attr('opacity', 1e-6).remove();
   }
   function updateRect() {
     rect = group.selectAll('rect').data((d: any) => d);
@@ -336,14 +326,14 @@ export const dashboardChartsCreate = (
     if (isAreaStacked) areaPaths = areas.selectAll('path').data(_stacked).join('path');
     if (isArea) {
       areaPaths.attr('fill', (d: any) => z(d.key)).attr('opacity', 1e-6);
-      areaPaths.transition().duration(durationOpacity).attr('opacity', opacityArea);
+      areaPaths.transition().duration(duration).attr('opacity', opacityArea);
     }
     if (isAreaGrouped) areaFunc.y0(y0Grouped).y1(y1Grouped);
     if (isAreaStacked) areaFunc.y0(y0Stacked).y1(y1Stacked);
     if (isArea) areaPaths.attr('d', areaFunc);
   }
   function removeArea() {
-    areaPaths.transition().duration(durationOpacity).attr('opacity', 1e-6).remove();
+    areaPaths?.transition().duration(duration).attr('opacity', 1e-6).remove();
   }
   function updateAreaStacked() {
     areaPaths.data(_stacked);
@@ -369,17 +359,17 @@ export const dashboardChartsCreate = (
       .selectAll('path')
       .data(_line)
       .join('path')
-      .attr('stroke', (d: any) => z2(d.key))
+      .attr('stroke', (d: any) => z(d.key))
       .attr('stroke-width', strokeWidth)
       .attr('fill', 'none');
-    linePaths.transition().duration(durationOpacity).attr('opacity', opacityLine);
+    linePaths.transition().duration(duration).attr('opacity', opacityLine);
     if (layout === EChartType.lineChart) {
       line.y(yCurve);
       linePaths.attr('d', line);
     }
   }
   function removeLine() {
-    linePaths.transition().duration(durationOpacity).attr('opacity', 1e-6).remove();
+    linePaths?.transition().duration(duration).attr('opacity', 1e-6).remove();
   }
   function updateLine() {
     linePaths.data(_line).attr('stroke-width', strokeWidth);
@@ -433,7 +423,7 @@ export const dashboardChartsCreate = (
       .attr('opacity', opacityDots);
   }
   function removeDot() {
-    if (dot) dot.remove();
+    dot?.remove();
   }
 
   function drawDotLine(item: any) {
@@ -452,7 +442,7 @@ export const dashboardChartsCreate = (
       .attr('x2', x(item.date) + x.bandwidth() / 2);
   }
   function removeDotLine() {
-    dotLine.attr('opacity', 1e-6);
+    dotLine?.attr('opacity', 1e-6);
   }
 
   // change
@@ -623,14 +613,10 @@ export const dashboardChartsCreate = (
       .select('body')
       .append('div')
       .attr('id', idTooltip)
-      .attr('class', classes.tooltip);
-
-    const container = tooltipElem.append('div').attr('class', classes.tooltip_container);
-    tooltipContent = container
-      .append('div')
-      .attr('class', classes.tooltip_content)
-      .style('display', 'none');
-    container.append('div').attr('class', classes.tooltip_arrow);
+      .attr(
+        'class',
+        'absolute flex flex-col w-[150px] px-4 py-2 gap-4 rounded-md border bg-foreground text-background'
+      );
   }
   function renderTooltip(item: any) {
     const format = new Intl.DateTimeFormat(lang, { month: 'long' });
@@ -638,22 +624,22 @@ export const dashboardChartsCreate = (
     const year = moment(item.date).year();
     const date = new Date(Date.UTC(2000, month, 1, 0, 0, 0));
     const label = format.format(date);
-    const html = `<div class="${classes.tooltip_name}">${label} ${year}</div>
-      <div class="${classes.tooltip_rows}">
+    const html = `<div class="">${label} ${year}</div>
+      <div class="flex flex-col">
       ${_keys
         .map((_key) => {
-          const color = legend.find((d) => d.key === _key)?.color2;
-          return `<div class="${classes.tooltip_row}">
-                    <div class="${classes.tooltip_value}">
-                      <div class="${classes.tooltip_value_color}" style="background-color: ${color}"></div>
-                      <div class="${classes.tooltip_value_text}">${_key}</div>
+          const color = legend.find((d) => d.key === _key)?.color;
+          return `<div class="flex justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-3 h-3 rounded-full" style="background-color: ${color}"></div>
+                      <div class="">${_key}</div>
                     </div>
-                    <div class="${classes.tooltip_value_text}">${formatValue(item[_key])}</div>
+                    <div class="">${formatValue(item[_key])}</div>
                   </div>`;
         })
         .join('')}
       </div>`;
-    tooltipContent.style('display', 'flex').html(html);
+    tooltipElem.style('display', 'flex').html(html);
   }
   function showTooltip(item: any) {
     const elemTooltip = document.getElementById(idTooltip);
@@ -664,8 +650,13 @@ export const dashboardChartsCreate = (
       const elemTRect = elemTooltip.getBoundingClientRect();
       const offsetY = elemRect.top - elemTRect.height - bodyRect.top - 5;
       const offsetX = elemRect.left - elemTRect.width / 2 - bodyRect.left;
-      const tooltipY = offsetY - 20;
-      const tooltipX = offsetX + x(item.date) + x.bandwidth() / 2;
+
+      const tooltipY = offsetY;
+      let tooltipX = offsetX + x(item.date) + x.bandwidth() / 2;
+      if (tooltipX + elemTRect.width > bodyRect.right - tooltipThreshold)
+        tooltipX = bodyRect.right - tooltipThreshold - elemTRect.width;
+      if (tooltipX < tooltipThreshold) tooltipX = tooltipThreshold;
+
       renderTooltip(item);
       tooltipElem.style('left', `${tooltipX}px`).style('top', `${tooltipY}px`);
     }
@@ -675,7 +666,7 @@ export const dashboardChartsCreate = (
     const isAreaStacked = type === EChartType.stackedAreaChart;
     const isLine = type === EChartType.lineChart;
     if (item) {
-      rect.attr('opacity', (d: any) => (d.data.date === item.date ? 1 : opacityHover));
+      rect.attr('opacity', (d: any) => (d.data.date === item.date ? opacityHover : opacityRect));
       if (isArea || isLine || isAreaStacked) drawDotLine(item);
       if (isArea || isLine || isAreaStacked) calcDot(item);
       if (isArea || isLine || isAreaStacked) drawDot();
@@ -704,6 +695,7 @@ export const dashboardChartsCreate = (
       highlight();
     }
     svg
+      .attr('class', 'cursor-pointer')
       .on('pointerenter', pointerEntered)
       .on('pointermove', pointerMoved)
       .on('pointerleave', pointerLeft)
@@ -711,30 +703,36 @@ export const dashboardChartsCreate = (
   }
 
   // create
-  init();
-  calcData(data);
-  scales();
-  drawXAxis();
-  drawGroups();
-  drawRect(type);
-  drawAreas();
-  drawArea(type);
-  drawLines();
-  drawLine(type);
-  drawDots();
-  tooltip();
-  events();
-
-  // update
+  function create(data: any[], layout: string) {
+    init();
+    calcData(data);
+    scales();
+    drawGroups();
+    drawRect(layout);
+    drawAreas();
+    drawArea(layout);
+    drawLines();
+    drawLine(layout);
+    drawDots();
+    tooltip();
+    events();
+  }
   function update(data: any[], layout: string) {
     calcData(data);
     updateYAxis(layout);
-    updateXAxis(layout);
     updateGroups();
     updateRect();
     updateLine();
     change(layout, prevType);
   }
+  function remove() {
+    removeRect();
+    removeArea();
+    removeLine();
+    removeDot();
+    removeDotLine();
+  }
+  create(data, type);
 
-  return Object.assign(svg.node() || {}, { update });
+  return Object.assign(svg.node() || {}, { update, remove });
 };

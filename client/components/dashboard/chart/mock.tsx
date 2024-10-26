@@ -10,33 +10,26 @@ export enum EChartType {
 }
 
 export interface IChartItem extends Record<string, any> {
-  total: number;
-  unbilled: number;
-  draft: number;
+  a: number;
+  b: number;
+  c: number;
   date: string;
 }
 
 export interface IChartLegendItem {
   key: string;
-  name: string;
   color: string;
-  color2?: string;
-  visible?: boolean;
-  percent?: number;
-  amount?: number;
 }
 
-const length = 12;
+const length = 100;
 
 export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
 export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) => {
-  const unbilled = randomInt(-200000, 200000);
-  const draft = randomInt(-200000, 200000);
   return {
-    total: unbilled + draft,
-    unbilled,
-    draft,
+    a: randomInt(-200000, 200000),
+    b: randomInt(-200000, 200000),
+    c: randomInt(-200000, 200000),
     date: moment({
       year: moment(new Date())
         .subtract(length - i - 1, 'months')
@@ -50,37 +43,17 @@ export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) =
   };
 });
 
-export const MOCK_CHART_LEGEND = (): IChartLegendItem[] => {
-  const total = MOCK_CHART_DATA.reduce((prev: number, curr: any) => prev + curr.total, 0);
-  const unbilled = MOCK_CHART_DATA.reduce((prev: number, curr: any) => prev + curr.unbilled, 0);
-  const draft = MOCK_CHART_DATA.reduce((prev: number, curr: any) => prev + curr.draft, 0);
-  return [
-    {
-      key: 'total',
-      name: 'total',
-      color: 'hsla(4, 100%, 80%, 1)',
-      color2: 'hsla(4, 100%, 85%, 1)',
-      visible: true,
-      amount: unbilled,
-      percent: (unbilled * 100) / total,
-    },
-    {
-      key: 'unbilled',
-      name: 'unbilled',
-      color: 'hsla(240, 100%, 80%, 1)',
-      color2: 'hsla(240, 100%, 85%, 1)',
-      visible: true,
-      amount: unbilled,
-      percent: (unbilled * 100) / total,
-    },
-    {
-      key: 'draft',
-      name: 'draft',
-      color: 'hsla(240, 100%, 65%, 1)',
-      color2: 'hsla(240, 100%, 70%, 1)',
-      visible: true,
-      amount: draft,
-      percent: (draft * 100) / total,
-    },
-  ];
-};
+export const MOCK_CHART_LEGEND: IChartLegendItem[] = [
+  {
+    key: 'a',
+    color: 'hsla(4, 100%, 80%, 1)',
+  },
+  {
+    key: 'b',
+    color: 'hsla(240, 100%, 80%, 1)',
+  },
+  {
+    key: 'c',
+    color: 'hsla(240, 100%, 65%, 1)',
+  },
+];
