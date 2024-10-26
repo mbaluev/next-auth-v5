@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { dashboardChartsCreate } from '@/components/dashboard/chart/create';
 import { SIDEBAR_EVENT_END, SIDEBAR_EVENT_START } from '@/components/layout/sidebar';
 import {
-  DEFAULT_CHART_TYPE,
+  EChartType,
   MOCK_CHART_DATA,
   MOCK_CHART_LEGEND,
+  DEFAULT_CHART_TYPE,
 } from '@/components/dashboard/chart/mock';
 import {
   Widget,
@@ -14,25 +15,34 @@ import {
   WidgetButtons,
 } from '@/components/layout/widget';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { LayoutDashboard } from 'lucide-react';
+import {
+  ChartArea,
+  ChartColumnBig,
+  ChartColumnStacked,
+  ChartLine,
+  ChartSpline,
+} from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export const DashboardCharts = () => {
   const ref = useRef<any>(null);
-
-  // data
-  const [type, setType] = useState<string>(DEFAULT_CHART_TYPE);
   const [chart, setChart] = useState<any>();
+  const router = useRouter();
+  const params = useSearchParams();
+  const type = params.get('type');
 
   // create chart
   const formatValue = (value: number) => value.toString();
   const create = useCallback(() => {
-    const obj = dashboardChartsCreate(ref, MOCK_CHART_DATA, MOCK_CHART_LEGEND, type, formatValue);
+    const obj = dashboardChartsCreate(
+      ref,
+      MOCK_CHART_DATA,
+      MOCK_CHART_LEGEND,
+      params.get('type') ?? DEFAULT_CHART_TYPE,
+      formatValue
+    );
     setChart(obj);
-  }, [type, ref]);
-  const update = useCallback(() => {
-    if (chart) chart.update(MOCK_CHART_DATA, type);
-  }, [type, chart]);
+  }, [ref]);
   useEffect(() => create(), [create]);
 
   // window size
@@ -50,15 +60,47 @@ export const DashboardCharts = () => {
     };
   }, [chart, create]);
 
+  // update
+  const handleChange = (type: EChartType) => {
+    router.push(`/dashboard?type=${type}`);
+  };
+  useEffect(() => {
+    if (chart) {
+      chart.update(MOCK_CHART_DATA, type ?? DEFAULT_CHART_TYPE);
+    }
+  }, [chart, type]);
+
   return (
     <Widget>
       <WidgetHeader>
         <WidgetTitle>widget</WidgetTitle>
         <WidgetButtons>
-          <Button variant="ghost" size="icon">
-            <Link href="/dashboard/line">
-              <LayoutDashboard />
-            </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => handleChange(EChartType.stackedBarChart)}
+          >
+            <ChartColumnStacked />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => handleChange(EChartType.groupedBarChart)}
+          >
+            <ChartColumnBig />
+          </Button>
+          <Button variant="ghost" size="icon" onClick={() => handleChange(EChartType.areaChart)}>
+            <ChartSpline />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => handleChange(EChartType.stackedAreaChart)}
+          >
+            <ChartArea />
+          </Button>
+          <Button variant="ghost" size="icon" onClick={() => handleChange(EChartType.lineChart)}>
+            <ChartLine />
           </Button>
         </WidgetButtons>
       </WidgetHeader>

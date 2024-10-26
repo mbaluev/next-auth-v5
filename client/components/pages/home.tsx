@@ -14,9 +14,8 @@ export default function HomePage() {
         <h1 className="text-6xl font-semibold">auth</h1>
       </div>
       <div className="space-y-1">
-        <p className="text-lg text-muted-foreground">a simple</p>
         <p className="text-lg text-muted-foreground">authentication service</p>
-        <p className="text-lg text-muted-foreground">landing page</p>
+        <p className="text-lg text-muted-foreground">personal experiments</p>
       </div>
       {!auth && (
         <div className="flex justify-center gap-x-8">

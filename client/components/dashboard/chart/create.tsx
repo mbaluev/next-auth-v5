@@ -19,7 +19,7 @@ export const dashboardChartsCreate = (
 
   // props
   const lang = 'en';
-  const duration = 100;
+  const duration = 250;
   const opacityHover = 0.5;
   const opacityRect = 1;
   const opacityArea = 0.7;
@@ -27,6 +27,7 @@ export const dashboardChartsCreate = (
   const opacityDots = 1;
   const strokeWidth = 2;
   const tooltipThreshold = 5;
+  const paddingRect = 0.1;
 
   // init
   let dims: any = undefined;
@@ -131,7 +132,7 @@ export const dashboardChartsCreate = (
       .scaleBand()
       .domain(_names)
       .range([margin.left, dims.width - margin.right])
-      .padding(0.5);
+      .padding(paddingRect);
 
     // declare the y (vertical position) scale.
     let y_min = y_min_grouped;
@@ -325,15 +326,18 @@ export const dashboardChartsCreate = (
     const isAreaGrouped = layout === EChartType.areaChart;
     const isAreaStacked = layout === EChartType.stackedAreaChart;
     const isArea = isAreaGrouped || isAreaStacked;
-    if (isAreaGrouped) areaPaths = areas.selectAll('path').data(_area).join('path');
-    if (isAreaStacked) areaPaths = areas.selectAll('path').data(_stacked).join('path');
     if (isArea) {
-      areaPaths.attr('fill', (d: any) => z(d.key)).attr('opacity', 1e-6);
-      areaPaths.transition().duration(duration).attr('opacity', opacityArea);
+      areaFunc.y0(y(0)).y1(y(0));
+      if (isAreaGrouped) areaPaths = areas.selectAll('path').data(_area).join('path');
+      if (isAreaStacked) areaPaths = areas.selectAll('path').data(_stacked).join('path');
+      areaPaths
+        .attr('fill', (d: any) => z(d.key))
+        .attr('opacity', opacityArea)
+        .attr('d', areaFunc);
+      if (isAreaGrouped) areaFunc.y0(y0Grouped).y1(y1Grouped);
+      if (isAreaStacked) areaFunc.y0(y0Stacked).y1(y1Stacked);
+      areaPaths.transition().duration(duration).attr('d', areaFunc);
     }
-    if (isAreaGrouped) areaFunc.y0(y0Grouped).y1(y1Grouped);
-    if (isAreaStacked) areaFunc.y0(y0Stacked).y1(y1Stacked);
-    if (isArea) areaPaths.attr('d', areaFunc);
   }
   function removeArea() {
     areaPaths?.transition().duration(duration).attr('opacity', 1e-6).remove();
@@ -355,20 +359,22 @@ export const dashboardChartsCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveBumpX).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveStep).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
+    line.y(y(0));
     linePaths = lines
       .selectAll('path')
       .data(_line)
       .join('path')
       .attr('stroke', (d: any) => z(d.key))
       .attr('stroke-width', strokeWidth)
-      .attr('fill', 'none');
-    linePaths.transition().duration(duration).attr('opacity', opacityLine);
+      .attr('fill', 'none')
+      .attr('opacity', 1e-6)
+      .attr('d', line);
     if (layout === EChartType.lineChart) {
       line.y(yCurve);
-      linePaths.attr('d', line);
+      linePaths.attr('opacity', opacityLine).transition().duration(duration).attr('d', line);
     }
   }
   function removeLine() {
@@ -463,19 +469,12 @@ export const dashboardChartsCreate = (
         drawRect(layout);
         break;
       case EChartType.areaChart:
-        updateAreaStacked();
-        setTimeout(() => {
-          removeArea();
-          drawRect(layout);
-        }, duration);
+        removeArea();
+        drawRect(layout);
         break;
       case EChartType.lineChart:
-        updateLineStacked();
-        setTimeout(() => {
-          removeLine();
-          drawRect(layout);
-        }, duration);
-        break;
+        removeLine();
+        drawRect(layout);
     }
   }
   function changeBarGrouped(layout: string, prevLayout: string) {
@@ -487,11 +486,8 @@ export const dashboardChartsCreate = (
         updateRectGroupedY();
         break;
       case EChartType.stackedAreaChart:
-        updateAreaGrouped();
-        setTimeout(() => {
-          removeArea();
-          drawRect(layout);
-        }, duration);
+        removeArea();
+        drawRect(layout);
         break;
       case EChartType.areaChart:
         removeArea();
@@ -510,11 +506,8 @@ export const dashboardChartsCreate = (
         drawArea(layout);
         break;
       case EChartType.groupedBarChart:
-        updateRectStacked();
-        setTimeout(() => {
-          removeRect();
-          drawArea(layout);
-        }, duration * 2);
+        removeRect();
+        drawArea(layout);
         break;
       case EChartType.stackedAreaChart:
         updateAreaStacked();
@@ -523,22 +516,16 @@ export const dashboardChartsCreate = (
         updateAreaStacked();
         break;
       case EChartType.lineChart:
-        updateLineStacked();
-        setTimeout(() => {
-          removeLine();
-          drawArea(EChartType.stackedAreaChart);
-        }, duration);
+        removeLine();
+        drawArea(EChartType.stackedAreaChart);
         break;
     }
   }
   function changeAreaGrouped(layout: string, prevLayout: string) {
     switch (prevLayout) {
       case EChartType.stackedBarChart:
-        updateRectGrouped();
-        setTimeout(() => {
-          removeRect();
-          drawArea(layout);
-        }, duration * 2);
+        removeRect();
+        drawArea(layout);
         break;
       case EChartType.groupedBarChart:
         removeRect();
@@ -559,22 +546,16 @@ export const dashboardChartsCreate = (
   function changeLine(layout: string, prevLayout: string) {
     switch (prevLayout) {
       case EChartType.stackedBarChart:
-        updateRectGrouped();
-        setTimeout(() => {
-          removeRect();
-          drawLine(layout);
-        }, duration * 2);
+        removeRect();
+        drawLine(layout);
         break;
       case EChartType.groupedBarChart:
         removeRect();
         drawLine(layout);
         break;
       case EChartType.stackedAreaChart:
-        updateAreaGrouped();
-        setTimeout(() => {
-          removeArea();
-          drawLine(layout);
-        }, duration * 2);
+        removeArea();
+        drawLine(layout);
         break;
       case EChartType.areaChart:
         removeArea();
@@ -651,11 +632,11 @@ export const dashboardChartsCreate = (
     if (item && elemSvg && elemTooltip) {
       const elemRect = elemSvg.getBoundingClientRect();
       const elemTRect = elemTooltip.getBoundingClientRect();
-      const offsetY = elemRect.top - bodyRect.top - 5;
+      const offsetY = elemRect.top - bodyRect.top - tooltipThreshold;
       const offsetX = elemRect.left - bodyRect.left + tooltipThreshold; // - elemTRect.width / 2;
 
       const tooltipY = offsetY + tooltipThreshold;
-      let tooltipX = offsetX + x(item.date) + x.bandwidth() / 2;
+      let tooltipX = offsetX + x(item.date) + x.bandwidth();
       if (tooltipX + elemTRect.width > bodyRect.right - tooltipThreshold)
         tooltipX = bodyRect.right - elemTRect.width - tooltipThreshold;
       if (tooltipX < tooltipThreshold) tooltipX = tooltipThreshold;
