@@ -599,7 +599,7 @@ export const dashboardChartsCreate = (
       .attr('id', idTooltip)
       .attr(
         'class',
-        'absolute flex flex-col w-[150px] px-4 py-2 gap-4 rounded-md border bg-foreground text-background'
+        'absolute flex flex-col w-[150px] px-4 py-2 gap-4 rounded-md border bg-foreground text-background hidden'
       );
   }
   function renderTooltip(item: any) {
