@@ -26,7 +26,7 @@ export const dashboardChartsCreate = (
   const opacityLine = 1;
   const opacityDots = 1;
   const strokeWidth = 2;
-  const tooltipThreshold = 10;
+  const tooltipThreshold = 5;
 
   // init
   let dims: any = undefined;

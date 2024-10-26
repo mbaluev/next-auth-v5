@@ -18,7 +18,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         type={visible ? 'text' : 'password'}
         className={cn('relative pr-9', inputProps.className)}
       />
-      <Button size="adornment" variant="ghost" onClick={handleVisible} asChild={true}>
+      <Button size="adornment" variant="ghost" onClick={handleVisible}>
         {visible ? <Eye /> : <EyeOff />}
       </Button>
     </div>

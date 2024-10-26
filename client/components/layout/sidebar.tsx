@@ -149,7 +149,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   );
 
   const classDivMobile = cn('h-full shadow-md rounded-r-lg border border-l-0');
-  const classDivDesktop = cn('fixed w-[240px] h-full border-r');
+  const classDivDesktop = cn('fixed w-[240px] h-full');
   const classDiv = cn(
     'bg-sidebar text-sidebar-foreground',
     isMobile ? classDivMobile : classDivDesktop
