@@ -15,13 +15,7 @@ import {
   WidgetButtons,
 } from '@/components/layout/widget';
 import { Button } from '@/components/ui/button';
-import {
-  ChartArea,
-  ChartColumnBig,
-  ChartColumnStacked,
-  ChartLine,
-  ChartSpline,
-} from 'lucide-react';
+import { ChartArea, ChartColumn, ChartColumnStacked, ChartLine, ChartSpline } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export const DashboardCharts = () => {
@@ -76,30 +70,38 @@ export const DashboardCharts = () => {
         <WidgetTitle>widget</WidgetTitle>
         <WidgetButtons>
           <Button
-            variant="ghost"
+            variant={type === EChartType.stackedBarChart ? 'default' : 'ghost'}
             size="icon"
             onClick={() => handleChange(EChartType.stackedBarChart)}
           >
             <ChartColumnStacked />
           </Button>
           <Button
-            variant="ghost"
+            variant={type === EChartType.groupedBarChart ? 'default' : 'ghost'}
             size="icon"
             onClick={() => handleChange(EChartType.groupedBarChart)}
           >
-            <ChartColumnBig />
+            <ChartColumn />
           </Button>
-          <Button variant="ghost" size="icon" onClick={() => handleChange(EChartType.areaChart)}>
+          <Button
+            variant={type === EChartType.areaChart ? 'default' : 'ghost'}
+            size="icon"
+            onClick={() => handleChange(EChartType.areaChart)}
+          >
             <ChartSpline />
           </Button>
           <Button
-            variant="ghost"
+            variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
             size="icon"
             onClick={() => handleChange(EChartType.stackedAreaChart)}
           >
             <ChartArea />
           </Button>
-          <Button variant="ghost" size="icon" onClick={() => handleChange(EChartType.lineChart)}>
+          <Button
+            variant={type === EChartType.lineChart ? 'default' : 'ghost'}
+            size="icon"
+            onClick={() => handleChange(EChartType.lineChart)}
+          >
             <ChartLine />
           </Button>
         </WidgetButtons>
