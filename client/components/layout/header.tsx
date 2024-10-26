@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import { cn } from '@/core/utils/cn';
 import { useScrollTop } from '@/core/hooks/use-scroll-top';
-import { usePathname } from 'next/navigation';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useDeviceSize } from '@/core/hooks/use-device-size';
-import { MEDIA_SM, useWindowSize } from '@/core/hooks/use-window-size';
+import { MEDIA_SM } from '@/core/hooks/use-window-size';
 import { SidebarTrigger } from '@/components/layout/sidebar';
-import { Fragment, useEffect, useState } from 'react';
-import { Button, ButtonProps } from '@/components/ui/button';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
+import { Fragment } from 'react';
+import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -41,7 +39,6 @@ const Header = () => {
 };
 
 const HeaderLeftBar = () => {
-  const pathname = usePathname();
   const user = useCurrentUser();
   const { less } = useDeviceSize(MEDIA_SM);
   if (!user) return null;
@@ -53,24 +50,12 @@ const HeaderLeftBar = () => {
           <Logo className="w-6 h-6" />
         </Link>
       </Button>
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/dashboard">
-          <LayoutDashboard />
-        </Link>
-      </Button>
       {!less && (
         <Fragment>
-          <Button asChild variant={pathname === '/server' ? 'secondary' : 'ghost'}>
-            <Link href="/server">server</Link>
-          </Button>
-          <Button asChild variant={pathname === '/client' ? 'secondary' : 'ghost'}>
-            <Link href="/client">client</Link>
-          </Button>
-          <Button asChild variant={pathname === '/admin' ? 'secondary' : 'ghost'}>
-            <Link href="/admin">admin</Link>
-          </Button>
-          <Button asChild variant={pathname === '/settings' ? 'secondary' : 'ghost'}>
-            <Link href="/settings">settings</Link>
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/dashboard">
+              <LayoutDashboard />
+            </Link>
           </Button>
         </Fragment>
       )}

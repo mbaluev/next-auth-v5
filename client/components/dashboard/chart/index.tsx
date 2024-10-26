@@ -70,7 +70,7 @@ export const DashboardCharts = () => {
         <WidgetTitle>widget</WidgetTitle>
         <WidgetButtons>
           <Button
-            variant={type === EChartType.stackedBarChart ? 'default' : 'ghost'}
+            variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
             size="icon"
             onClick={() => handleChange(EChartType.stackedBarChart)}
           >
