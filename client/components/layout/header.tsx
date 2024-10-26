@@ -4,10 +4,7 @@ import Link from 'next/link';
 import { cn } from '@/core/utils/cn';
 import { useScrollTop } from '@/core/hooks/use-scroll-top';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { useDeviceSize } from '@/core/hooks/use-device-size';
-import { MEDIA_SM } from '@/core/hooks/use-window-size';
 import { SidebarTrigger } from '@/components/layout/sidebar';
-import { Fragment } from 'react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
@@ -40,7 +37,6 @@ const Header = () => {
 
 const HeaderLeftBar = () => {
   const user = useCurrentUser();
-  const { less } = useDeviceSize(MEDIA_SM);
   if (!user) return null;
   return (
     <nav className="flex-grow flex flex-wrap gap-4">
@@ -50,15 +46,11 @@ const HeaderLeftBar = () => {
           <Logo className="w-6 h-6" />
         </Link>
       </Button>
-      {!less && (
-        <Fragment>
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/dashboard">
-              <LayoutDashboard />
-            </Link>
-          </Button>
-        </Fragment>
-      )}
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/dashboard">
+          <LayoutDashboard />
+        </Link>
+      </Button>
     </nav>
   );
 };
