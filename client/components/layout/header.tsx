@@ -26,7 +26,7 @@ const Header = () => {
     <header
       className={cn(
         'flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0',
-        scrolled && 'bg-background border-b shadow-sm'
+        scrolled && 'bg-background'
       )}
     >
       <HeaderLeftBar />
