@@ -14,6 +14,7 @@ const buttonVariants = cva(
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-secondary hover:text-secondary-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        sidebar: 'bg-secondary text-primary',
       },
       size: {
         default: 'h-11 px-4',
@@ -22,6 +23,9 @@ const buttonVariants = cva(
         lg: 'h-14 px-6',
         adornment: 'h-8 w-8 p-1.5 absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full',
         icon: 'h-11 w-11 p-2 rounded-full',
+        'flex-start': 'h-11 px-4 flex gap-4 justify-start',
+        'flex-end': 'h-11 px-4 flex gap-4 justify-end',
+        'flex-between': 'h-11 px-4 flex gap-4 justify-between',
       },
     },
     defaultVariants: {

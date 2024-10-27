@@ -2,9 +2,11 @@
 
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { useSidebar } from '@/components/layout/sidebar';
+import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
 import { usePathname } from 'next/navigation';
-import { X } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { Logo } from '@/components/layout/logo';
+import { MonitorSmartphone, Server, Settings, ShieldCheck, LayoutDashboard, X } from 'lucide-react';
 import Link from 'next/link';
 
 export const Nav = () => {
@@ -13,42 +15,50 @@ export const Nav = () => {
   const { toggleSidebar } = useSidebar();
   if (!user) return null;
   return (
-    <div className="flex flex-col p-4 gap-4">
-      <div className="flex gap-4 justify-between">
-        <Button variant="ghost">navigation</Button>
+    <div className="flex flex-col">
+      <div className="flex gap-4 p-4 justify-between">
+        <SidebarButton asChild variant="ghost">
+          <Link href="/">
+            <Logo className="w-6 h-6" />
+            <p>mbaluev</p>
+          </Link>
+        </SidebarButton>
         <Button variant="ghost" size="icon" onClick={toggleSidebar}>
           <X />
         </Button>
       </div>
-      <div className="flex flex-col gap-2">
-        <Button
-          asChild
-          variant={pathname === '/server' ? 'default' : 'ghost'}
-          className="justify-start"
-        >
-          <Link href="/server">server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === '/client' ? 'default' : 'ghost'}
-          className="justify-start"
-        >
-          <Link href="/client">client</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === '/admin' ? 'default' : 'ghost'}
-          className="justify-start"
-        >
-          <Link href="/admin">admin</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === '/settings' ? 'default' : 'ghost'}
-          className="justify-start"
-        >
-          <Link href="/settings">settings</Link>
-        </Button>
+      <Separator />
+      <div className="flex flex-col gap-4 p-4">
+        <SidebarButton asChild variant={pathname === '/dashboard' ? 'sidebar' : 'ghost'}>
+          <Link href="/dashboard">
+            <LayoutDashboard />
+            <p>dashboard</p>
+          </Link>
+        </SidebarButton>
+        <SidebarButton asChild variant={pathname === '/server' ? 'sidebar' : 'ghost'}>
+          <Link href="/server">
+            <Server />
+            <p>server</p>
+          </Link>
+        </SidebarButton>
+        <SidebarButton asChild variant={pathname === '/client' ? 'sidebar' : 'ghost'}>
+          <Link href="/client">
+            <MonitorSmartphone />
+            <p>client</p>
+          </Link>
+        </SidebarButton>
+        <SidebarButton asChild variant={pathname === '/admin' ? 'sidebar' : 'ghost'}>
+          <Link href="/admin">
+            <ShieldCheck className="w-6 h-6" />
+            <p>admin</p>
+          </Link>
+        </SidebarButton>
+        <SidebarButton asChild variant={pathname === '/settings' ? 'sidebar' : 'ghost'}>
+          <Link href="/settings">
+            <Settings className="w-6 h-6" />
+            <p>settings</p>
+          </Link>
+        </SidebarButton>
       </div>
     </div>
   );

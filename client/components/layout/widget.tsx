@@ -6,9 +6,10 @@ const Widget = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     <div
       ref={ref}
       className={cn(
-        'flex flex-col flex-grow rounded-md bg-sidebar text-sidebar-foreground',
+        'flex flex-col flex-grow rounded-md bg-sidebar text-sidebar-foreground max-h-full',
         className
       )}
+      data-type="widget"
       {...props}
     />
   )

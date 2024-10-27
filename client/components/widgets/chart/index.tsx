@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { WidgetChartCreate } from '@/components/widgets/chart/create';
-import { SIDEBAR_EVENT_END, SIDEBAR_EVENT_START } from '@/components/layout/sidebar';
+import { SIDEBAR_EVENT_END, SIDEBAR_EVENT_START, useSidebar } from '@/components/layout/sidebar';
 import {
   EChartType,
   MOCK_CHART_DATA,
@@ -26,6 +26,7 @@ export const WidgetChart = () => {
   const [chart, setChart] = useState<any>();
   const router = useRouter();
   const params = useSearchParams();
+  const { isMobile } = useSidebar();
   const type = params.get('type');
 
   // create chart
@@ -45,23 +46,36 @@ export const WidgetChart = () => {
     }
   }, [ref]);
   useEffect(() => {
-    setTimeout(create, 500);
+    setTimeout(create, 200);
   }, []);
 
   // window size
   useEffect(() => {
-    const resize = () => create();
-    const resizeStart = () => chart?.remove();
-    const resizeEnd = () => create();
+    const resize = () => {
+      setLoading(true);
+      chart?.remove();
+      setTimeout(create, 200);
+    };
+    const resizeStart = () => {
+      setLoading(true);
+      chart?.remove();
+    };
+    const resizeEnd = () => {
+      setTimeout(create, 100);
+    };
     window.addEventListener('resize', resize);
-    window.addEventListener(SIDEBAR_EVENT_START, resizeStart);
-    window.addEventListener(SIDEBAR_EVENT_END, resizeEnd);
+    if (!isMobile) {
+      window.addEventListener(SIDEBAR_EVENT_START, resizeStart);
+      window.addEventListener(SIDEBAR_EVENT_END, resizeEnd);
+    }
     return () => {
       window.removeEventListener('resize', resize);
-      window.removeEventListener(SIDEBAR_EVENT_START, resizeStart);
-      window.removeEventListener(SIDEBAR_EVENT_END, resizeEnd);
+      if (!isMobile) {
+        window.removeEventListener(SIDEBAR_EVENT_START, resizeStart);
+        window.removeEventListener(SIDEBAR_EVENT_END, resizeEnd);
+      }
     };
-  }, [chart, create]);
+  }, [chart, create, isMobile]);
 
   // update
   const handleChange = (type: EChartType) => {

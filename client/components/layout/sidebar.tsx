@@ -5,6 +5,7 @@ import {
   createContext,
   ElementRef,
   forwardRef,
+  Fragment,
   useCallback,
   useContext,
   useEffect,
@@ -82,7 +83,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     window.dispatchEvent(new Event(SIDEBAR_EVENT_START));
     setTimeout(() => {
       window.dispatchEvent(new Event(SIDEBAR_EVENT_END));
-    }, SIDEBAR_TRANSITION_DURATION * 1.5);
+    }, SIDEBAR_TRANSITION_DURATION * 2);
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
 
@@ -117,7 +118,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <div className={cn('flex min-h-full', className)} ref={ref} {..._props}>
+      <div className={cn('flex min-h-full relative', className)} ref={ref} {..._props}>
         {children}
       </div>
     </SidebarContext.Provider>
@@ -129,7 +130,7 @@ type SidebarBaseProps = {};
 type SidebarProps = ComponentProps<'div'> & SidebarBaseProps;
 const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const { className, children, ..._props } = props;
-  const { isMobile, open, openMobile } = useSidebar();
+  const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
 
   const user = useCurrentUser();
   if (!user) return null;
@@ -139,7 +140,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     !open && 'ml-[-240px]'
   );
   const classNavMobile = cn(
-    'w-[calc(100%-12px)] fixed top-[57px] bottom-4 z-[10]',
+    'w-[calc(100%-12px)] max-w-[300px] fixed top-[57px] bottom-4 z-[10]',
     openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
   );
   const classNav = cn(
@@ -156,9 +157,17 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   );
 
   return (
-    <nav className={classNav} ref={ref} {..._props}>
-      <div className={classDiv}>{children}</div>
-    </nav>
+    <Fragment>
+      <nav className={classNav} ref={ref} {..._props}>
+        <div className={classDiv}>{children}</div>
+      </nav>
+      {isMobile && openMobile && (
+        <div
+          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/50')}
+          onClick={toggleSidebar}
+        />
+      )}
+    </Fragment>
   );
 });
 Sidebar.displayName = 'Sidebar';
@@ -185,10 +194,24 @@ const SidebarTrigger = forwardRef<ElementRef<typeof Button>, SidebarTriggerProps
 });
 SidebarTrigger.displayName = 'SidebarTrigger';
 
+type SidebarButtonProps = ComponentProps<typeof Button>;
+const SidebarButton = forwardRef<ElementRef<typeof Button>, SidebarButtonProps>((props, ref) => {
+  const { onClick, children, ..._props } = props;
+  const { toggleSidebar, isMobile } = useSidebar();
+  const handleClick = isMobile ? toggleSidebar : undefined;
+  return (
+    <Button size="flex-start" onClick={handleClick} {..._props}>
+      {children}
+    </Button>
+  );
+});
+SidebarButton.displayName = 'SidebarButton';
+
 export {
   SidebarProvider,
   Sidebar,
   SidebarTrigger,
+  SidebarButton,
   useSidebar,
   SIDEBAR_EVENT_START,
   SIDEBAR_EVENT_END,
