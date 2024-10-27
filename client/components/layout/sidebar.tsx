@@ -140,7 +140,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     !open && 'ml-[-240px]'
   );
   const classNavMobile = cn(
-    'w-[calc(100%-12px)] max-w-[300px] fixed top-[57px] bottom-4 z-[10]',
+    'w-[calc(100%-12px)] max-w-[300px] fixed top-0 bottom-0 z-[10]',
     openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
   );
   const classNav = cn(
@@ -149,7 +149,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     className
   );
 
-  const classDivMobile = cn('h-full shadow-md rounded-r-lg border border-l-0');
+  const classDivMobile = cn('h-full shadow-md rounded-r-lg');
   const classDivDesktop = cn('fixed w-[240px] h-full');
   const classDiv = cn(
     'bg-sidebar text-sidebar-foreground',
@@ -163,7 +163,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
       </nav>
       {isMobile && openMobile && (
         <div
-          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/50')}
+          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/25')}
           onClick={toggleSidebar}
         />
       )}
