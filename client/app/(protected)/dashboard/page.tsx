@@ -1,10 +1,7 @@
-'use client';
-
-// import HomePage from '@/components/pages/home';
-import { DashboardCharts } from '@/components/dashboard/chart';
+import { WidgetChart } from '@/components/widgets/chart';
 
 const DashboardPage = () => {
-  return <DashboardCharts />;
+  return <WidgetChart />;
 };
 
 export default DashboardPage;

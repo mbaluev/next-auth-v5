@@ -1,13 +1,13 @@
 import * as d3 from 'd3';
 import moment from 'moment/moment';
 import { MutableRefObject } from 'react';
-import { EChartType, IChartItem, IChartLegendItem } from '@/components/dashboard/chart/mock';
+import { EChartType, IChartItem, IChartLegendItem } from '@/components/widgets/chart/mock';
 import { JetBrains_Mono } from 'next/font/google';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
 const classes: any = {};
 
-export const dashboardChartsCreate = (
+export const WidgetChartCreate = (
   ref: MutableRefObject<any>,
   data: IChartItem[],
   legend: IChartLegendItem[],
@@ -25,7 +25,7 @@ export const dashboardChartsCreate = (
   const opacityArea = 0.7;
   const opacityLine = 1;
   const opacityDots = 1;
-  const strokeWidth = 2;
+  const strokeWidth = 1;
   const tooltipThreshold = 5;
   const paddingRect = 0.1;
 
@@ -359,7 +359,7 @@ export const dashboardChartsCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveStep).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveLinear).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
     line.y(y(0));

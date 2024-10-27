@@ -1,12 +1,14 @@
+'use client';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { dashboardChartsCreate } from '@/components/dashboard/chart/create';
+import { WidgetChartCreate } from '@/components/widgets/chart/create';
 import { SIDEBAR_EVENT_END, SIDEBAR_EVENT_START } from '@/components/layout/sidebar';
 import {
   EChartType,
   MOCK_CHART_DATA,
   MOCK_CHART_LEGEND,
   DEFAULT_CHART_TYPE,
-} from '@/components/dashboard/chart/mock';
+} from '@/components/widgets/chart/mock';
 import {
   Widget,
   WidgetContent,
@@ -17,8 +19,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { ChartArea, ChartColumn, ChartColumnStacked, ChartLine, ChartSpline } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Spinner } from '@/components/ui/spinner';
 
-export const DashboardCharts = () => {
+export const WidgetChart = () => {
   const ref = useRef<any>(null);
   const [chart, setChart] = useState<any>();
   const router = useRouter();
@@ -26,18 +29,24 @@ export const DashboardCharts = () => {
   const type = params.get('type');
 
   // create chart
+  const [loading, setLoading] = useState(true);
   const formatValue = (value: number) => value.toString();
   const create = useCallback(() => {
-    const obj = dashboardChartsCreate(
-      ref,
-      MOCK_CHART_DATA,
-      MOCK_CHART_LEGEND,
-      params.get('type') ?? DEFAULT_CHART_TYPE,
-      formatValue
-    );
-    setChart(obj);
+    if (ref.current && loading) {
+      setLoading(false);
+      const obj = WidgetChartCreate(
+        ref,
+        MOCK_CHART_DATA,
+        MOCK_CHART_LEGEND,
+        params.get('type') ?? DEFAULT_CHART_TYPE,
+        formatValue
+      );
+      setChart(obj);
+    }
   }, [ref]);
-  useEffect(() => create(), [create]);
+  useEffect(() => {
+    setTimeout(create, 500);
+  }, []);
 
   // window size
   useEffect(() => {
@@ -107,7 +116,13 @@ export const DashboardCharts = () => {
         </WidgetButtons>
       </WidgetHeader>
       <WidgetContent>
-        <div ref={ref} className="w-full h-full" />
+        <div ref={ref} className="w-full h-full relative">
+          {loading && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <Spinner />
+            </div>
+          )}
+        </div>
       </WidgetContent>
     </Widget>
   );
