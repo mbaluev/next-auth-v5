@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { WidgetChartCreate } from '@/components/widgets/chart/create';
-import { SIDEBAR_EVENT_END, SIDEBAR_EVENT_START, useSidebar } from '@/components/layout/sidebar';
 import {
   EChartType,
   MOCK_CHART_DATA,
@@ -20,21 +19,20 @@ import { Button } from '@/components/ui/button';
 import { ChartArea, ChartColumn, ChartColumnStacked, ChartLine, ChartSpline } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
+import { useResize } from '@/core/hooks/use-resize';
 
 export const WidgetChart = () => {
   const ref = useRef<any>(null);
   const [chart, setChart] = useState<any>();
   const router = useRouter();
   const params = useSearchParams();
-  const { isMobile } = useSidebar();
   const type = params.get('type');
+  const loading = false;
 
   // create chart
-  const [loading, setLoading] = useState(true);
   const formatValue = (value: number) => value.toString();
   const create = useCallback(() => {
-    if (ref.current && loading) {
-      setLoading(false);
+    if (ref.current) {
       const obj = WidgetChartCreate(
         ref,
         MOCK_CHART_DATA,
@@ -45,47 +43,23 @@ export const WidgetChart = () => {
       setChart(obj);
     }
   }, [ref]);
-  useEffect(() => {
-    setTimeout(create, 200);
-  }, []);
-
-  // window size
-  useEffect(() => {
-    const resize = () => {
-      setLoading(true);
-      chart?.remove();
-      setTimeout(create, 200);
-    };
-    const resizeStart = () => {
-      setLoading(true);
-      chart?.remove();
-    };
-    const resizeEnd = () => {
-      setTimeout(create, 100);
-    };
-    window.addEventListener('resize', resize);
-    if (!isMobile) {
-      window.addEventListener(SIDEBAR_EVENT_START, resizeStart);
-      window.addEventListener(SIDEBAR_EVENT_END, resizeEnd);
-    }
-    return () => {
-      window.removeEventListener('resize', resize);
-      if (!isMobile) {
-        window.removeEventListener(SIDEBAR_EVENT_START, resizeStart);
-        window.removeEventListener(SIDEBAR_EVENT_END, resizeEnd);
-      }
-    };
-  }, [chart, create, isMobile]);
 
   // update
   const handleChange = (type: EChartType) => {
     router.push(`/dashboard?type=${type}`);
   };
   useEffect(() => {
-    if (chart) {
-      chart.update(MOCK_CHART_DATA, type ?? DEFAULT_CHART_TYPE);
-    }
+    if (chart) chart.update(MOCK_CHART_DATA, type ?? DEFAULT_CHART_TYPE);
   }, [chart, type]);
+
+  // create, resize
+  const { width, height } = useResize(ref, []);
+  useEffect(() => {
+    if (width > 0 && height > 0) {
+      chart?.remove();
+      create();
+    }
+  }, [width, height]);
 
   return (
     <Widget>
