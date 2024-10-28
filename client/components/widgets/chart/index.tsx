@@ -20,6 +20,7 @@ import { ChartArea, ChartColumn, ChartColumnStacked, ChartLine, ChartSpline } fr
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
+import { v4 } from 'uuid';
 
 export const WidgetChart = () => {
   const ref = useRef<any>(null);
@@ -28,6 +29,7 @@ export const WidgetChart = () => {
   const params = useSearchParams();
   const type = params.get('type');
   const loading = false;
+  const id = `widget-chart-${v4()}`;
 
   // create chart
   const formatValue = (value: number) => value.toString();
@@ -35,6 +37,7 @@ export const WidgetChart = () => {
     if (ref.current) {
       const obj = WidgetChartCreate(
         ref,
+        id,
         MOCK_CHART_DATA,
         MOCK_CHART_LEGEND,
         params.get('type') ?? DEFAULT_CHART_TYPE,

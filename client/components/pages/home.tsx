@@ -18,7 +18,7 @@ export default function HomePage() {
         <p className="text-lg text-muted-foreground">personal experiments</p>
       </div>
       {!auth && (
-        <div className="flex justify-center gap-x-8">
+        <div className="flex justify-center gap-6">
           <LoginButton mode="redirect" asChild>
             <Button variant="default" size="lg">
               sign in

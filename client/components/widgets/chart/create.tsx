@@ -9,13 +9,13 @@ const classes: any = {};
 
 export const WidgetChartCreate = (
   ref: MutableRefObject<any>,
+  id: string,
   data: IChartItem[],
   legend: IChartLegendItem[],
   type: string,
   formatValue: (value: any) => string
 ) => {
-  const id = 'svg-chart';
-  const idTooltip = 'svg-chart-tooltip';
+  const idTooltip = `${id}-tooltip`;
 
   // props
   const lang = 'en';

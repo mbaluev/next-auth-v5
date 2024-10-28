@@ -1,21 +1,18 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardProps } from '@/components/ui/card';
 import { CardHeaderContent } from '@/components/auth/card-header-content';
 import { Social } from '@/components/auth/social';
 import { BackButton } from '@/components/auth/back-button';
-import { cn } from '@/core/utils/cn';
 
-interface CardWrapperProps {
+interface CardWrapperProps extends CardProps {
   children?: ReactNode;
   headerLabel: string;
   backButtonLabel: string;
   backButtonHref: string;
   showSocial?: boolean;
   loading?: boolean;
-  border?: boolean;
-  padding?: boolean;
 }
 
 export const CardWrapper = ({
@@ -25,21 +22,20 @@ export const CardWrapper = ({
   backButtonHref,
   showSocial,
   loading,
-  border = true,
-  padding = true,
+  ..._props
 }: CardWrapperProps) => {
   return (
-    <Card className={cn(!border && 'border-none shadow-none z-[10]')}>
-      <CardHeader className={cn(!padding && 'pt-0 px-0')}>
+    <Card variant="transparent" className="z-[10]" {..._props}>
+      <CardHeader>
         <CardHeaderContent loading={loading} label={headerLabel} />
       </CardHeader>
-      <CardContent className={cn(!padding && 'px-0')}>{children}</CardContent>
+      <CardContent>{children}</CardContent>
       {showSocial && (
-        <CardFooter className={cn(!padding && 'px-0')}>
+        <CardFooter>
           <Social />
         </CardFooter>
       )}
-      <CardFooter className={cn(!padding && 'p-0')}>
+      <CardFooter>
         <BackButton href={backButtonHref} label={backButtonLabel} />
       </CardFooter>
     </Card>

@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Layout>{children}</Layout>
               <Toaster
-                visibleToasts={3}
+                visibleToasts={5}
                 position="bottom-right"
                 className={font.className}
                 toastOptions={{
@@ -73,7 +73,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                   error: <OctagonX />,
                   loading: <Spinner />,
                 }}
-                expand
               />
             </ThemeProvider>
           </body>

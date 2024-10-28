@@ -8,7 +8,10 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { ...inputProps } = props;
 
   const [visible, setVisible] = useState<boolean>(false);
-  const handleVisible = () => setVisible(!visible);
+  const handleVisible = (e: any) => {
+    e.preventDefault();
+    setVisible(!visible);
+  };
 
   return (
     <div className="relative">

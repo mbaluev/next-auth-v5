@@ -164,10 +164,7 @@ export const SettingsForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>two factor authentication</FormLabel>
-                  <div className="flex space-x-2 p-4 border rounded-md">
-                    <FormDescription>
-                      enable two factor authentication for your account
-                    </FormDescription>
+                  <div className="flex gap-4">
                     <FormControl>
                       <Switch
                         disabled={isPending}
@@ -175,6 +172,7 @@ export const SettingsForm = () => {
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
+                    <FormDescription>enable two factor authentication</FormDescription>
                   </div>
                   <FormMessage />
                 </FormItem>
