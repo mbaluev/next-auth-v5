@@ -6,7 +6,7 @@ import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
 import { Logo } from '@/components/layout/logo';
-import { MonitorSmartphone, Server, Settings, ShieldCheck, LayoutDashboard, X } from 'lucide-react';
+import { MonitorSmartphone, Server, LayoutDashboard, X, TriangleAlert } from 'lucide-react';
 import Link from 'next/link';
 
 export const Nav = () => {
@@ -35,28 +35,22 @@ export const Nav = () => {
             <p>dashboard</p>
           </Link>
         </SidebarButton>
-        <SidebarButton asChild variant={pathname === '/server' ? 'sidebar' : 'ghost'}>
-          <Link href="/server">
-            <Server />
-            <p>server</p>
-          </Link>
-        </SidebarButton>
         <SidebarButton asChild variant={pathname === '/client' ? 'sidebar' : 'ghost'}>
           <Link href="/client">
             <MonitorSmartphone />
             <p>client</p>
           </Link>
         </SidebarButton>
-        <SidebarButton asChild variant={pathname === '/admin' ? 'sidebar' : 'ghost'}>
-          <Link href="/admin">
-            <ShieldCheck className="w-6 h-6" />
-            <p>admin</p>
+        <SidebarButton asChild variant={pathname === '/server' ? 'sidebar' : 'ghost'}>
+          <Link href="/server">
+            <Server />
+            <p>server</p>
           </Link>
         </SidebarButton>
-        <SidebarButton asChild variant={pathname === '/settings' ? 'sidebar' : 'ghost'}>
-          <Link href="/settings">
-            <Settings className="w-6 h-6" />
-            <p>settings</p>
+        <SidebarButton asChild variant={pathname === '/xxx' ? 'sidebar' : 'ghost'}>
+          <Link href="/xxx">
+            <TriangleAlert className="w-6 h-6" />
+            <p>page not found</p>
           </Link>
         </SidebarButton>
       </div>

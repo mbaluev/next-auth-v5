@@ -1,3 +1,5 @@
+'use client';
+
 import { WidgetChart } from '@/components/widgets/chart';
 
 const DashboardPage = () => {
