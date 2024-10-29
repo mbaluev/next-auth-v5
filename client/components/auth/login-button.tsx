@@ -33,8 +33,8 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
         <DialogContent className="max-w-lg" close>
           <VisuallyHidden>
             <DialogHeader>
-              <DialogToolbar title="login to application login to application login to application login to application" />
-              <DialogDescription>login to application</DialogDescription>
+              <DialogToolbar title="login to application" />
+              <DialogDescription>welcome back</DialogDescription>
             </DialogHeader>
           </VisuallyHidden>
           <LoginForm />

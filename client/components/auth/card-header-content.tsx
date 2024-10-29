@@ -18,7 +18,7 @@ export const CardHeaderContent = ({ label, loading }: HeaderProps) => {
           ) : (
             <Logo className="h-8 w-8 mr-3" />
           )}
-          auth
+          {process.env.APP_NAME}
         </Link>
       </Button>
       {label && <p className="text-muted-foreground">{label}</p>}

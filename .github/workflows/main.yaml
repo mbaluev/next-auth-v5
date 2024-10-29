@@ -18,6 +18,7 @@ jobs:
           cd client
           rm -f .env
           touch .env
+          echo APP_NAME=${{ vars.APP_NAME }} >> .env
           echo APP_URL=${{ vars.APP_URL }} >> .env
           echo AUTH_URL=${{ vars.AUTH_URL }} >> .env
           echo AUTH_TRUST_HOST=${{ vars.AUTH_TRUST_HOST }} >> .env

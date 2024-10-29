@@ -117,9 +117,6 @@ export const WidgetChartCreate = (
     );
     y_max_stacked = Math.max(_max_st, 0);
     y_min_stacked = Math.min(_min_st, 0);
-
-    // console.log(_line, _stacked);
-    // console.log(_grouped);
   }
 
   // scales

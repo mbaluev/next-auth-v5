@@ -20,7 +20,7 @@ export const Nav = () => {
         <SidebarButton asChild variant="ghost">
           <Link href="/">
             <Logo className="w-6 h-6" />
-            <p>mbaluev</p>
+            <p>{process.env.APP_NAME}</p>
           </Link>
         </SidebarButton>
         <Button variant="ghost" size="icon" onClick={toggleSidebar}>

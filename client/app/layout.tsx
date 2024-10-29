@@ -15,7 +15,7 @@ import './globals.css';
 const font = JetBrains_Mono({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'auth',
+  title: `${process.env.APP_NAME}`,
   description: 'a simple authentication service',
   icons: {
     icon: [
