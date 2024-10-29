@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { newPasswordSchema } from '@/core/auth/schemas';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { AlertSuccess, AlertError } from '@/components/layout/alerts';
+import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { newPassword } from '@/core/auth/actions/new-password';

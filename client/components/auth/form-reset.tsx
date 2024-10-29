@@ -8,7 +8,7 @@ import { resetSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { AlertSuccess, AlertError } from '@/components/layout/alerts';
+import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import { useState, useTransition } from 'react';
 import { reset } from '@/core/auth/actions/reset';
 

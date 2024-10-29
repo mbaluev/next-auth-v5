@@ -8,7 +8,7 @@ interface LogoProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HT
   callback?: Function;
 }
 
-export const Logo = (props: LogoProps) => {
+const Logo = (props: LogoProps) => {
   return (
     <div {...props} className={cn('relative', props.className)}>
       <Image src="/assets/logo.svg" fill alt="logo" className="dark:hidden" />
@@ -16,3 +16,5 @@ export const Logo = (props: LogoProps) => {
     </div>
   );
 };
+
+export { Logo };

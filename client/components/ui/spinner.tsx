@@ -1,6 +1,6 @@
 import { cn } from '@/core/utils/cn';
 
-export const Spinner = ({ className }: { className?: string }) => {
+const Spinner = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,3 +18,5 @@ export const Spinner = ({ className }: { className?: string }) => {
     </svg>
   );
 };
+
+export { Spinner };

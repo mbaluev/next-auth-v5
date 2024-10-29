@@ -4,7 +4,7 @@ import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '@/core/auth/actions/new-verification';
-import { AlertSuccess, AlertError, AlertInfo } from '@/components/layout/alerts';
+import { AlertSuccess, AlertError, AlertInfo } from '@/components/ui/alert';
 import { router } from 'next/client';
 
 export const FormNewVerification = () => {

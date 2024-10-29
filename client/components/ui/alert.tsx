@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/core/utils/cn';
+import { Check, TriangleAlert } from 'lucide-react';
+import { Spinner } from '@/components/ui/spinner';
 
 const alertVariants = cva('relative flex space-x-3 w-full rounded-md border px-4 py-3', {
   variants: {
@@ -45,4 +47,40 @@ const AlertDescription = React.forwardRef<
 ));
 AlertDescription.displayName = 'AlertDescription';
 
-export { Alert, AlertTitle, AlertDescription };
+// variants
+
+interface AlertProps {
+  message?: string;
+}
+
+const AlertError = ({ message }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="destructive">
+      <TriangleAlert className="h-6 w-6" />
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+const AlertInfo = ({ message }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="blue">
+      <Spinner className="h-6 w-6" />
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+const AlertSuccess = ({ message }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="emerald">
+      <Check className="h-6 w-6" />
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+export { Alert, AlertTitle, AlertDescription, AlertError, AlertInfo, AlertSuccess };

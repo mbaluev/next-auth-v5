@@ -1,5 +1,5 @@
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
-import { AlertError } from '@/components/layout/alerts';
+import { AlertError } from '@/components/ui/alert';
 
 export default function NotFound() {
   return (

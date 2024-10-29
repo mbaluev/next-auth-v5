@@ -14,7 +14,7 @@ const widgetVariants = cva('flex flex-col flex-grow gap-6 max-h-full', {
   },
 });
 
-export interface WidgetProps
+interface WidgetProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof widgetVariants> {}
 const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
@@ -63,3 +63,4 @@ const WidgetContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
 WidgetContent.displayName = 'WidgetContent';
 
 export { Widget, WidgetHeader, WidgetIcon, WidgetTitle, WidgetContent, WidgetButtons };
+export type { WidgetProps };

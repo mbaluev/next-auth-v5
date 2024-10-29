@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 import { admin } from '@/core/auth/actions/admin';
 import { RoleGate } from '@/components/auth/role-gate';
 import { UserRole } from '@prisma/client';
-import { AlertSuccess } from '@/components/layout/alerts';
+import { AlertSuccess } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
   Widget,

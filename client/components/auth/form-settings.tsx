@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { AlertSuccess, AlertError } from '@/components/layout/alerts';
+import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import {
   Select,
   SelectContent,
