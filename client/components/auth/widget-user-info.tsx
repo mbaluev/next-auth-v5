@@ -1,23 +1,32 @@
 import { ExtendedUser } from '@/next-auth';
-import { Card, CardContent, CardHeader, CardProps } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import * as React from 'react';
-import { forwardRef } from 'react';
+import { forwardRef, ReactElement } from 'react';
 import { Separator } from '@/components/ui/separator';
+import {
+  Widget,
+  WidgetContent,
+  WidgetHeader,
+  WidgetIcon,
+  WidgetProps,
+  WidgetTitle,
+} from '@/components/layout/widget';
 
-interface UserInfoProps extends CardProps {
+interface UserInfoProps extends WidgetProps {
   user?: ExtendedUser;
+  icon?: ReactElement;
   label: string;
 }
 
-const UserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
-  const { user, label, ..._props } = props;
+const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
+  const { user, icon, label, ..._props } = props;
   return (
-    <Card variant="widget" ref={ref} {..._props}>
-      <CardHeader>
-        <p className="text-xl">{label}</p>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <Widget ref={ref} {..._props}>
+      <WidgetHeader>
+        {icon && <WidgetIcon>{icon}</WidgetIcon>}
+        <WidgetTitle>{label}</WidgetTitle>
+      </WidgetHeader>
+      <WidgetContent className="space-y-4">
+        <Separator />
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">id</p>
           <p>{user?.id}</p>
@@ -44,10 +53,10 @@ const UserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
             {user?.isTwoFactorEnabled ? 'on' : 'off'}
           </Badge>
         </div>
-      </CardContent>
-    </Card>
+      </WidgetContent>
+    </Widget>
   );
 });
-UserInfo.displayName = 'Card';
+WidgetUserInfo.displayName = 'UserInfo';
 
-export { UserInfo };
+export { WidgetUserInfo };

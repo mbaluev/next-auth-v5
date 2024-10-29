@@ -2,7 +2,7 @@
 
 import { useIsAuth } from '@/core/auth/hooks/use-is-auth';
 import { Logo } from '@/components/layout/logo';
-import { LoginButton } from '@/components/auth/login-button';
+import { ButtonLogin } from '@/components/auth/button-login';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -21,16 +21,16 @@ export default function Home() {
       </div>
       {!auth && (
         <div className="flex justify-center gap-6">
-          <LoginButton mode="redirect" asChild>
+          <ButtonLogin mode="redirect" asChild>
             <Button variant="default" size="lg">
               sign in
             </Button>
-          </LoginButton>
-          <LoginButton mode="modal" asChild>
+          </ButtonLogin>
+          <ButtonLogin mode="modal" asChild>
             <Button variant="outline" size="lg">
               sign in modal
             </Button>
-          </LoginButton>
+          </ButtonLogin>
         </div>
       )}
     </div>

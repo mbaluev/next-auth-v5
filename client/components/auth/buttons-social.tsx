@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { useSearchParams } from 'next/navigation';
 
-export const Social = () => {
+export const ButtonsSocial = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const onClick = async (provider: 'google' | 'github') => {

@@ -1,7 +1,8 @@
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { UserInfo } from '@/components/auth/user-info';
+import { WidgetUserInfo } from '@/components/auth/widget-user-info';
+import { MonitorSmartphone } from 'lucide-react';
 
 export const WidgetClient = () => {
   const user = useCurrentUser();
-  return <UserInfo user={user} label="😎 client component" />;
+  return <WidgetUserInfo user={user} icon={<MonitorSmartphone />} label="client component" />;
 };

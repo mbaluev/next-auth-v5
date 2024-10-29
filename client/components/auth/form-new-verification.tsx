@@ -1,13 +1,13 @@
 'use client';
 
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '@/core/auth/actions/new-verification';
-import { FormSuccess, FormError, FormInfo } from '@/components/layout/form-alerts';
+import { AlertSuccess, AlertError, AlertInfo } from '@/components/layout/alerts';
 import { router } from 'next/client';
 
-export const NewVerificationForm = () => {
+export const FormNewVerification = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -39,16 +39,16 @@ export const NewVerificationForm = () => {
   }, [onSubmit]);
 
   return (
-    <CardWrapper
+    <WidgetWrapper
       headerLabel="confirming you verification"
       backButtonLabel="back to login"
       backButtonHref="/auth/login"
     >
       <div className="flex flex-col space-y-6 items-center w-full justify-center">
-        {!success && !error && <FormInfo message="verificatoin in progress..." />}
-        <FormSuccess message={success} />
-        {!success && <FormError message={error} />}
+        {!success && !error && <AlertInfo message="verificatoin in progress..." />}
+        <AlertSuccess message={success} />
+        {!success && <AlertError message={error} />}
       </div>
-    </CardWrapper>
+    </WidgetWrapper>
   );
 };

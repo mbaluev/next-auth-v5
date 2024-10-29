@@ -6,7 +6,7 @@ interface FormAlertProps {
   message?: string;
 }
 
-const FormError = ({ message }: FormAlertProps) => {
+const AlertError = ({ message }: FormAlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="destructive">
@@ -16,7 +16,7 @@ const FormError = ({ message }: FormAlertProps) => {
   );
 };
 
-const FormInfo = ({ message }: FormAlertProps) => {
+const AlertInfo = ({ message }: FormAlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="blue">
@@ -26,7 +26,7 @@ const FormInfo = ({ message }: FormAlertProps) => {
   );
 };
 
-const FormSuccess = ({ message }: FormAlertProps) => {
+const AlertSuccess = ({ message }: FormAlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="emerald">
@@ -36,4 +36,4 @@ const FormSuccess = ({ message }: FormAlertProps) => {
   );
 };
 
-export { FormError, FormInfo, FormSuccess };
+export { AlertError, AlertInfo, AlertSuccess };

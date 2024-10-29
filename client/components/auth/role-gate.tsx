@@ -3,7 +3,7 @@
 import { Fragment, ReactNode } from 'react';
 import { UserRole } from '@prisma/client';
 import { useCurrentRole } from '@/core/auth/hooks/use-current-role';
-import { FormError } from '@/components/layout/form-alerts';
+import { AlertError } from '@/components/layout/alerts';
 
 interface RoleGateProps {
   children?: ReactNode;
@@ -14,7 +14,7 @@ export const RoleGate = ({ children, allowedRole }: RoleGateProps) => {
   const role = useCurrentRole();
 
   if (role !== allowedRole) {
-    return <FormError message="you do not have permission to view this content" />;
+    return <AlertError message="you do not have permission to view this content" />;
   }
 
   return <Fragment>{children}</Fragment>;

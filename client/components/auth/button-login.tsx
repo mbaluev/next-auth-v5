@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoginForm } from '@/components/auth/login-form';
+import { FormLogin } from '@/components/auth/form-login';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ interface LoginButtonProps {
   asChild?: boolean;
 }
 
-export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButtonProps) => {
+export const ButtonLogin = ({ children, mode = 'redirect', asChild }: LoginButtonProps) => {
   const router = useRouter();
 
   const onClick = () => {
@@ -37,7 +37,7 @@ export const LoginButton = ({ children, mode = 'redirect', asChild }: LoginButto
               <DialogDescription>welcome back</DialogDescription>
             </DialogHeader>
           </VisuallyHidden>
-          <LoginForm />
+          <FormLogin />
         </DialogContent>
       </Dialog>
     );

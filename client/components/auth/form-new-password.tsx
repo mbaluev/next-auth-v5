@@ -2,18 +2,18 @@
 
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { newPasswordSchema } from '@/core/auth/schemas';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { FormSuccess, FormError } from '@/components/layout/form-alerts';
+import { AlertSuccess, AlertError } from '@/components/layout/alerts';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { newPassword } from '@/core/auth/actions/new-password';
 import { InputPassword } from '@/components/ui/input-password';
 
-export const NewPasswordForm = () => {
+export const FormNewPassword = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get('token') as string;
 
@@ -40,7 +40,7 @@ export const NewPasswordForm = () => {
   };
 
   return (
-    <CardWrapper
+    <WidgetWrapper
       loading={isPending}
       headerLabel="enter a new password"
       backButtonLabel="back to login"
@@ -67,13 +67,13 @@ export const NewPasswordForm = () => {
               )}
             />
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
+          <AlertError message={error} />
+          <AlertSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             reset password
           </Button>
         </form>
       </Form>
-    </CardWrapper>
+    </WidgetWrapper>
   );
 };

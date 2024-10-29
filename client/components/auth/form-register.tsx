@@ -2,18 +2,18 @@
 
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { FormSuccess, FormError } from '@/components/layout/form-alerts';
+import { AlertSuccess, AlertError } from '@/components/layout/alerts';
 import { useState, useTransition } from 'react';
 import { register } from '@/core/auth/actions/register';
 import { InputPassword } from '@/components/ui/input-password';
 
-export const RegisterForm = () => {
+export const FormRegister = () => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
@@ -39,7 +39,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <CardWrapper
+    <WidgetWrapper
       loading={isPending}
       headerLabel="create an account"
       backButtonLabel="already have an account?"
@@ -102,13 +102,13 @@ export const RegisterForm = () => {
               )}
             />
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
+          <AlertError message={error} />
+          <AlertSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             create an account
           </Button>
         </form>
       </Form>
-    </CardWrapper>
+    </WidgetWrapper>
   );
 };

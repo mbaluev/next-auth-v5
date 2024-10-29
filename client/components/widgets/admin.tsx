@@ -1,10 +1,18 @@
 import { toast } from 'sonner';
 import { admin } from '@/core/auth/actions/admin';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { RoleGate } from '@/components/auth/role-gate';
 import { UserRole } from '@prisma/client';
-import { FormSuccess } from '@/components/layout/form-alerts';
+import { AlertSuccess } from '@/components/layout/alerts';
 import { Button } from '@/components/ui/button';
+import {
+  Widget,
+  WidgetContent,
+  WidgetHeader,
+  WidgetIcon,
+  WidgetTitle,
+} from '@/components/layout/widget';
+import { Separator } from '@/components/ui/separator';
+import { Shield } from 'lucide-react';
 
 export const WidgetAdmin = () => {
   const onApiRouteClick = () => {
@@ -31,13 +39,17 @@ export const WidgetAdmin = () => {
   const error = () => toast.error('error');
   const info = () => toast.info('info');
   return (
-    <Card variant="widget">
-      <CardHeader>
-        <p className="text-xl">🔑 admin</p>
-      </CardHeader>
-      <CardContent className="space-y-6">
+    <Widget>
+      <WidgetHeader>
+        <WidgetIcon>
+          <Shield />
+        </WidgetIcon>
+        <WidgetTitle>admin</WidgetTitle>
+      </WidgetHeader>
+      <WidgetContent className="space-y-6">
+        <Separator />
         <RoleGate allowedRole={UserRole.ADMIN}>
-          <FormSuccess message="you are allowed to see this content" />
+          <AlertSuccess message="you are allowed to see this content" />
         </RoleGate>
         <div className="flex flex-row items-center justify-between rounded-md p-4 gap-4 border">
           <p>admin-only api route</p>
@@ -71,7 +83,7 @@ export const WidgetAdmin = () => {
             click to info
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </WidgetContent>
+    </Widget>
   );
 };

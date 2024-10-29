@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { FormSuccess, FormError } from '@/components/layout/form-alerts';
+import { AlertSuccess, AlertError } from '@/components/layout/alerts';
 import {
   Select,
   SelectContent,
@@ -31,7 +31,7 @@ import { UserRole } from '@prisma/client';
 import { Switch } from '@/components/ui/switch';
 import { InputPassword } from '@/components/ui/input-password';
 
-export const SettingsForm = () => {
+export const FormSettings = () => {
   const user = useCurrentUser();
   const { update } = useSession();
 
@@ -180,8 +180,8 @@ export const SettingsForm = () => {
             />
           )}
         </div>
-        <FormError message={error} />
-        <FormSuccess message={success} />
+        <AlertError message={error} />
+        <AlertSuccess message={success} />
         <Button type="submit" disabled={isPending}>
           save
         </Button>

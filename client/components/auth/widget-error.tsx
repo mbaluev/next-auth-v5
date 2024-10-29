@@ -1,11 +1,11 @@
 'use client';
 
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { TriangleAlert } from 'lucide-react';
 
-export const CardError = () => {
+export const WidgetError = () => {
   return (
-    <CardWrapper
+    <WidgetWrapper
       headerLabel="oops! something went wrong"
       backButtonLabel="back to login"
       backButtonHref="/auth/login"
@@ -13,6 +13,6 @@ export const CardError = () => {
       <div className="w-full flex items-center justify-center">
         <TriangleAlert className="w-12 h-12 text-destructive" />
       </div>
-    </CardWrapper>
+    </WidgetWrapper>
   );
 };

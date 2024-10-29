@@ -1,7 +1,7 @@
-import { CardError } from "@/components/auth/card-error";
+import { WidgetError } from '@/components/auth/widget-error';
 
 const AuthErrorPage = () => {
-  return <CardError />;
+  return <WidgetError />;
 };
 
 export default AuthErrorPage;

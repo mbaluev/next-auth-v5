@@ -8,7 +8,7 @@ interface BackButtonProps {
   label: string;
 }
 
-export const BackButton = ({ href, label }: BackButtonProps) => {
+export const ButtonBack = ({ href, label }: BackButtonProps) => {
   return (
     <Button variant="link" className="px-0 py-0 h-auto w-full" asChild>
       <Link href={href}>{label}</Link>

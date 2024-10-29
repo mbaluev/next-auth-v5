@@ -14,9 +14,17 @@ import {
   WidgetHeader,
   WidgetTitle,
   WidgetButtons,
+  WidgetIcon,
 } from '@/components/layout/widget';
 import { Button } from '@/components/ui/button';
-import { ChartArea, ChartColumn, ChartColumnStacked, ChartLine, ChartSpline } from 'lucide-react';
+import {
+  ChartArea,
+  ChartColumn,
+  ChartColumnStacked,
+  ChartLine,
+  ChartSpline,
+  LayoutDashboard,
+} from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
@@ -67,7 +75,10 @@ export const WidgetChart = () => {
   return (
     <Widget>
       <WidgetHeader>
-        <WidgetTitle>widget</WidgetTitle>
+        <WidgetIcon>
+          <LayoutDashboard />
+        </WidgetIcon>
+        <WidgetTitle>dashboard</WidgetTitle>
         <WidgetButtons>
           <Button
             variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}

@@ -2,7 +2,7 @@
 
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/core/auth/schemas';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { FormSuccess, FormError } from '@/components/layout/form-alerts';
+import { AlertSuccess, AlertError } from '@/components/layout/alerts';
 import { login } from '@/core/auth/actions/login';
 import { Fragment, useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -24,7 +24,7 @@ import Link from 'next/link';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 
-export const LoginForm = () => {
+export const FormLogin = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const isAuthError = searchParams.get('error') === 'OAuthAccountNotLinked';
@@ -65,7 +65,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
+    <WidgetWrapper
       loading={isPending}
       headerLabel="welcome back"
       backButtonLabel="don't have an account?"
@@ -147,13 +147,13 @@ export const LoginForm = () => {
               </Fragment>
             )}
           </div>
-          <FormError message={error || urlError} />
-          <FormSuccess message={success} />
+          <AlertError message={error || urlError} />
+          <AlertSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             {showTwoFactor ? 'confirm code' : 'login'}
           </Button>
         </form>
       </Form>
-    </CardWrapper>
+    </WidgetWrapper>
   );
 };

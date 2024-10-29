@@ -8,7 +8,7 @@ interface HeaderProps {
   loading?: boolean;
 }
 
-export const CardHeaderContent = ({ label, loading }: HeaderProps) => {
+export const WidgetHeaderContent = ({ label, loading }: HeaderProps) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <Button variant="ghost" className="text-3xl font-semibold" asChild>

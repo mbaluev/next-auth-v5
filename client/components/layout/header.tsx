@@ -12,7 +12,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { LogOut, Moon, UserCog, Sun, LayoutDashboard } from 'lucide-react';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogoutButton } from '@/components/auth/logout-button';
+import { ButtonLogout } from '@/components/auth/button-logout';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,12 +101,12 @@ const HeaderRightUserBtn = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <LogoutButton>
+        <ButtonLogout>
           <DropdownMenuItem>
             <LogOut className="mr-4" />
             logout
           </DropdownMenuItem>
-        </LogoutButton>
+        </ButtonLogout>
       </DropdownMenuContent>
     </DropdownMenu>
   );

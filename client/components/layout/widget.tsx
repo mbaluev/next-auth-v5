@@ -1,14 +1,27 @@
 import * as React from 'react';
 import { cn } from '@/core/utils/cn';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-const Widget = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+const widgetVariants = cva('flex flex-col flex-grow gap-6 max-h-full', {
+  variants: {
+    variant: {
+      default: 'p-6 bg-sidebar text-sidebar-foreground rounded-md',
+      section: 'p-0',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
+
+export interface WidgetProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof widgetVariants> {}
+const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
+  ({ className, variant, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        'flex flex-col flex-grow rounded-md bg-sidebar text-sidebar-foreground max-h-full',
-        className
-      )}
+      className={cn(widgetVariants({ variant, className }))}
       data-type="widget"
       {...props}
     />
@@ -18,10 +31,15 @@ Widget.displayName = 'Widget';
 
 const WidgetHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-0 justify-between p-4 pb-0', className)} {...props} />
+    <div ref={ref} className={cn('flex flex-0 gap-4 justify-between', className)} {...props} />
   )
 );
 WidgetHeader.displayName = 'WidgetHeader';
+
+const WidgetIcon = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cn('flex-0', className)} {...props} />
+);
+WidgetIcon.displayName = 'WidgetIcon';
 
 const WidgetTitle = React.forwardRef<
   HTMLParagraphElement,
@@ -40,10 +58,8 @@ const WidgetButtons = React.forwardRef<
 WidgetButtons.displayName = 'WidgetButtons';
 
 const WidgetContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex-1 p-4', className)} {...props} />
-  )
+  ({ className, ...props }, ref) => <div ref={ref} className={cn('flex-1', className)} {...props} />
 );
 WidgetContent.displayName = 'WidgetContent';
 
-export { Widget, WidgetHeader, WidgetTitle, WidgetContent, WidgetButtons };
+export { Widget, WidgetHeader, WidgetIcon, WidgetTitle, WidgetContent, WidgetButtons };
