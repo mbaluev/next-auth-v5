@@ -64,22 +64,22 @@ export const WidgetAdmin = () => {
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={error}>
+          <Button variant="destructive" onClick={error}>
             click to error
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={warning}>
+          <Button variant="warning" onClick={warning}>
             click to warning
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={success}>
+          <Button variant="success" onClick={success}>
             click to success
           </Button>
         </div>
         <div>
-          <Button variant="ghost" onClick={info}>
+          <Button variant="default" onClick={info}>
             click to info
           </Button>
         </div>

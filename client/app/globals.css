@@ -42,6 +42,12 @@ svg.lucide {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
+    --warning: 41 97% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+
     --border: 60 4% 91%;
     --input: 60 4% 91%;
     --ring: 60 4% 91%;
@@ -73,8 +79,14 @@ svg.lucide {
     --accent: 0 0% 20%;
     --accent-foreground: 0 0% 90%;
 
-    --destructive: 0 62.8% 60.6%;
-    --destructive-foreground: 0 0% 90%;
+    --destructive: 0 63% 66%;
+    --destructive-foreground: 0 0% 10%;
+
+    --warning: 41 78% 69%;
+    --warning-foreground: 0 0% 10%;
+
+    --success: 170 63% 64%;
+    --success-foreground: 0 0% 10%;
 
     --border: 0 0% 22%;
     --input: 0 0% 22%;

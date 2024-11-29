@@ -10,9 +10,9 @@ const alertVariants = cva('relative flex space-x-3 w-full rounded-md border px-4
       default: 'bg-background text-foreground',
       destructive:
         'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
-      emerald:
-        'border-emerald-500/50 text-emerald-500 dark:border-emerald-500 [&>svg]:text-emerald-500',
-      blue: 'border-blue-500/50 text-blue-500 dark:border-blue-500 [&>svg]:text-blue-500',
+      success: 'border-success/50 text-success dark:border-success [&>svg]:text-success',
+      info: 'border-primary/50 text-primary dark:border-primary [&>svg]:text-primary',
+      warning: 'border-warning/50 text-warning dark:border-warning [&>svg]:text-warning',
     },
   },
   defaultVariants: {
@@ -66,7 +66,7 @@ const AlertError = ({ message }: AlertProps) => {
 const AlertInfo = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
-    <Alert variant="blue">
+    <Alert variant="info">
       <Spinner className="h-6 w-6" />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
@@ -76,11 +76,21 @@ const AlertInfo = ({ message }: AlertProps) => {
 const AlertSuccess = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
-    <Alert variant="emerald">
+    <Alert variant="success">
       <Check className="h-6 w-6" />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
 };
 
-export { Alert, AlertTitle, AlertDescription, AlertError, AlertInfo, AlertSuccess };
+const AlertWarning = ({ message }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="warning">
+      <Check className="h-6 w-6" />
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+export { Alert, AlertTitle, AlertDescription, AlertError, AlertInfo, AlertSuccess, AlertWarning };

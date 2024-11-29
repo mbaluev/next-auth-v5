@@ -73,12 +73,12 @@ export const WidgetChart = () => {
   }, [width, height]);
 
   return (
-    <Widget>
+    <Widget className="h-[400px]">
       <WidgetHeader>
         <WidgetIcon>
           <LayoutDashboard />
         </WidgetIcon>
-        <WidgetTitle>dashboard</WidgetTitle>
+        <WidgetTitle>widget</WidgetTitle>
         <WidgetButtons>
           <Button
             variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}

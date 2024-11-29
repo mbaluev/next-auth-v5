@@ -356,7 +356,7 @@ export const WidgetChartCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveLinear).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveBumpX).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
     line.y(y(0));
