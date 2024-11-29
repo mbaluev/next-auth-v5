@@ -9,7 +9,16 @@ import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { LogOut, Moon, UserCog, Sun, LayoutDashboard } from 'lucide-react';
+import {
+  LogOut,
+  Moon,
+  UserCog,
+  Sun,
+  LayoutDashboard,
+  MonitorSmartphone,
+  Server,
+  TriangleAlert,
+} from 'lucide-react';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ButtonLogout } from '@/components/auth/button-logout';
@@ -49,6 +58,21 @@ const HeaderLeftBar = () => {
       <Button variant="ghost" size="icon" asChild>
         <Link href="/dashboard">
           <LayoutDashboard />
+        </Link>
+      </Button>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/client">
+          <MonitorSmartphone />
+        </Link>
+      </Button>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/server">
+          <Server />
+        </Link>
+      </Button>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/xxx">
+          <TriangleAlert />
         </Link>
       </Button>
     </nav>
