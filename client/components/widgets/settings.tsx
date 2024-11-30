@@ -4,15 +4,16 @@ import {
   WidgetContent,
   WidgetHeader,
   WidgetIcon,
+  WidgetProps,
   WidgetTitle,
 } from '@/components/layout/widget';
 import { Cog, Ellipsis } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TooltipText } from '@/components/ui/tooltip';
 
-export const WidgetSettings = () => {
+export const WidgetSettings = (props: WidgetProps) => {
   return (
-    <Widget variant="border">
+    <Widget variant="border" {...props}>
       <WidgetHeader variant="background">
         <WidgetIcon>
           <Cog />

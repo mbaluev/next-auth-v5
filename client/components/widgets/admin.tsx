@@ -11,10 +11,11 @@ import {
   WidgetContent,
   WidgetHeader,
   WidgetIcon,
+  WidgetProps,
   WidgetTitle,
 } from '@/components/layout/widget';
 
-export const WidgetAdmin = () => {
+export const WidgetAdmin = (props: WidgetProps) => {
   const onApiRouteClick = () => {
     fetch('/api/admin').then((response) => {
       if (response.ok) {
@@ -39,7 +40,7 @@ export const WidgetAdmin = () => {
   const error = () => toast.error('error');
   const info = () => toast.info('info');
   return (
-    <Widget variant="border">
+    <Widget variant="border" {...props}>
       <WidgetHeader variant="background">
         <WidgetIcon>
           <Shield />

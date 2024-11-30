@@ -23,7 +23,7 @@ interface UserInfoProps extends WidgetProps {
 const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
   const { user, icon, label, ..._props } = props;
   return (
-    <Widget ref={ref} {..._props} variant="border">
+    <Widget ref={ref} variant="border" {..._props}>
       <WidgetHeader variant="background">
         {icon && <WidgetIcon>{icon}</WidgetIcon>}
         <WidgetTitle>{label}</WidgetTitle>

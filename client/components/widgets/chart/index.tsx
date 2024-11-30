@@ -15,6 +15,7 @@ import {
   WidgetTitle,
   WidgetButtons,
   WidgetIcon,
+  WidgetProps,
 } from '@/components/layout/widget';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +31,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
 
-export const WidgetChart = () => {
+export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
   const [chart, setChart] = useState<any>();
   const router = useRouter();
@@ -73,7 +74,7 @@ export const WidgetChart = () => {
   }, [width, height]);
 
   return (
-    <Widget variant="background" className="h-[500px]">
+    <Widget variant="background" {...props}>
       <WidgetHeader variant="padding">
         <WidgetIcon>
           <LayoutDashboard />
