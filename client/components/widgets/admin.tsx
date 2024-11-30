@@ -4,6 +4,8 @@ import { RoleGate } from '@/components/auth/role-gate';
 import { UserRole } from '@prisma/client';
 import { AlertSuccess } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { Ellipsis, Shield } from 'lucide-react';
+import { TooltipText } from '@/components/ui/tooltip';
 import {
   Widget,
   WidgetContent,
@@ -11,8 +13,6 @@ import {
   WidgetIcon,
   WidgetTitle,
 } from '@/components/layout/widget';
-import { Separator } from '@/components/ui/separator';
-import { Shield } from 'lucide-react';
 
 export const WidgetAdmin = () => {
   const onApiRouteClick = () => {
@@ -39,15 +39,14 @@ export const WidgetAdmin = () => {
   const error = () => toast.error('error');
   const info = () => toast.info('info');
   return (
-    <Widget>
-      <WidgetHeader>
+    <Widget variant="border">
+      <WidgetHeader variant="background">
         <WidgetIcon>
           <Shield />
         </WidgetIcon>
         <WidgetTitle>admin</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent className="space-y-6">
-        <Separator />
+      <WidgetContent variant="padding" className="space-y-6">
         <RoleGate allowedRole={UserRole.ADMIN}>
           <AlertSuccess message="you are allowed to see this content" />
         </RoleGate>
@@ -84,6 +83,13 @@ export const WidgetAdmin = () => {
           </Button>
         </div>
       </WidgetContent>
+      <WidgetHeader className="p-4 justify-end">
+        <TooltipText title="more actions" side="left">
+          <Button variant="ghost" size="icon">
+            <Ellipsis />
+          </Button>
+        </TooltipText>
+      </WidgetHeader>
     </Widget>
   );
 };

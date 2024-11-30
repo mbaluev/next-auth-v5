@@ -73,12 +73,12 @@ export const WidgetChart = () => {
   }, [width, height]);
 
   return (
-    <Widget className="h-[400px]">
-      <WidgetHeader>
+    <Widget variant="background" className="h-[500px]">
+      <WidgetHeader variant="padding">
         <WidgetIcon>
           <LayoutDashboard />
         </WidgetIcon>
-        <WidgetTitle>widget</WidgetTitle>
+        <WidgetTitle>chart</WidgetTitle>
         <WidgetButtons>
           <Button
             variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
@@ -117,7 +117,7 @@ export const WidgetChart = () => {
           </Button>
         </WidgetButtons>
       </WidgetHeader>
-      <WidgetContent>
+      <WidgetContent variant="padding">
         <div ref={ref} className="w-full h-full relative">
           {loading && (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

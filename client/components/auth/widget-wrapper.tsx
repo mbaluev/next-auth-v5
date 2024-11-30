@@ -19,7 +19,7 @@ export const WidgetWrapper = (props: WidgetWrapperProps) => {
   const { children, headerLabel, backButtonLabel, backButtonHref, showSocial, loading, ..._props } =
     props;
   return (
-    <Widget variant="section" className="z-[10]" {..._props}>
+    <Widget variant="space" className="z-[10]" {..._props}>
       <WidgetHeader>
         <WidgetHeaderContent loading={loading} label={headerLabel} />
       </WidgetHeader>

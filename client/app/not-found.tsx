@@ -9,7 +9,6 @@ export default function NotFound() {
           headerLabel="a simple authentication service"
           backButtonLabel="back home"
           backButtonHref="/"
-          variant="section"
         >
           <AlertError message="page not found" />
         </WidgetWrapper>

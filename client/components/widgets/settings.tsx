@@ -6,22 +6,29 @@ import {
   WidgetIcon,
   WidgetTitle,
 } from '@/components/layout/widget';
-import { Cog, Settings, Settings2, Wrench } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { Cog, Ellipsis } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TooltipText } from '@/components/ui/tooltip';
 
 export const WidgetSettings = () => {
   return (
-    <Widget>
-      <WidgetHeader>
+    <Widget variant="border">
+      <WidgetHeader variant="background">
         <WidgetIcon>
           <Cog />
         </WidgetIcon>
         <WidgetTitle>settings</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent className="space-y-4">
-        <Separator />
+      <WidgetContent variant="padding" className="space-y-4">
         <FormSettings />
       </WidgetContent>
+      <WidgetHeader className="p-4 justify-end">
+        <TooltipText title="more actions" side="left">
+          <Button variant="ghost" size="icon">
+            <Ellipsis />
+          </Button>
+        </TooltipText>
+      </WidgetHeader>
     </Widget>
   );
 };

@@ -8,7 +8,7 @@ import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { TooltipText } from '@/components/ui/tooltip';
 import {
   LogOut,
   Moon,
@@ -19,7 +19,6 @@ import {
   Server,
   TriangleAlert,
 } from 'lucide-react';
-import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ButtonLogout } from '@/components/auth/button-logout';
 import {
@@ -92,20 +91,12 @@ const HeaderRightThemeBtn = () => {
   const { setTheme, theme } = useTheme();
   const handleChangeTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
   return (
-    <TooltipProvider disableHoverableContent>
-      <Tooltip delayDuration={100}>
-        <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" onClick={handleChangeTheme} className="flex-grow-0">
-            <Moon className="rotate-90 scale-0 transition-transform ease-in-out duration-500 dark:rotate-0 dark:scale-100" />
-            <Sun className="rotate-0 scale-1000 transition-transform ease-in-out duration-500 dark:-rotate-90 dark:scale-0 absolute" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="left">
-          Switch Theme
-          <TooltipArrow className="fill-foreground w-2.5 h-1.5" />
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <TooltipText title="switch theme" side="left">
+      <Button variant="ghost" size="icon" onClick={handleChangeTheme} className="flex-grow-0">
+        <Moon className="rotate-90 scale-0 transition-transform ease-in-out duration-500 dark:rotate-0 dark:scale-100" />
+        <Sun className="rotate-0 scale-1000 transition-transform ease-in-out duration-500 dark:-rotate-90 dark:scale-0 absolute" />
+      </Button>
+    </TooltipText>
   );
 };
 

@@ -10,6 +10,9 @@ import {
   WidgetProps,
   WidgetTitle,
 } from '@/components/layout/widget';
+import { Button } from '@/components/ui/button';
+import { Ellipsis } from 'lucide-react';
+import { TooltipText } from '@/components/ui/tooltip';
 
 interface UserInfoProps extends WidgetProps {
   user?: ExtendedUser;
@@ -20,13 +23,12 @@ interface UserInfoProps extends WidgetProps {
 const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
   const { user, icon, label, ..._props } = props;
   return (
-    <Widget ref={ref} {..._props}>
-      <WidgetHeader>
+    <Widget ref={ref} {..._props} variant="border">
+      <WidgetHeader variant="background">
         {icon && <WidgetIcon>{icon}</WidgetIcon>}
         <WidgetTitle>{label}</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent className="space-y-4">
-        <Separator />
+      <WidgetContent variant="padding" className="space-y-4">
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">id</p>
           <p>{user?.id}</p>
@@ -54,6 +56,13 @@ const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) =>
           </Badge>
         </div>
       </WidgetContent>
+      <WidgetHeader className="p-4 justify-end">
+        <TooltipText title="more actions" side="left">
+          <Button variant="ghost" size="icon">
+            <Ellipsis />
+          </Button>
+        </TooltipText>
+      </WidgetHeader>
     </Widget>
   );
 });

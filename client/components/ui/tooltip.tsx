@@ -3,6 +3,7 @@
 import * as React from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { cn } from '@/core/utils/cn';
+import { TooltipArrow } from '@radix-ui/react-tooltip';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -26,4 +27,20 @@ const TooltipContent = React.forwardRef<
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+const TooltipText = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+>(({ children, title, ...props }, ref) => (
+  <TooltipProvider disableHoverableContent>
+    <Tooltip delayDuration={100}>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent ref={ref} {...props}>
+        {title}
+        <TooltipArrow className="fill-foreground w-2.5 h-1.5" />
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+));
+TooltipText.displayName = 'TooltipText';
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipText };

@@ -21,7 +21,7 @@ export interface IChartLegendItem {
   color: string;
 }
 
-const length = 30;
+const length = 40;
 
 export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
@@ -52,10 +52,10 @@ export const MOCK_CHART_LEGEND: IChartLegendItem[] = [
   },
   {
     key: 'b',
-    color: 'hsla(240, 100%, 80%, 1)',
+    color: 'hsla(240, 100%, 75%, 1)',
   },
   {
     key: 'c',
-    color: 'hsla(240, 100%, 65%, 1)',
+    color: 'hsla(210, 100%, 75%, 1)',
   },
 ];
