@@ -26,7 +26,8 @@ export const WidgetChartCreate = (
   const opacityLine = 1;
   const opacityDots = 1;
   const strokeWidth = 2;
-  const tooltipThreshold = 5;
+  const tooltipThreshold = 20;
+  const tooltipPadding = 5;
   const paddingRect = 0.5;
 
   // init
@@ -433,10 +434,6 @@ export const WidgetChartCreate = (
   function updateLine() {
     linePaths.data(_line).attr('stroke-width', strokeWidth);
   }
-  function updateLineStacked() {
-    line.y(yCurve);
-    linePaths.transition().duration(duration).attr('d', line).attr('opacity', opacityLine);
-  }
   function updateLineGrouped() {
     line.y(yCurve);
     linePaths.transition().duration(duration).attr('d', line).attr('opacity', opacityLine);
@@ -640,7 +637,6 @@ export const WidgetChartCreate = (
 
   // tooltip
   let tooltipElem: any = undefined;
-  let tooltipContent: any = undefined;
   function tooltip() {
     d3.selectAll(`#${idTooltip}`).remove();
     tooltipElem = d3
@@ -649,7 +645,7 @@ export const WidgetChartCreate = (
       .attr('id', idTooltip)
       .attr(
         'class',
-        'absolute flex flex-col w-[150px] px-4 py-2 gap-4 rounded-md border bg-foreground text-background hidden'
+        'absolute flex flex-col w-[200px] px-4 py-2 gap-4 rounded-md border bg-foreground text-background hidden'
       );
   }
   function renderTooltip(item: any) {
@@ -682,13 +678,13 @@ export const WidgetChartCreate = (
     if (item && elemSvg && elemTooltip) {
       const elemRect = elemSvg.getBoundingClientRect();
       const elemTRect = elemTooltip.getBoundingClientRect();
-      const offsetY = elemRect.top - bodyRect.top - tooltipThreshold;
-      const offsetX = elemRect.left - bodyRect.left + tooltipThreshold; // - elemTRect.width / 2;
+      const offsetY = elemRect.top - bodyRect.top;
+      const offsetX = elemRect.left - bodyRect.left;
 
-      const tooltipY = offsetY + tooltipThreshold;
-      let tooltipX = offsetX + x(item.date) + x.bandwidth();
+      const tooltipY = offsetY - tooltipPadding;
+      let tooltipX = offsetX + x(item.date) + x.bandwidth() + tooltipPadding;
       if (tooltipX + elemTRect.width > bodyRect.right - tooltipThreshold)
-        tooltipX = bodyRect.right - elemTRect.width - tooltipThreshold;
+        tooltipX = offsetX + x(item.date) - elemTRect.width - tooltipPadding;
       if (tooltipX < tooltipThreshold) tooltipX = tooltipThreshold;
 
       renderTooltip(item);

@@ -25,11 +25,13 @@ import {
   ChartLine,
   ChartSpline,
   LayoutDashboard,
+  RefreshCw,
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
+import Link from 'next/link';
 
 export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
@@ -41,7 +43,13 @@ export const WidgetChart = (props: WidgetProps) => {
   const id = `widget-chart-${v4()}`;
 
   // create chart
-  const formatValue = (value: number) => value.toString();
+  const formatValue = (value: number) => {
+    return new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: 'EUR',
+      currencyDisplay: 'code',
+    }).format(value);
+  };
   const create = useCallback(() => {
     if (ref.current) {
       const obj = WidgetChartCreate(
@@ -62,7 +70,7 @@ export const WidgetChart = (props: WidgetProps) => {
   };
   useEffect(() => {
     if (chart) chart.update(MOCK_CHART_DATA, type ?? DEFAULT_CHART_TYPE);
-  }, [chart, type]);
+  }, [type]);
 
   // create, resize
   const { width, height } = useResize(ref, []);
@@ -115,6 +123,11 @@ export const WidgetChart = (props: WidgetProps) => {
             onClick={() => handleChange(EChartType.lineChart)}
           >
             <ChartLine />
+          </Button>
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/dashboard">
+              <RefreshCw />
+            </Link>
           </Button>
         </WidgetButtons>
       </WidgetHeader>
