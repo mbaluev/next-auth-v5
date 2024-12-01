@@ -42,12 +42,6 @@ export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) =
       .format('YYYY-MM-DD'),
   };
 });
-MOCK_CHART_DATA[0].a = 0;
-MOCK_CHART_DATA[0].b = 0;
-MOCK_CHART_DATA[0].c = 0;
-MOCK_CHART_DATA[length - 1].a = 0;
-MOCK_CHART_DATA[length - 1].b = 0;
-MOCK_CHART_DATA[length - 1].c = 0;
 
 export const MOCK_CHART_LEGEND: IChartLegendItem[] = [
   {
