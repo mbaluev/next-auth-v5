@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from '@/core/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const widgetVariants = cva('flex flex-col flex-grow max-h-full rounded-lg overflow-hidden', {
+const widgetVariants = cva('flex flex-col flex-grow max-h-full rounded-xl overflow-hidden', {
   variants: {
     variant: {
       default: '',

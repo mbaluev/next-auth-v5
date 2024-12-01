@@ -19,15 +19,15 @@ export const WidgetChartCreate = (
 
   // props
   const lang = 'en';
-  const duration = 250;
+  const duration = 300;
   const opacityHover = 0.5;
   const opacityRect = 1;
-  const opacityArea = 0.7;
+  const opacityArea = 1;
   const opacityLine = 1;
   const opacityDots = 1;
-  const strokeWidth = 1;
+  const strokeWidth = 2;
   const tooltipThreshold = 5;
-  const paddingRect = 0.1;
+  const paddingRect = 0.5;
 
   // init
   let dims: any = undefined;
@@ -56,7 +56,9 @@ export const WidgetChartCreate = (
   let _names: string[] = [];
   let _grouped: Record<string, any>[] = [];
   let _stacked: Record<string, any>[][] = [];
-  let _area: Record<string, any>[][] = [];
+  let __stacked: Record<string, any>[][] = [];
+  let _area_1: Record<string, any>[][] = [];
+  let _area_2: Record<string, any>[][] = [];
   let _line: Record<string, any>[][] = [];
   let _dots: Record<string, any>[][] = [];
   let y_max_grouped = 0;
@@ -64,6 +66,21 @@ export const WidgetChartCreate = (
   let y_max_stacked = 0;
   let y_min_stacked = 0;
   function calcData(_data: IChartItem[]) {
+    const _data1 = [..._data].map((d) => {
+      const _d = { ...d };
+      _d.a = _d.a > 0 ? _d.a : 0;
+      _d.b = _d.b > 0 ? _d.b : 0;
+      _d.c = _d.c > 0 ? _d.c : 0;
+      return _d;
+    });
+    const _data2 = [..._data].map((d) => {
+      const _d = { ...d };
+      _d.a = _d.a < 0 ? _d.a : 0;
+      _d.b = _d.b < 0 ? _d.b : 0;
+      _d.c = _d.c < 0 ? _d.c : 0;
+      return _d;
+    });
+
     _keys = legend.map((d) => d.key);
     _names = d3.map(_data, (d) => d.date);
 
@@ -81,14 +98,22 @@ export const WidgetChartCreate = (
       _keys.forEach((_key: any) => (_d[_key] = d[_key]));
       return _d;
     });
+    __stacked = d3
+      .stack()
+      .keys(_keys)(_data ?? [])
+      .map(mapData);
     _stacked = d3
       .stack()
       .keys(_keys)
       .offset(d3.stackOffsetDiverging)(_data ?? [])
       .map(mapData);
-    _area = d3
+    _area_1 = d3
       .stack()
-      .keys(_keys)(_data ?? [])
+      .keys(_keys)(_data1 ?? [])
+      .map(mapData);
+    _area_2 = d3
+      .stack()
+      .keys(_keys)(_data2 ?? [])
       .map(mapData);
     _line = _stacked.map((d: any) => {
       const new_d = d.map((d1: any) => {
@@ -109,10 +134,10 @@ export const WidgetChartCreate = (
     y_min_grouped = Math.min(_min_gr, 0);
 
     // min, max stacked
-    const _max_st = d3.max(_stacked, (d) =>
+    const _max_st = d3.max(__stacked, (d) =>
       d3.max(d, (d2) => d3.max(Object.values(d2).filter((d4) => !isNaN(d4))))
     );
-    const _min_st = d3.min(_stacked, (d) =>
+    const _min_st = d3.min(__stacked, (d) =>
       d3.min(d, (d2) => d3.min(Object.values(d2).filter((d4) => !isNaN(d4))))
     );
     y_max_stacked = Math.max(_max_st, 0);
@@ -249,8 +274,8 @@ export const WidgetChartCreate = (
   // y-functions area
   const y0Stacked = (d: any) => y(d[0]);
   const y1Stacked = (d: any) => y(d[1]);
-  const y0Grouped = (d: any) => y(d[1] - d[0]);
-  const y1Grouped = () => y(0);
+  const y0Grouped = () => y(0);
+  const y1Grouped = (d: any) => y(d[1] - d[0]);
 
   // width-functions
   const widthGrouped = () => x.bandwidth() / _keys.length;
@@ -266,14 +291,17 @@ export const WidgetChartCreate = (
       .selectAll('rect')
       .data((d: any) => d)
       .join('rect')
-      .attr('y', y(0));
+      .attr('opacity', 1e-6);
+    // .attr('y', y(0))
     if (layout === EChartType.groupedBarChart) {
+      rect.attr('y', yGrouped).attr('height', heightBar);
       rect.attr('x', xGrouped).attr('width', widthGrouped());
-      rect.transition().duration(duration).attr('y', yGrouped).attr('height', heightBar);
+      rect.transition().duration(duration).attr('opacity', opacityRect);
     }
     if (layout === EChartType.stackedBarChart) {
+      rect.attr('y', yStacked).attr('height', heightBar);
       rect.attr('x', xStacked).attr('width', widthStacked());
-      rect.transition().duration(duration).attr('y', yStacked).attr('height', heightBar);
+      rect.transition().duration(duration).attr('opacity', opacityRect);
     }
   }
   function removeRect() {
@@ -291,10 +319,16 @@ export const WidgetChartCreate = (
       .transition()
       .duration(duration)
       .attr('x', xStacked)
-      .attr('width', widthStacked());
+      .attr('width', widthStacked())
+      .attr('opacity', opacityRect);
   }
   function updateRectStackedY() {
-    rect.transition().duration(duration).attr('y', yStacked).attr('height', heightBar);
+    rect
+      .transition()
+      .duration(duration)
+      .attr('y', yStacked)
+      .attr('height', heightBar)
+      .attr('opacity', opacityRect);
   }
   function updateRectGrouped() {
     rect
@@ -305,18 +339,27 @@ export const WidgetChartCreate = (
       .transition()
       .duration(duration)
       .attr('y', yGrouped)
-      .attr('height', heightBar);
+      .attr('height', heightBar)
+      .attr('opacity', opacityRect);
   }
   function updateRectGroupedY() {
-    rect.transition().duration(duration).attr('y', yGrouped).attr('height', heightBar);
+    rect
+      .transition()
+      .duration(duration)
+      .attr('y', yGrouped)
+      .attr('height', heightBar)
+      .attr('opacity', opacityRect);
   }
 
   // area
-  let areas: any = undefined;
+  let areas1: any = undefined;
+  let areas2: any = undefined;
   let areaFunc: any = undefined;
-  let areaPaths: any = undefined;
+  let areaPaths1: any = undefined;
+  let areaPaths2: any = undefined;
   function drawAreas() {
-    areas = svg.append('g').attr('class', 'areas');
+    areas1 = svg.append('g').attr('class', 'areas');
+    areas2 = svg.append('g').attr('class', 'areas');
     areaFunc = d3.area().curve(d3.curveBumpX).x(xCurve);
   }
   function drawArea(layout: string) {
@@ -325,29 +368,43 @@ export const WidgetChartCreate = (
     const isArea = isAreaGrouped || isAreaStacked;
     if (isArea) {
       areaFunc.y0(y(0)).y1(y(0));
-      if (isAreaGrouped) areaPaths = areas.selectAll('path').data(_area).join('path');
-      if (isAreaStacked) areaPaths = areas.selectAll('path').data(_stacked).join('path');
-      areaPaths
-        .attr('fill', (d: any) => z(d.key))
-        .attr('opacity', opacityArea)
-        .attr('d', areaFunc);
       if (isAreaGrouped) areaFunc.y0(y0Grouped).y1(y1Grouped);
       if (isAreaStacked) areaFunc.y0(y0Stacked).y1(y1Stacked);
-      areaPaths.transition().duration(duration).attr('d', areaFunc);
+      areaPaths1 = areas1
+        .selectAll('path')
+        .data(_area_1)
+        .join('path')
+        .attr('fill', (d: any) => z(d.key))
+        .attr('opacity', 1e-6)
+        .attr('d', areaFunc);
+      areaPaths2 = areas2
+        .selectAll('path')
+        .data(_area_2)
+        .join('path')
+        .attr('fill', (d: any) => z(d.key))
+        .attr('opacity', 1e-6)
+        .attr('d', areaFunc);
+      areaPaths1.transition().duration(duration).attr('opacity', opacityArea);
+      areaPaths2.transition().duration(duration).attr('opacity', opacityArea);
     }
   }
   function removeArea() {
-    areaPaths?.transition().duration(duration).attr('opacity', 1e-6).remove();
+    areaPaths1?.transition().duration(duration).attr('opacity', 1e-6).remove();
+    areaPaths2?.transition().duration(duration).attr('opacity', 1e-6).remove();
   }
   function updateAreaStacked() {
-    areaPaths.data(_stacked);
     areaFunc.y0(y0Stacked).y1(y1Stacked);
-    areaPaths.transition().duration(duration).attr('d', areaFunc);
+    areaPaths1.data(_area_1);
+    areaPaths1.transition().duration(duration).attr('d', areaFunc).attr('opacity', opacityArea);
+    areaPaths2.data(_area_2);
+    areaPaths2.transition().duration(duration).attr('d', areaFunc).attr('opacity', opacityArea);
   }
   function updateAreaGrouped() {
-    areaPaths.data(_area);
     areaFunc.y0(y0Grouped).y1(y1Grouped);
-    areaPaths.transition().duration(duration).attr('d', areaFunc);
+    areaPaths1.data(_area_1);
+    areaPaths1.transition().duration(duration).attr('d', areaFunc).attr('opacity', opacityArea);
+    areaPaths2.data(_area_2);
+    areaPaths2.transition().duration(duration).attr('d', areaFunc).attr('opacity', opacityArea);
   }
 
   // line
@@ -359,7 +416,9 @@ export const WidgetChartCreate = (
     line = d3.line().curve(d3.curveBumpX).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
+    const isLineGrouped = layout == EChartType.lineChart;
     line.y(y(0));
+    line.y(yCurve);
     linePaths = lines
       .selectAll('path')
       .data(_line)
@@ -369,9 +428,8 @@ export const WidgetChartCreate = (
       .attr('fill', 'none')
       .attr('opacity', 1e-6)
       .attr('d', line);
-    if (layout === EChartType.lineChart) {
-      line.y(yCurve);
-      linePaths.attr('opacity', opacityLine).transition().duration(duration).attr('d', line);
+    if (isLineGrouped) {
+      linePaths.transition().duration(duration).attr('opacity', opacityLine);
     }
   }
   function removeLine() {
@@ -382,11 +440,11 @@ export const WidgetChartCreate = (
   }
   function updateLineStacked() {
     line.y(yCurve);
-    linePaths.transition().duration(duration).attr('d', line);
+    linePaths.transition().duration(duration).attr('d', line).attr('opacity', opacityLine);
   }
   function updateLineGrouped() {
     line.y(yCurve);
-    linePaths.transition().duration(duration).attr('d', line);
+    linePaths.transition().duration(duration).attr('d', line).attr('opacity', opacityLine);
   }
 
   // dots

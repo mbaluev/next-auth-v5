@@ -4,8 +4,9 @@ import { WidgetChart } from '@/components/widgets/chart';
 
 const DashboardPage = () => {
   return (
-    <div className="w-full grid gap-4 grid-cols-1">
-      <WidgetChart />
+    <div className="w-full grid gap-4 grid-cols-1 {/*md:grid-cols-2*/}">
+      <WidgetChart className="h-[400px]" />
+      {/*<WidgetEmpty className="h-[400px]" />*/}
     </div>
   );
 };

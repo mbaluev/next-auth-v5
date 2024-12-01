@@ -21,38 +21,43 @@ export interface IChartLegendItem {
   color: string;
 }
 
-const length = 40;
+const length = 50;
 
 export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
-export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length })
-  .map((_, i) => {
-    return {
-      a: randomInt(-200000, 200000),
-      b: randomInt(-200000, 200000),
-      c: randomInt(-200000, 200000),
-      date: moment({
-        year: moment(new Date())
-          .subtract(length - i - 1, 'months')
-          .year(),
-        month: moment(new Date())
-          .subtract(length - i - 1, 'months')
-          .month(),
-      })
-        .startOf('month')
-        .format('YYYY-MM-DD'),
-    };
-  })
-  .sort((a, b) => a.a + a.b + a.c - (b.a + b.b + b.c));
+export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) => {
+  return {
+    a: randomInt(-200000, 200000),
+    b: randomInt(-200000, 200000),
+    c: randomInt(-200000, 200000),
+    date: moment({
+      year: moment(new Date())
+        .subtract(length - i - 1, 'months')
+        .year(),
+      month: moment(new Date())
+        .subtract(length - i - 1, 'months')
+        .month(),
+    })
+      .startOf('month')
+      .format('YYYY-MM-DD'),
+  };
+});
+// .sort((a, b) => a.a + a.b + a.c - (b.a + b.b + b.c));
+MOCK_CHART_DATA[0].a = 0;
+MOCK_CHART_DATA[0].b = 0;
+MOCK_CHART_DATA[0].c = 0;
+MOCK_CHART_DATA[length - 1].a = 0;
+MOCK_CHART_DATA[length - 1].b = 0;
+MOCK_CHART_DATA[length - 1].c = 0;
 
 export const MOCK_CHART_LEGEND: IChartLegendItem[] = [
   {
     key: 'a',
-    color: 'hsla(4, 100%, 80%, 1)',
+    color: 'hsla(240, 100%, 75%, 1)',
   },
   {
     key: 'b',
-    color: 'hsla(240, 100%, 75%, 1)',
+    color: 'hsla(4, 100%, 80%, 1)',
   },
   {
     key: 'c',
