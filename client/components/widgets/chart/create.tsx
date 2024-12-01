@@ -56,7 +56,6 @@ export const WidgetChartCreate = (
   let _names: string[] = [];
   let _grouped: Record<string, any>[] = [];
   let _stacked: Record<string, any>[][] = [];
-  let __stacked: Record<string, any>[][] = [];
   let _area_1: Record<string, any>[][] = [];
   let _area_2: Record<string, any>[][] = [];
   let _line: Record<string, any>[][] = [];
@@ -98,10 +97,6 @@ export const WidgetChartCreate = (
       _keys.forEach((_key: any) => (_d[_key] = d[_key]));
       return _d;
     });
-    __stacked = d3
-      .stack()
-      .keys(_keys)(_data ?? [])
-      .map(mapData);
     _stacked = d3
       .stack()
       .keys(_keys)
@@ -134,10 +129,10 @@ export const WidgetChartCreate = (
     y_min_grouped = Math.min(_min_gr, 0);
 
     // min, max stacked
-    const _max_st = d3.max(__stacked, (d) =>
+    const _max_st = d3.max(_stacked, (d) =>
       d3.max(d, (d2) => d3.max(Object.values(d2).filter((d4) => !isNaN(d4))))
     );
-    const _min_st = d3.min(__stacked, (d) =>
+    const _min_st = d3.min(_stacked, (d) =>
       d3.min(d, (d2) => d3.min(Object.values(d2).filter((d4) => !isNaN(d4))))
     );
     y_max_stacked = Math.max(_max_st, 0);

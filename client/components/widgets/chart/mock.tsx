@@ -27,9 +27,9 @@ export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
 export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) => {
   return {
-    a: randomInt(-200000, 200000),
-    b: randomInt(-200000, 200000),
-    c: randomInt(-200000, 200000),
+    a: randomInt(-100000, 100000),
+    b: randomInt(-100000, 100000),
+    c: randomInt(-100000, 100000),
     date: moment({
       year: moment(new Date())
         .subtract(length - i - 1, 'months')
@@ -42,7 +42,6 @@ export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) =
       .format('YYYY-MM-DD'),
   };
 });
-// .sort((a, b) => a.a + a.b + a.c - (b.a + b.b + b.c));
 MOCK_CHART_DATA[0].a = 0;
 MOCK_CHART_DATA[0].b = 0;
 MOCK_CHART_DATA[0].c = 0;
