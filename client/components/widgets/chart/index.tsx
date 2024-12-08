@@ -32,6 +32,8 @@ import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
 import Link from 'next/link';
+import { TooltipText } from '@/components/ui/tooltip';
+import { Separator } from '@/components/ui/separator';
 
 export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
@@ -89,41 +91,52 @@ export const WidgetChart = (props: WidgetProps) => {
         </WidgetIcon>
         <WidgetTitle>chart</WidgetTitle>
         <WidgetButtons>
-          <Button
-            variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
-            size="icon"
-            onClick={() => handleChange(EChartType.stackedBarChart)}
-          >
-            <ChartColumnStacked />
-          </Button>
-          <Button
-            variant={type === EChartType.groupedBarChart ? 'default' : 'ghost'}
-            size="icon"
-            onClick={() => handleChange(EChartType.groupedBarChart)}
-          >
-            <ChartColumn />
-          </Button>
-          <Button
-            variant={type === EChartType.areaChart ? 'default' : 'ghost'}
-            size="icon"
-            onClick={() => handleChange(EChartType.areaChart)}
-          >
-            <ChartSpline />
-          </Button>
-          <Button
-            variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
-            size="icon"
-            onClick={() => handleChange(EChartType.stackedAreaChart)}
-          >
-            <ChartArea />
-          </Button>
-          <Button
-            variant={type === EChartType.lineChart ? 'default' : 'ghost'}
-            size="icon"
-            onClick={() => handleChange(EChartType.lineChart)}
-          >
-            <ChartLine />
-          </Button>
+          <TooltipText title="stacked bar chart" side="top">
+            <Button
+              variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.stackedBarChart)}
+            >
+              <ChartColumnStacked />
+            </Button>
+          </TooltipText>
+          <TooltipText title="grouped bar chart" side="top">
+            <Button
+              variant={type === EChartType.groupedBarChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.groupedBarChart)}
+            >
+              <ChartColumn />
+            </Button>
+          </TooltipText>
+          <TooltipText title="area bar chart" side="top">
+            <Button
+              variant={type === EChartType.areaChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.areaChart)}
+            >
+              <ChartSpline />
+            </Button>
+          </TooltipText>
+          <TooltipText title="stacked area chart" side="top">
+            <Button
+              variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.stackedAreaChart)}
+            >
+              <ChartArea />
+            </Button>
+          </TooltipText>
+          <TooltipText title="line (curveBasisClosed)" side="top">
+            <Button
+              variant={type === EChartType.lineChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.lineChart)}
+            >
+              <ChartLine />
+            </Button>
+          </TooltipText>
+          <Separator orientation="vertical" className="h-auto" />
           <Button variant="ghost" size="icon" asChild>
             <Link href="/dashboard">
               <RefreshCw />

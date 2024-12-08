@@ -5,7 +5,6 @@ import { EChartType, IChartItem, IChartLegendItem } from '@/components/widgets/c
 import { JetBrains_Mono } from 'next/font/google';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
-const classes: any = {};
 
 export const WidgetChartCreate = (
   ref: MutableRefObject<any>,
@@ -25,10 +24,12 @@ export const WidgetChartCreate = (
   const opacityArea = 1;
   const opacityLine = 1;
   const opacityDots = 1;
-  const strokeWidth = 2;
+  const strokeWidth = 3;
+  const strokeColor = 'stroke-gray-500';
   const tooltipThreshold = 20;
   const tooltipPadding = 5;
   const paddingRect = 0.5;
+  const xTickPadding = -15;
 
   // init
   let dims: any = undefined;
@@ -42,7 +43,7 @@ export const WidgetChartCreate = (
 
     // declare the chart dimensions and _margins.
     dims = { width: ref.current.clientWidth, height: ref.current.clientHeight };
-    margin = { top: 10, right: 0, bottom: 10, left: 0 };
+    margin = { top: 0, right: 0, bottom: 10, left: 0 };
 
     // create the SVG container.
     svg = d3
@@ -182,10 +183,7 @@ export const WidgetChartCreate = (
         return format.format(date);
       });
 
-    xaxis = svg
-      .append('g')
-      .attr('class', classes.x_axis)
-      .attr('transform', `translate(0, ${y(0)})`);
+    xaxis = svg.append('g').attr('transform', `translate(0, ${y(0)})`);
 
     let y_min = y_min_grouped;
     if (type === EChartType.stackedBarChart || type === EChartType.stackedAreaChart)
@@ -194,8 +192,10 @@ export const WidgetChartCreate = (
     xticks = xaxis.call(xscale);
     xticks
       .selectAll('text')
-      .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min))})`)
+      .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min) + xTickPadding)})`)
       .attr('font-family', font.style.fontFamily);
+    xticks.selectAll('line').attr('class', strokeColor);
+    xaxis.selectAll('path').attr('class', strokeColor);
   }
   function updateXAxis(layout: string) {
     xaxis
@@ -207,7 +207,7 @@ export const WidgetChartCreate = (
         .selectAll('text')
         .transition()
         .duration(duration)
-        .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min_stacked))})`);
+        .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min_stacked) + xTickPadding)})`);
     }
     if (
       layout === EChartType.groupedBarChart ||
@@ -218,8 +218,9 @@ export const WidgetChartCreate = (
         .selectAll('text')
         .transition()
         .duration(duration)
-        .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min_grouped))})`);
+        .attr('transform', `translate(0,${Math.abs(y(0) - y(y_min_grouped) + xTickPadding)})`);
     }
+    xaxis.selectAll('path').attr('class', strokeColor);
   }
 
   // y-axis
@@ -409,7 +410,7 @@ export const WidgetChartCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveBumpX).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveBasisClosed).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
     const isLineGrouped = layout == EChartType.lineChart;
@@ -445,7 +446,7 @@ export const WidgetChartCreate = (
   let dotLine: any = undefined;
   function drawDots() {
     dots = svg.append('g').attr('class', 'dots');
-    dotLine = dots.append('line').attr('class', classes.line_selected).attr('opacity', 0);
+    dotLine = dots.append('line').attr('class', strokeColor).attr('opacity', 0);
   }
   function calcDot(item?: any) {
     _dots = [];

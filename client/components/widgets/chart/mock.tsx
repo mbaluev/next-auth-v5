@@ -21,7 +21,7 @@ export interface IChartLegendItem {
   color: string;
 }
 
-const length = 50;
+const length = 45;
 
 export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
