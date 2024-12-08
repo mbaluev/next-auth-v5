@@ -410,7 +410,7 @@ export const WidgetChartCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveBasisClosed).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveCatmullRom).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
     const isLineGrouped = layout == EChartType.lineChart;

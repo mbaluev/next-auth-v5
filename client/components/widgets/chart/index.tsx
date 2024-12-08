@@ -127,7 +127,7 @@ export const WidgetChart = (props: WidgetProps) => {
               <ChartArea />
             </Button>
           </TooltipText>
-          <TooltipText title="line (curveBasisClosed)" side="top">
+          <TooltipText title="line chart" side="top">
             <Button
               variant={type === EChartType.lineChart ? 'default' : 'ghost'}
               size="icon"
