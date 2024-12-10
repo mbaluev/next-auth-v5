@@ -12,12 +12,12 @@ import { TooltipText } from '@/components/ui/tooltip';
 import {
   LogOut,
   Moon,
-  UserCog,
   Sun,
   LayoutDashboard,
   MonitorSmartphone,
   Server,
   TriangleAlert,
+  User,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ButtonLogout } from '@/components/auth/button-logout';
@@ -110,7 +110,7 @@ const HeaderRightUserBtn = () => {
           <Avatar>
             <AvatarImage src={user?.image || ''} />
             <AvatarFallback className="bg-transparent hover:bg-secondary hover:text-secondary-foreground">
-              <UserCog />
+              <User />
             </AvatarFallback>
           </Avatar>
         </Button>
