@@ -2,17 +2,16 @@
 
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { TriangleAlert } from 'lucide-react';
+import { AlertError } from '@/components/ui/alert';
 
 export const WidgetError = () => {
   return (
     <WidgetWrapper
-      headerLabel="oops! something went wrong"
+      headerLabel="a simple authentication service"
       backButtonLabel="back to login"
       backButtonHref="/auth/login"
     >
-      <div className="w-full flex items-center justify-center">
-        <TriangleAlert className="w-12 h-12 text-destructive" />
-      </div>
+      <AlertError message="oops! something went wrong" />
     </WidgetWrapper>
   );
 };
