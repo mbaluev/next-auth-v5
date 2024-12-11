@@ -24,7 +24,7 @@ export const WidgetChartCreate = (
   const opacityArea = 1;
   const opacityLine = 1;
   const opacityDots = 1;
-  const strokeWidth = 3;
+  const strokeWidth = 2;
   const strokeColor = 'stroke-gray-500';
   const tooltipThreshold = 20;
   const tooltipPadding = 5;
@@ -410,7 +410,7 @@ export const WidgetChartCreate = (
   let linePaths: any = undefined;
   function drawLines() {
     lines = svg.append('g').attr('class', 'lines');
-    line = d3.line().curve(d3.curveCatmullRom).x(xCurve).y(yCurve);
+    line = d3.line().curve(d3.curveBumpX).x(xCurve).y(yCurve);
   }
   function drawLine(layout: string) {
     const isLineGrouped = layout == EChartType.lineChart;
