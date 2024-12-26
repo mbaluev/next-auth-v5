@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
@@ -7,12 +8,25 @@ import { usePathname } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
 import { Logo } from '@/components/layout/logo';
 import { MonitorSmartphone, Server, LayoutDashboard, X, TriangleAlert } from 'lucide-react';
-import Link from 'next/link';
+import { guid } from '@/core/utils/guid';
+import { CTree } from '@/core/utils/tree';
+import { useEffect } from 'react';
 
 export const Nav = () => {
   const user = useCurrentUser();
   const pathname = usePathname();
   const { toggleSidebar } = useSidebar();
+
+  const id_root = guid();
+  const id_1 = guid();
+  const id_2 = guid();
+  const id_3 = guid();
+  const _tree = new CTree(id_root, { level: 0, hidden: false, collapsed: false });
+  _tree.insert(id_1, id_root, { level: 1, hidden: false, collapsed: false });
+  _tree.insert(id_2, id_root, { level: 1, hidden: false, collapsed: false });
+  _tree.insert(id_3, id_2, { level: 2, hidden: false, collapsed: false });
+  useEffect(() => console.log(_tree, _tree.flat()));
+
   if (!user) return null;
   return (
     <div className="flex flex-col">
