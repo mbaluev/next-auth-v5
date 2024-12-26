@@ -3,14 +3,14 @@
 import { ReactNode } from 'react';
 import { Footer } from '@/components/layout/footer';
 import { SidebarProvider, Sidebar } from '@/components/layout/sidebar';
-import { Nav } from '@/components/layout/nav';
+import { Navbar } from '@/components/layout/navbar';
 import { Header } from '@/components/layout/header';
 
 export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider>
       <Sidebar>
-        <Nav />
+        <Navbar />
       </Sidebar>
       <div className="flex-grow flex flex-col">
         <Header />

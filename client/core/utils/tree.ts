@@ -4,6 +4,7 @@ export type TTreeState = {
   level: number;
   hidden?: boolean | null;
   collapsed?: boolean | null;
+  selected?: boolean | null;
 };
 
 export type TTreeDTO<T> = {
@@ -12,6 +13,13 @@ export type TTreeDTO<T> = {
   data?: T;
   items: TTreeDTO<T>[];
   state: TTreeState;
+};
+
+export const DEFAULT_STATE: TTreeState = {
+  level: 0,
+  hidden: false,
+  collapsed: false,
+  selected: false,
 };
 
 export class CTreeNode<T> {
@@ -43,12 +51,7 @@ export class CTree<T> {
 
   constructor(key?: string, data?: T, state?: TTreeState) {
     const _key = key || guid();
-    const _state: TTreeState = {
-      level: 0,
-      hidden: false,
-      collapsed: false,
-      ...state,
-    };
+    const _state: TTreeState = { ...DEFAULT_STATE, ...state };
     this.root = new CTreeNode(_key, null, _state, data);
   }
 
@@ -79,15 +82,17 @@ export class CTree<T> {
     return undefined;
   }
 
+  find(predicate: (value: CTreeNode<T>) => boolean, root?: CTreeNode<T>) {
+    for (const node of this.preOrderTraversal(root)) {
+      if (predicate(node)) return node;
+    }
+    return undefined;
+  }
+
   insert(id: string, pid: string | null, data?: T, state?: TTreeState) {
     for (const node of this.preOrderTraversal()) {
       if (node.id === pid) {
-        const _state: TTreeState = {
-          level: node.state.level + 1,
-          hidden: false,
-          collapsed: false,
-          ...state,
-        };
+        const _state: TTreeState = { ...DEFAULT_STATE, level: node.state.level + 1, ...state };
         node.items.push(new CTreeNode(id, node.id, _state, data));
         return true;
       }
@@ -189,6 +194,24 @@ export class CTree<T> {
       node.state.collapsed = true;
       if (node.state.level && node.state.level > to) {
         node.state.hidden = true;
+      }
+    }
+  }
+
+  // select
+
+  select(key: string, value: boolean) {
+    const root = this.get(key);
+    // clear
+    for (const node of this.preOrderTraversal()) node.state.selected = false;
+    // children
+    for (const node of this.preOrderTraversal(root)) node.state.selected = value;
+    // parent
+    for (const node of this.postOrderTraversal()) {
+      if (node.items.length > 0) {
+        let selected = false;
+        for (const child of node.items) selected = selected || !!child.state.selected;
+        node.state.selected = selected;
       }
     }
   }
