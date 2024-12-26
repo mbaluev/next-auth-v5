@@ -1,5 +1,7 @@
+import { guid } from '@/core/utils/guid';
+
 export type TTreeState = {
-  level?: number | null;
+  level: number;
   hidden?: boolean | null;
   collapsed?: boolean | null;
 };
@@ -39,8 +41,15 @@ export class CTreeNode<T> {
 export class CTree<T> {
   root: CTreeNode<T>;
 
-  constructor(key: string, state: TTreeState, data?: T) {
-    this.root = new CTreeNode(key, null, state, data);
+  constructor(key?: string, data?: T, state?: TTreeState) {
+    const _key = key || guid();
+    const _state: TTreeState = {
+      level: 0,
+      hidden: false,
+      collapsed: false,
+      ...state,
+    };
+    this.root = new CTreeNode(_key, null, _state, data);
   }
 
   *preOrderTraversal(node = this.root): Generator<CTreeNode<T>, any, undefined> {
@@ -70,10 +79,16 @@ export class CTree<T> {
     return undefined;
   }
 
-  insert(id: string, pid: string | null, state: TTreeState, data?: T) {
+  insert(id: string, pid: string | null, data?: T, state?: TTreeState) {
     for (const node of this.preOrderTraversal()) {
       if (node.id === pid) {
-        node.items.push(new CTreeNode(id, node.id, state, data));
+        const _state: TTreeState = {
+          level: node.state.level + 1,
+          hidden: false,
+          collapsed: false,
+          ...state,
+        };
+        node.items.push(new CTreeNode(id, node.id, _state, data));
         return true;
       }
     }
@@ -115,7 +130,7 @@ export class CTree<T> {
   toggleValueNode(key: string, name: keyof TTreeState, value: any) {
     for (const node of this.preOrderTraversal()) {
       if (node.id === key) {
-        node.state[name] = value;
+        node.state[name] = value as never;
       }
     }
   }
@@ -123,7 +138,7 @@ export class CTree<T> {
   toggleValueAll(key: string, name: keyof TTreeState, value: any) {
     const root = this.get(key);
     for (const node of this.preOrderTraversal(root)) {
-      node.state[name] = value;
+      node.state[name] = value as never;
     }
   }
 
