@@ -122,8 +122,8 @@ export class CTree<T> {
   flat() {
     const collection: TTreeDTO<T>[] = [];
     for (const node of this.preOrderTraversal()) {
-      const { id, pid, state, data } = node;
-      if (pid !== null) collection.push({ id, pid, data, items: [], state });
+      const { id, pid, state, data, items } = node;
+      if (pid !== null) collection.push({ id, pid, data, items, state });
     }
     return collection;
   }

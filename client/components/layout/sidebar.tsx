@@ -198,7 +198,10 @@ type SidebarButtonProps = ComponentProps<typeof Button>;
 const SidebarButton = forwardRef<ElementRef<typeof Button>, SidebarButtonProps>((props, ref) => {
   const { onClick, children, ..._props } = props;
   const { toggleSidebar, isMobile } = useSidebar();
-  const handleClick = isMobile ? toggleSidebar : undefined;
+  const handleClick = (e: any) => {
+    if (onClick) onClick(e);
+    if (isMobile) toggleSidebar();
+  };
   return (
     <Button size="flex-start" onClick={handleClick} {..._props}>
       {children}
