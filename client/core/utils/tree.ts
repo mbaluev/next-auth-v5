@@ -1,7 +1,7 @@
 import { guid } from '@/core/utils/guid';
 
 export type TTreeState = {
-  level: number;
+  level?: number;
   hidden?: boolean | null;
   collapsed?: boolean | null;
   selected?: boolean | null;
@@ -92,7 +92,11 @@ export class CTree<T> {
   insert(id: string, pid: string | null, data?: T, state?: TTreeState) {
     for (const node of this.preOrderTraversal()) {
       if (node.id === pid) {
-        const _state: TTreeState = { ...DEFAULT_STATE, level: node.state.level + 1, ...state };
+        const _state: TTreeState = {
+          ...DEFAULT_STATE,
+          level: (node.state.level || 0) + 1,
+          ...state,
+        };
         node.items.push(new CTreeNode(id, node.id, _state, data));
         return true;
       }
@@ -200,10 +204,14 @@ export class CTree<T> {
 
   // select
 
+  deselect() {
+    for (const node of this.preOrderTraversal()) node.state.selected = false;
+  }
+
   select(key: string, value: boolean) {
     const root = this.get(key);
     // clear
-    for (const node of this.preOrderTraversal()) node.state.selected = false;
+    this.deselect();
     // children
     for (const node of this.preOrderTraversal(root)) node.state.selected = value;
     // parent
@@ -212,6 +220,10 @@ export class CTree<T> {
         let selected = false;
         for (const child of node.items) selected = selected || !!child.state.selected;
         node.state.selected = selected;
+        if (selected) {
+          node.state.collapsed = false;
+          for (const child of node.items) child.state.hidden = false;
+        }
       }
     }
   }

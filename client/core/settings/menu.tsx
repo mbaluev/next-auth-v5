@@ -20,14 +20,14 @@ menuTree.insert('dashboard', menuTree.root.id, {
   label: 'dashboard',
   icon: <LayoutDashboard />,
 });
-menuTree.insert('samples', menuTree.root.id, {
-  label: 'samples',
-  icon: <SwatchBook />,
-});
-menuTree.insert('xxx', menuTree.root.id, {
+menuTree.insert('page-not-found', menuTree.root.id, {
   path: '/xxx',
   label: 'page not found',
   icon: <TriangleAlert className="w-6 h-6" />,
+});
+menuTree.insert('samples', menuTree.root.id, {
+  label: 'samples',
+  icon: <SwatchBook />,
 });
 menuTree.insert('client', 'samples', {
   path: '/client',
