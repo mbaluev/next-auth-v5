@@ -73,13 +73,14 @@ const NavItem = (props: INavItemProps<TMenuItemDTO>) => {
     return (
       <div className="flex">
         <NavItemPadding node={node} />
-        <SidebarButton
+        <Button
+          size="flex-start"
           variant={node.state.selected ? 'sidebar' : 'ghost'}
           className="flex-1"
           onClick={handleToggle}
         >
           <NavItemContent node={node} />
-        </SidebarButton>
+        </Button>
       </div>
     );
   }
