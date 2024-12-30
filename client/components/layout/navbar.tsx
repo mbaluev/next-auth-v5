@@ -7,12 +7,14 @@ import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
 import { Logo } from '@/components/layout/logo';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import { ChevronRight, X } from 'lucide-react';
 import { menuTree, TMenuItemDTO } from '@/core/settings/menu';
 import { CTree, TTreeDTO } from '@/core/utils/tree';
 import { createContext, Fragment, ReactNode, useContext, useEffect, useState } from 'react';
+import { cn } from '@/core/utils/cn';
 
 const NAVBAR_PADDING_ITEM = 15;
+const NAVBAR_TRANSITION_DURATION = 100;
 
 type NavbarContext = CTree<TMenuItemDTO>;
 const NavbarContext = createContext<NavbarContext | null>(null);
@@ -48,12 +50,15 @@ interface INavItemContentProps<T> {
 }
 const NavItemContent = (props: INavItemContentProps<TMenuItemDTO>) => {
   const { node } = props;
+  const classNameChevron = cn(
+    `transition-all transform duration-${NAVBAR_TRANSITION_DURATION}`,
+    !node.state.collapsed && 'rotate-90'
+  );
   return (
     <Fragment>
       {node.data?.icon}
       <p className="flex-1 text-left">{node.data?.label}</p>
-      {node.items.length > 0 && node.state.collapsed && <ChevronUp />}
-      {node.items.length > 0 && !node.state.collapsed && <ChevronDown />}
+      {node.items.length > 0 && <ChevronRight className={classNameChevron} />}
     </Fragment>
   );
 };
@@ -124,7 +129,7 @@ const Navbar = () => {
   return (
     <div className="flex flex-col">
       <div className="flex gap-4 p-4 justify-between">
-        <SidebarButton asChild variant="ghost">
+        <SidebarButton asChild variant="ghost" className="flex-1">
           <Link href="/">
             <Logo className="w-6 h-6" />
             <p>{process.env.APP_NAME}</p>
