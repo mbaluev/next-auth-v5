@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { cn } from '@/core/utils/cn';
-import { useScrollTop } from '@/core/hooks/use-scroll-top';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Button } from '@/components/ui/button';
@@ -27,17 +26,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { BreadCrumbs } from '@/components/layout/bread-crumbs';
 
 const Header = () => {
-  const scrolled = useScrollTop();
+  // const scrolled = useScrollTop();
   return (
     <header
       className={cn(
         'flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0',
-        scrolled && 'bg-background'
+        'bg-background' // scrolled && 'bg-background'
       )}
     >
-      <HeaderLeftBar />
+      <BreadCrumbs />
       <HeaderRightBar />
     </header>
   );

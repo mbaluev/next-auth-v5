@@ -33,7 +33,6 @@ import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
 import Link from 'next/link';
 import { TooltipText } from '@/components/ui/tooltip';
-import { Separator } from '@/components/ui/separator';
 
 export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
@@ -136,7 +135,6 @@ export const WidgetChart = (props: WidgetProps) => {
               <ChartLine />
             </Button>
           </TooltipText>
-          <Separator orientation="vertical" className="h-auto" />
           <Button variant="ghost" size="icon" asChild>
             <Link href="/dashboard">
               <RefreshCw />

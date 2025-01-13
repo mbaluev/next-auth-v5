@@ -17,10 +17,10 @@ export const ButtonsSocial = () => {
   return (
     <div className="flex items-center w-full gap-x-6">
       <Button className="w-full" variant="outline" onClick={() => onClick('google')}>
-        <FcGoogle className="h-6 w-6" />
+        <FcGoogle className="h-8 w-8" />
       </Button>
       <Button className="w-full" variant="outline" onClick={() => onClick('github')}>
-        <FaGithub className="h-6 w-6" />
+        <FaGithub className="h-8 w-8" />
       </Button>
     </div>
   );

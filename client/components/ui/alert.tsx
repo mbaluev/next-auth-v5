@@ -57,7 +57,7 @@ const AlertError = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="destructive">
-      <TriangleAlert className="h-6 w-6" />
+      <TriangleAlert />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
@@ -67,7 +67,7 @@ const AlertInfo = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="info">
-      <Spinner className="h-6 w-6" />
+      <Spinner />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
@@ -77,7 +77,7 @@ const AlertSuccess = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="success">
-      <Check className="h-6 w-6" />
+      <Check />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
@@ -87,7 +87,7 @@ const AlertWarning = ({ message }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="warning">
-      <Check className="h-6 w-6" />
+      <Check />
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
