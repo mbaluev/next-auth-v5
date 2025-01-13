@@ -66,15 +66,14 @@ NavItemContent.displayName = 'NavItemContent';
 
 interface INavItemProps<T> {
   node: TTreeDTO<T>;
-  onClick?: (node: TTreeDTO<TMenuItemDTO>) => void;
+  onToggle: (node: TTreeDTO<TMenuItemDTO>) => void;
 }
 const NavItem = (props: INavItemProps<TMenuItemDTO>) => {
-  const { node, onClick } = props;
+  const { node, onToggle } = props;
 
-  const handleToggle = () => {
-    if (onClick) onClick(node);
-  };
+  // item toggle
   if (!node.data?.path) {
+    const handleToggle = () => onToggle(node);
     return (
       <div className="flex">
         <NavItemPadding node={node} />
@@ -90,6 +89,7 @@ const NavItem = (props: INavItemProps<TMenuItemDTO>) => {
     );
   }
 
+  // item link
   return (
     <div className="flex">
       <NavItemPadding node={node} />
@@ -143,7 +143,7 @@ const Navbar = () => {
       <div className="flex flex-col gap-4 p-4">
         {state
           ?.filter((d) => !d.state.hidden)
-          .map((node, index) => <NavItem key={index} node={node} onClick={handleToggle} />)}
+          .map((node, index) => <NavItem key={index} node={node} onToggle={handleToggle} />)}
       </div>
     </div>
   );
