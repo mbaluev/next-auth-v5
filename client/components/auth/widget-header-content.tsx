@@ -11,13 +11,9 @@ interface HeaderProps {
 export const WidgetHeaderContent = ({ label, loading }: HeaderProps) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <Button variant="ghost" className="text-3xl font-semibold" asChild>
+      <Button variant="ghost" size="flex-start" className="text-3xl font-semibold" asChild>
         <Link href="/">
-          {loading ? (
-            <Spinner className="h-8 w-8 mr-3 animate-spin" />
-          ) : (
-            <Logo className="h-8 w-8 mr-3" />
-          )}
+          {loading ? <Spinner className="h-8 w-8 animate-spin" /> : <Logo className="h-8 w-8" />}
           {process.env.APP_NAME}
         </Link>
       </Button>

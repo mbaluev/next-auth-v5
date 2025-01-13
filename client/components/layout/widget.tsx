@@ -30,7 +30,7 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
 );
 Widget.displayName = 'Widget';
 
-const widgetHeaderVariants = cva('flex flex-0 flex-wrap gap-4 justify-between', {
+const widgetHeaderVariants = cva('flex flex-0 flex-wrap gap-2 justify-between', {
   variants: {
     variant: {
       default: '',

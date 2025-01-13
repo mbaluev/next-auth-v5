@@ -9,8 +9,8 @@ export default function Home() {
   const auth = useIsAuth();
   return (
     <div className="space-y-10 text-center">
-      <div className="flex flex-row gap-x-8 items-center justify-center">
-        <Logo className="h-14 w-14" />
+      <div className="text-6xl flex flex-row gap-x-8 items-center justify-center">
+        <Logo />
         <h1 className="text-6xl font-semibold">{process.env.APP_NAME}</h1>
       </div>
       <div className="flex flex-col gap-1 items-center">
