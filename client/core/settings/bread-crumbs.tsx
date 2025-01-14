@@ -1,6 +1,5 @@
 'use client';
 
-import { LayoutDashboard, MonitorSmartphone, Server } from 'lucide-react';
 import { ReactNode } from 'react';
 
 interface ICrumbDTO {
@@ -12,30 +11,9 @@ interface ICrumbDTO {
 
 const BREAD_CRUMBS: Record<string, ICrumbDTO[]> = {
   '/': [],
-  '/dashboard': [
-    {
-      path: '/dashboard',
-      icon: <LayoutDashboard />,
-      label: 'dashboard',
-      loading: false,
-    },
-  ],
-  '/client': [
-    {
-      path: '/client',
-      icon: <MonitorSmartphone />,
-      label: 'client',
-      loading: false,
-    },
-  ],
-  '/server': [
-    {
-      path: '/server',
-      icon: <Server />,
-      label: 'server',
-      loading: false,
-    },
-  ],
+  '/dashboard': [{ path: '/dashboard', label: 'dashboard', loading: false }],
+  '/client': [{ path: '/client', label: 'client', loading: false }],
+  '/server': [{ path: '/server', label: 'server', loading: false }],
 };
 
 export { BREAD_CRUMBS };

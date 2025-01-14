@@ -31,12 +31,7 @@ import { BreadCrumbs } from '@/components/layout/bread-crumbs';
 const Header = () => {
   // const scrolled = useScrollTop();
   return (
-    <header
-      className={cn(
-        'flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0',
-        'bg-background' // scrolled && 'bg-background'
-      )}
-    >
+    <header className="flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0 bg-background">
       <BreadCrumbs />
       <HeaderRightBar />
     </header>

@@ -28,7 +28,7 @@ export default function Home() {
           </ButtonLogin>
           <ButtonLogin mode="modal" asChild>
             <Button variant="outline" size="lg">
-              sign in modal
+              sign in dialog
             </Button>
           </ButtonLogin>
         </div>
