@@ -24,22 +24,21 @@ import {
   ChartColumnStacked,
   ChartLine,
   ChartSpline,
-  LayoutDashboard,
   RefreshCw,
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
-import Link from 'next/link';
 import { TooltipText } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
   const [chart, setChart] = useState<any>();
   const router = useRouter();
   const params = useSearchParams();
-  const type = params.get('type');
+  const type = params.get('type') ?? DEFAULT_CHART_TYPE;
   const loading = false;
   const id = `widget-chart-${v4()}`;
 
@@ -53,24 +52,17 @@ export const WidgetChart = (props: WidgetProps) => {
   };
   const create = useCallback(() => {
     if (ref.current) {
-      const obj = WidgetChartCreate(
-        ref,
-        id,
-        MOCK_CHART_DATA,
-        MOCK_CHART_LEGEND,
-        params.get('type') ?? DEFAULT_CHART_TYPE,
-        formatValue
-      );
+      const obj = WidgetChartCreate(ref, id, MOCK_CHART_DATA, MOCK_CHART_LEGEND, type, formatValue);
       setChart(obj);
     }
-  }, [ref]);
+  }, [ref, type]);
 
   // update
   const handleChange = (type: EChartType) => {
-    router.push(`/dashboard?type=${type}`);
+    router.push(`/chart?type=${type}`);
   };
   useEffect(() => {
-    if (chart) chart.update(MOCK_CHART_DATA, type ?? DEFAULT_CHART_TYPE);
+    if (chart) chart.update(MOCK_CHART_DATA, type);
   }, [type]);
 
   // create, resize
@@ -86,7 +78,7 @@ export const WidgetChart = (props: WidgetProps) => {
     <Widget variant="background" {...props}>
       <WidgetHeader variant="padding">
         <WidgetIcon>
-          <LayoutDashboard />
+          <ChartColumn />
         </WidgetIcon>
         <WidgetTitle>chart</WidgetTitle>
         <WidgetButtons>
@@ -136,7 +128,7 @@ export const WidgetChart = (props: WidgetProps) => {
             </Button>
           </TooltipText>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="/dashboard">
+            <Link href="/chart">
               <RefreshCw />
             </Link>
           </Button>

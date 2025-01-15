@@ -11,7 +11,7 @@ interface ICrumbDTO {
 
 const BREAD_CRUMBS: Record<string, ICrumbDTO[]> = {
   '/': [],
-  '/dashboard': [{ path: '/dashboard', label: 'dashboard', loading: false }],
+  '/chart': [{ path: '/chart', label: 'chart', loading: false }],
   '/client': [{ path: '/client', label: 'client', loading: false }],
   '/server': [{ path: '/server', label: 'server', loading: false }],
 };

@@ -1,12 +1,6 @@
 import { ReactElement } from 'react';
 import { CTree } from '@/core/utils/tree';
-import {
-  LayoutDashboard,
-  MonitorSmartphone,
-  Server,
-  SwatchBook,
-  TriangleAlert,
-} from 'lucide-react';
+import { ChartColumn, MonitorSmartphone, Server, SwatchBook, TriangleAlert } from 'lucide-react';
 
 type TMenuItemDTO = {
   path?: string | null;
@@ -15,10 +9,10 @@ type TMenuItemDTO = {
 };
 
 const menuTree = new CTree<TMenuItemDTO>();
-menuTree.insert('dashboard', menuTree.root.id, {
-  path: '/dashboard',
-  label: 'dashboard',
-  icon: <LayoutDashboard />,
+menuTree.insert('chart', menuTree.root.id, {
+  path: '/chart',
+  label: 'chart',
+  icon: <ChartColumn />,
 });
 menuTree.insert('page-not-found', menuTree.root.id, {
   path: '/xxx',
