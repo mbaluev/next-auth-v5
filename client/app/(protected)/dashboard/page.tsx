@@ -2,7 +2,7 @@
 
 import { WidgetChart } from '@/components/widgets/chart';
 
-const ChartPage = () => {
+const DashboardPage = () => {
   return (
     <div className="w-full grid gap-4 grid-cols-1">
       <WidgetChart />
@@ -10,4 +10,4 @@ const ChartPage = () => {
   );
 };
 
-export default ChartPage;
+export default DashboardPage;

@@ -24,6 +24,7 @@ import {
   ChartColumnStacked,
   ChartLine,
   ChartSpline,
+  LayoutDashboard,
   RefreshCw,
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -59,7 +60,7 @@ export const WidgetChart = (props: WidgetProps) => {
 
   // update
   const handleChange = (type: EChartType) => {
-    router.push(`/chart?type=${type}`);
+    router.push(`/dashboard?type=${type}`);
   };
   useEffect(() => {
     if (chart) chart.update(MOCK_CHART_DATA, type);
@@ -78,9 +79,9 @@ export const WidgetChart = (props: WidgetProps) => {
     <Widget variant="background" {...props}>
       <WidgetHeader variant="padding">
         <WidgetIcon>
-          <ChartColumn />
+          <LayoutDashboard />
         </WidgetIcon>
-        <WidgetTitle>chart</WidgetTitle>
+        <WidgetTitle>dashboard</WidgetTitle>
         <WidgetButtons>
           <TooltipText title="stacked bar chart" side="top">
             <Button
@@ -128,7 +129,7 @@ export const WidgetChart = (props: WidgetProps) => {
             </Button>
           </TooltipText>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="/chart">
+            <Link href="/dashboard">
               <RefreshCw />
             </Link>
           </Button>
