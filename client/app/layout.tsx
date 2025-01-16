@@ -18,18 +18,10 @@ export const metadata: Metadata = {
   title: `${process.env.APP_NAME}`,
   description: 'a simple authentication service',
   icons: {
-    icon: [
-      {
-        media: '(prefers-color-scheme: light)',
-        url: '/assets/logo.svg',
-        href: '/assets/logo.svg',
-      },
-      {
-        media: '(prefers-color-scheme: dark)',
-        url: '/assets/logo-dark.svg',
-        href: '/assets/logo-dark.svg',
-      },
-    ],
+    icon: {
+      url: '/assets/favicon.ico',
+      href: '/assets/favicon.ico',
+    },
   },
 };
 
