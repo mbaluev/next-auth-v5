@@ -1,30 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
+import { IBreadCrumbDTO } from '@/core/settings/bread-crumbs';
 import { Logo } from '@/components/layout/logo';
-import { Separator } from '@/components/ui/separator';
 import { ReactNode } from 'react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 
-interface IBreadCrumbProps {
+interface IBreadCrumbWrapperProps {
   children: ReactNode;
   divider?: boolean;
 }
-const BreadCrumb = (props: IBreadCrumbProps) => {
+const BreadCrumbWrapper = (props: IBreadCrumbWrapperProps) => {
   const { children, divider } = props;
   return (
     <div className="flex gap-2 items-center">
       {children}
-      {divider && <ChevronRight />}
+      {divider && <ChevronRight className="text-muted-foreground" />}
     </div>
   );
 };
-BreadCrumb.displayName = 'BreadCrumb';
 
 interface IBreadCrumbHomeProps {
   divider?: boolean;
@@ -34,55 +30,93 @@ const BreadCrumbHome = (props: IBreadCrumbHomeProps) => {
   const user = useCurrentUser();
   if (!user) return null;
   return (
-    <BreadCrumb divider={divider}>
+    <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" asChild>
         <Link href="/">
           <Logo />
         </Link>
       </Button>
-    </BreadCrumb>
+    </BreadCrumbWrapper>
   );
 };
-BreadCrumbHome.displayName = 'BreadCrumbHome';
 
-const BreadCrumbs = () => {
-  const pathname = usePathname();
-  const user = useCurrentUser();
-  const breadCrumbs = BREAD_CRUMBS[pathname as keyof typeof BREAD_CRUMBS];
+interface IBreadCrumbProps {
+  key: number;
+  data: IBreadCrumbDTO;
+  divider: boolean;
+}
+const BreadCrumbLabel = (props: IBreadCrumbProps) => {
+  const { key, data, divider } = props;
+  const { icon, label } = data;
+  if (!label) return null;
   return (
-    <div className="flex-grow flex flex-wrap gap-4">
-      <SidebarTrigger />
-      {user && <Separator orientation="vertical" className="h-auto" />}
-      <div className="flex-grow flex flex-wrap gap-2">
-        <BreadCrumbHome divider={breadCrumbs && breadCrumbs.length > 0} />
-        {breadCrumbs?.map((d, i, arr) => {
-          if (d.label) {
-            return (
-              <BreadCrumb key={i} divider={i < arr.length - 1}>
-                <Button variant="ghost" size="bread-crumb" asChild>
-                  <Link href={d.path}>
-                    {d.icon}
-                    <p className="flex-1 text-left">{d.label}</p>
-                  </Link>
-                </Button>
-              </BreadCrumb>
-            );
-          }
-          if (d.icon) {
-            return (
-              <BreadCrumb key={i} divider={i < arr.length - 1}>
-                <Button variant="ghost" size="icon" asChild>
-                  <Link href={d.path}>{d.icon}</Link>
-                </Button>
-              </BreadCrumb>
-            );
-          }
-          return null;
-        })}
-      </div>
+    <BreadCrumbWrapper key={key} divider={divider}>
+      <Button variant="ghost" size="bread-crumb" disabled>
+        {icon}
+        <p className="flex-1 text-left">{label}</p>
+      </Button>
+    </BreadCrumbWrapper>
+  );
+};
+const BreadCrumbIcon = (props: IBreadCrumbProps) => {
+  const { key, data, divider } = props;
+  const { icon } = data;
+  if (!icon) return null;
+  return (
+    <BreadCrumbWrapper key={key} divider={divider}>
+      <Button variant="ghost" size="icon" disabled>
+        {icon}
+      </Button>
+    </BreadCrumbWrapper>
+  );
+};
+const BreadCrumbLabelLink = (props: IBreadCrumbProps) => {
+  const { key, data, divider } = props;
+  const { path, icon, label } = data;
+  if (!path || !label) return null;
+  return (
+    <BreadCrumbWrapper key={key} divider={divider}>
+      <Button variant="ghost" size="bread-crumb" asChild>
+        <Link href={path}>
+          {icon}
+          <p className="flex-1 text-left">{label}</p>
+        </Link>
+      </Button>
+    </BreadCrumbWrapper>
+  );
+};
+const BreadCrumbIconLink = (props: IBreadCrumbProps) => {
+  const { key, data, divider } = props;
+  const { path, icon } = data;
+  if (!path || !icon) return null;
+  return (
+    <BreadCrumbWrapper key={key} divider={divider}>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href={path}>{icon}</Link>
+      </Button>
+    </BreadCrumbWrapper>
+  );
+};
+
+interface IBreadCrumbsComponentProps {
+  home?: boolean;
+  breadCrumbs: IBreadCrumbDTO[];
+}
+const BreadCrumbs = (props: IBreadCrumbsComponentProps) => {
+  const { home, breadCrumbs } = props;
+  return (
+    <div className="flex-grow flex flex-wrap gap-2">
+      {home && <BreadCrumbHome divider={breadCrumbs && breadCrumbs.length > 0} />}
+      {breadCrumbs?.map((d, i, arr) => {
+        const divider = i < arr.length - 1;
+        if (!d.path && d.label) return <BreadCrumbLabel key={i} data={d} divider={divider} />;
+        if (!d.path && d.icon) return <BreadCrumbIcon key={i} data={d} divider={divider} />;
+        if (d.path && d.label) return <BreadCrumbLabelLink key={i} data={d} divider={divider} />;
+        if (d.path && d.icon) return <BreadCrumbIconLink key={i} data={d} divider={divider} />;
+        return null;
+      })}
     </div>
   );
 };
-BreadCrumbs.displayName = 'BreadCrumbs';
 
 export { BreadCrumbs };

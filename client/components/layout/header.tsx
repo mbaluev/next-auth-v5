@@ -1,23 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-import { cn } from '@/core/utils/cn';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Button } from '@/components/ui/button';
-import { Logo } from '@/components/layout/logo';
 import { useTheme } from 'next-themes';
 import { TooltipText } from '@/components/ui/tooltip';
-import {
-  LogOut,
-  Moon,
-  Sun,
-  LayoutDashboard,
-  MonitorSmartphone,
-  Server,
-  TriangleAlert,
-  User,
-} from 'lucide-react';
+import { LogOut, Moon, Sun, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ButtonLogout } from '@/components/auth/button-logout';
 import {
@@ -26,61 +14,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { usePathname } from 'next/navigation';
+import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
+import { Separator } from '@/components/ui/separator';
 import { BreadCrumbs } from '@/components/layout/bread-crumbs';
-
-const Header = () => {
-  // const scrolled = useScrollTop();
-  return (
-    <header className="flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0 bg-background">
-      <BreadCrumbs />
-      <HeaderRightBar />
-    </header>
-  );
-};
-
-const HeaderLeftBar = () => {
-  const user = useCurrentUser();
-  if (!user) return null;
-  return (
-    <nav className="flex-grow flex flex-wrap gap-4">
-      <SidebarTrigger />
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/">
-          <Logo className="w-6 h-6" />
-        </Link>
-      </Button>
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/dashboard">
-          <LayoutDashboard />
-        </Link>
-      </Button>
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/client">
-          <MonitorSmartphone />
-        </Link>
-      </Button>
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/server">
-          <Server />
-        </Link>
-      </Button>
-      <Button variant="ghost" size="icon" asChild>
-        <Link href="/xxx">
-          <TriangleAlert />
-        </Link>
-      </Button>
-    </nav>
-  );
-};
-
-const HeaderRightBar = () => {
-  return (
-    <nav className="flex-grow-0 flex gap-4">
-      <HeaderRightThemeBtn />
-      <HeaderRightUserBtn />
-    </nav>
-  );
-};
 
 const HeaderRightThemeBtn = () => {
   const { setTheme, theme } = useTheme();
@@ -119,6 +56,38 @@ const HeaderRightUserBtn = () => {
         </ButtonLogout>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+};
+
+const HeaderRightBar = () => {
+  return (
+    <nav className="flex-grow-0 flex gap-4">
+      <HeaderRightThemeBtn />
+      <HeaderRightUserBtn />
+    </nav>
+  );
+};
+
+const HeaderBreadCrumbs = () => {
+  const pathname = usePathname();
+  const user = useCurrentUser();
+  const breadCrumbs = BREAD_CRUMBS[pathname as keyof typeof BREAD_CRUMBS];
+  return (
+    <div className="flex-grow flex flex-wrap gap-4">
+      <SidebarTrigger />
+      {user && <Separator orientation="vertical" className="h-auto" />}
+      <BreadCrumbs breadCrumbs={breadCrumbs} home />
+    </div>
+  );
+};
+
+const Header = () => {
+  // const scrolled = useScrollTop();
+  return (
+    <header className="flex gap-4 justify-end items-start p-4 w-full z-[8] sticky top-0 bg-background">
+      <HeaderBreadCrumbs />
+      <HeaderRightBar />
+    </header>
   );
 };
 
