@@ -83,6 +83,15 @@ export const WidgetChart = (props: WidgetProps) => {
         </WidgetIcon>
         <WidgetTitle>dashboard</WidgetTitle>
         <WidgetButtons>
+          <TooltipText title="stacked area chart" side="top">
+            <Button
+              variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
+              size="icon"
+              onClick={() => handleChange(EChartType.stackedAreaChart)}
+            >
+              <ChartArea />
+            </Button>
+          </TooltipText>
           <TooltipText title="stacked bar chart" side="top">
             <Button
               variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
@@ -108,15 +117,6 @@ export const WidgetChart = (props: WidgetProps) => {
               onClick={() => handleChange(EChartType.areaChart)}
             >
               <ChartSpline />
-            </Button>
-          </TooltipText>
-          <TooltipText title="stacked area chart" side="top">
-            <Button
-              variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
-              size="icon"
-              onClick={() => handleChange(EChartType.stackedAreaChart)}
-            >
-              <ChartArea />
             </Button>
           </TooltipText>
           <TooltipText title="line chart" side="top">
