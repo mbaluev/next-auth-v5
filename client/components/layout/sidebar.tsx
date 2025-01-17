@@ -205,7 +205,7 @@ const SidebarButton = forwardRef<ElementRef<typeof Button>, SidebarButtonProps>(
     if (isMobile) toggleSidebar();
   };
   return (
-    <Button size="flex-start" onClick={handleClick} {..._props}>
+    <Button ref={ref} size="flex-start" onClick={handleClick} {..._props}>
       {children}
     </Button>
   );
