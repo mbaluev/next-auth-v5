@@ -7,6 +7,7 @@ import {
   SwatchBook,
   TriangleAlert,
 } from 'lucide-react';
+import { ROUTES } from '@/core/settings/routes';
 
 type TMenuItemDTO = {
   path?: string | null;
@@ -15,28 +16,28 @@ type TMenuItemDTO = {
 };
 
 const menuTree = new CTree<TMenuItemDTO>();
-menuTree.insert('dashboard', menuTree.root.id, {
-  path: '/dashboard',
-  label: 'dashboard',
+menuTree.insert(ROUTES.DASHBOARD.name, menuTree.root.id, {
+  path: ROUTES.DASHBOARD.path,
+  label: ROUTES.DASHBOARD.label,
   icon: <LayoutDashboard />,
 });
-menuTree.insert('page-not-found', menuTree.root.id, {
-  path: '/xxx',
-  label: 'page not found',
+menuTree.insert(ROUTES.NOT_FOUND.name, menuTree.root.id, {
+  path: ROUTES.NOT_FOUND.path,
+  label: ROUTES.NOT_FOUND.label,
   icon: <TriangleAlert className="w-6 h-6" />,
 });
-menuTree.insert('samples', menuTree.root.id, {
-  label: 'samples',
+menuTree.insert(ROUTES.SAMPLES.name, menuTree.root.id, {
+  label: ROUTES.SAMPLES.label,
   icon: <SwatchBook />,
 });
-menuTree.insert('client', 'samples', {
-  path: '/client',
-  label: 'client',
+menuTree.insert(ROUTES.SAMPLE_CLIENT.name, ROUTES.SAMPLES.name, {
+  path: ROUTES.SAMPLE_CLIENT.path,
+  label: ROUTES.SAMPLE_CLIENT.label,
   icon: <MonitorSmartphone />,
 });
-menuTree.insert('server', 'samples', {
-  path: '/server',
-  label: 'server',
+menuTree.insert(ROUTES.SAMPLE_SERVER.name, ROUTES.SAMPLES.name, {
+  path: ROUTES.SAMPLE_SERVER.path,
+  label: ROUTES.SAMPLE_SERVER.label,
   icon: <Server />,
 });
 

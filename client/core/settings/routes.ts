@@ -1,32 +1,31 @@
-/**
- * an array of routes that are accessible to the public
- * these routes do not require authentication
- * @type {string[]}
- */
-export const publicRoutes: string[] = ['/', '/auth/new-verification'];
-
-/**
- * an array of routes that are used for authentication
- * these routes will redirect logged in users to /settings
- * @type {string[]}
- */
-export const authRoutes: string[] = [
-  '/auth/login',
-  '/auth/register',
-  '/auth/error',
-  '/auth/reset',
-  '/auth/new-password',
-];
-
-/**
- * the prefix for API authentication routes
- * routes that start with this prefix are used for API authentication purposes
- * @type {string}
- */
-export const apiAuthPrefix: string = '/api/auth';
-
-/**
- * the default redirect path after logging in
- * @type {string}
- */
-export const DEFAULT_LOGIN_REDIRECT: string = '/';
+export const ROUTES: Record<string, any> = {
+  NOT_FOUND: {
+    name: 'not-found',
+    label: 'page not found',
+    path: '/xxx',
+  },
+  HOME: {
+    name: 'home',
+    label: 'home',
+    path: '/',
+  },
+  DASHBOARD: {
+    name: 'dashboard',
+    label: 'dashboard',
+    path: '/dashboard',
+  },
+  SAMPLES: {
+    name: 'samples',
+    label: 'samples',
+  },
+  SAMPLE_CLIENT: {
+    name: 'sample-client',
+    label: 'client',
+    path: '/client',
+  },
+  SAMPLE_SERVER: {
+    name: 'sample-server',
+    label: 'server',
+    path: '/server',
+  },
+};

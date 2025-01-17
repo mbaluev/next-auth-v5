@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { WidgetChartCreate } from '@/components/widgets/chart/create';
 import {
@@ -32,7 +33,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { useResize } from '@/core/hooks/use-resize';
 import { v4 } from 'uuid';
 import { TooltipText } from '@/components/ui/tooltip';
-import Link from 'next/link';
+import { ROUTES } from '@/core/settings/routes';
 
 export const WidgetChart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
@@ -60,7 +61,8 @@ export const WidgetChart = (props: WidgetProps) => {
 
   // update
   const handleChange = (type: EChartType) => {
-    router.push(`/dashboard?type=${type}`);
+    const path = ROUTES.DASHBOARD.path;
+    router.push(`${path}?type=${type}`);
   };
   useEffect(() => {
     if (chart) chart.update(MOCK_CHART_DATA, type);
@@ -92,13 +94,13 @@ export const WidgetChart = (props: WidgetProps) => {
               <ChartArea />
             </Button>
           </TooltipText>
-          <TooltipText title="stacked bar chart" side="top">
+          <TooltipText title="area bar chart" side="top">
             <Button
-              variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
+              variant={type === EChartType.areaChart ? 'default' : 'ghost'}
               size="icon"
-              onClick={() => handleChange(EChartType.stackedBarChart)}
+              onClick={() => handleChange(EChartType.areaChart)}
             >
-              <ChartColumnStacked />
+              <ChartSpline />
             </Button>
           </TooltipText>
           <TooltipText title="grouped bar chart" side="top">
@@ -110,13 +112,13 @@ export const WidgetChart = (props: WidgetProps) => {
               <ChartColumn />
             </Button>
           </TooltipText>
-          <TooltipText title="area bar chart" side="top">
+          <TooltipText title="stacked bar chart" side="top">
             <Button
-              variant={type === EChartType.areaChart ? 'default' : 'ghost'}
+              variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
               size="icon"
-              onClick={() => handleChange(EChartType.areaChart)}
+              onClick={() => handleChange(EChartType.stackedBarChart)}
             >
-              <ChartSpline />
+              <ChartColumnStacked />
             </Button>
           </TooltipText>
           <TooltipText title="line chart" side="top">
@@ -129,7 +131,7 @@ export const WidgetChart = (props: WidgetProps) => {
             </Button>
           </TooltipText>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="/dashboard">
+            <Link href={ROUTES.DASHBOARD.path}>
               <RefreshCw />
             </Link>
           </Button>
