@@ -10,11 +10,11 @@ export const Footer = () => {
       <Button variant="link" className="px-0 py-0 h-auto" asChild>
         <Link href="/">{`© 2024 ${process.env.APP_NAME}`}</Link>
       </Button>
-      <Dot className="text-muted" />
+      <Dot className="text-primary" />
       <Button variant="link" className="px-0 py-0 h-auto" asChild>
         <Link href="#">privacy policy</Link>
       </Button>
-      <Dot className="text-muted" />
+      <Dot className="text-primary" />
       <Button variant="link" className="px-0 py-0 h-auto" asChild>
         <Link href="#">terms & conditions</Link>
       </Button>
