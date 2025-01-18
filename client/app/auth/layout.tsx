@@ -1,11 +1,8 @@
 import { ReactNode } from 'react';
+import { MasterCenter } from '@/components/layout/master';
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
-  return (
-    <section className="flex flex-grow justify-center">
-      <div className="h-fit w-[min(350px,100%)] px-4">{children}</div>
-    </section>
-  );
+  return <MasterCenter className="items-start">{children}</MasterCenter>;
 };
 
 export default AuthLayout;

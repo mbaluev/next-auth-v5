@@ -1,13 +1,12 @@
 'use client';
 
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
-import { TriangleAlert } from 'lucide-react';
 import { AlertError } from '@/components/ui/alert';
 
 export const WidgetError = () => {
   return (
     <WidgetWrapper
-      headerLabel="a simple authentication service"
+      headerLabel="authentication service"
       backButtonLabel="back to login"
       backButtonHref="/auth/login"
     >

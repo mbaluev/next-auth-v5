@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { MasterDefault } from '@/components/layout/master';
+import { MasterFullHeight } from '@/components/layout/master';
 
 const ProtectedLayout = ({ children }: { children: ReactNode }) => {
-  return <MasterDefault>{children}</MasterDefault>;
+  return <MasterFullHeight>{children}</MasterFullHeight>;
 };
 
 export default ProtectedLayout;

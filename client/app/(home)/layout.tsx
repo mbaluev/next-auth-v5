@@ -1,11 +1,8 @@
 import { ReactNode } from 'react';
+import { MasterCenter } from '@/components/layout/master';
 
 const HomeLayout = ({ children }: { children: ReactNode }) => {
-  return (
-    <section className="flex flex-grow justify-center items-center">
-      <div className="h-fit px-4">{children}</div>
-    </section>
-  );
+  return <MasterCenter>{children}</MasterCenter>;
 };
 
 export default HomeLayout;
