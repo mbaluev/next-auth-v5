@@ -7,6 +7,7 @@ import { IBreadCrumbDTO } from '@/core/settings/bread-crumbs';
 import { Logo } from '@/components/layout/logo';
 import { ReactNode } from 'react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { ROUTES } from '@/core/settings/routes';
 
 interface IBreadCrumbWrapperProps {
   children: ReactNode;
@@ -32,7 +33,7 @@ const BreadCrumbHome = (props: IBreadCrumbHomeProps) => {
   return (
     <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" asChild>
-        <Link href="/">
+        <Link href={ROUTES.HOME.path}>
           <Logo />
         </Link>
       </Button>

@@ -5,7 +5,7 @@ import { SidebarTrigger } from '@/components/layout/sidebar';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
 import { TooltipText } from '@/components/ui/tooltip';
-import { LogOut, Moon, Sun, User } from 'lucide-react';
+import { LogOut, Moon, Sun, User, UserPen } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ButtonLogout } from '@/components/auth/button-logout';
 import {
@@ -17,6 +17,11 @@ import {
 import { usePathname } from 'next/navigation';
 import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
 import { BreadCrumbs } from '@/components/layout/bread-crumbs';
+import { Badge } from '@/components/ui/badge';
+import { UserRole } from '@prisma/client';
+import { Separator } from '@/components/ui/separator';
+import { ROUTES } from '@/core/settings/routes';
+import Link from 'next/link';
 
 const HeaderRightThemeBtn = () => {
   const { setTheme, theme } = useTheme();
@@ -40,19 +45,46 @@ const HeaderRightUserBtn = () => {
         <Button variant="ghost" size="icon">
           <Avatar>
             <AvatarImage src={user?.image || ''} />
-            <AvatarFallback className="bg-transparent hover:bg-secondary hover:text-secondary-foreground">
+            <AvatarFallback className="bg-transparent hover:bg-secondary">
               <User />
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <ButtonLogout>
-          <DropdownMenuItem>
-            <LogOut className="mr-4" />
-            logout
-          </DropdownMenuItem>
-        </ButtonLogout>
+      <DropdownMenuContent align="end" className="min-w-[300px] p-0 space-y-0">
+        <div className="flex p-4 pb-0 space-x-4 items-center">
+          <Avatar className="w-32 h-32">
+            <AvatarImage src={user?.image || ''} />
+            <AvatarFallback className="text-5xl bg-transparent hover:bg-secondary">
+              <User />
+            </AvatarFallback>
+          </Avatar>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <p>{user?.name}</p>
+              <p>{user?.email}</p>
+            </div>
+            {user.role === UserRole.USER && <Badge variant="default">{UserRole.USER}</Badge>}
+            {user.role === UserRole.ADMIN && <Badge variant="success">{UserRole.ADMIN}</Badge>}
+          </div>
+        </div>
+        <div className="p-4">
+          <Link href={ROUTES.PROFILE.path}>
+            <DropdownMenuItem>
+              <UserPen className="mr-4" />
+              profile
+            </DropdownMenuItem>
+          </Link>
+        </div>
+        <Separator />
+        <div className="p-4">
+          <ButtonLogout>
+            <DropdownMenuItem>
+              <LogOut className="mr-4" />
+              logout
+            </DropdownMenuItem>
+          </ButtonLogout>
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

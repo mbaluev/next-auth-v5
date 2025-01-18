@@ -1,5 +1,6 @@
 export const ROUTES: Record<string, any> = {
   HOME: { name: 'home', label: 'home', path: '/' },
+  PROFILE: { name: 'profile', label: 'profile', path: '/profile' },
   DASHBOARD: { name: 'dashboard', label: 'dashboard', path: '/dashboard' },
   SAMPLES: { name: 'samples', label: 'samples' },
   SAMPLE_CLIENT: { name: 'sample-client', label: 'client', path: '/client' },

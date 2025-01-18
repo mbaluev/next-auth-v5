@@ -11,6 +11,7 @@ interface IBreadCrumbDTO {
 
 const BREAD_CRUMBS: Record<string, IBreadCrumbDTO[]> = {};
 BREAD_CRUMBS[ROUTES.HOME.path] = [];
+BREAD_CRUMBS[ROUTES.PROFILE.path] = [{ path: ROUTES.PROFILE.path, label: ROUTES.PROFILE.label }];
 BREAD_CRUMBS[ROUTES.DASHBOARD.path] = [
   { path: ROUTES.DASHBOARD.path, label: ROUTES.DASHBOARD.label },
 ];

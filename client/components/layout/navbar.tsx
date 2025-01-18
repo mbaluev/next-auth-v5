@@ -12,6 +12,7 @@ import { menuTree, TMenuItemDTO } from '@/core/settings/menu';
 import { CTree, TTreeDTO } from '@/core/utils/tree';
 import { createContext, Fragment, ReactNode, useContext, useEffect, useState } from 'react';
 import { cn } from '@/core/utils/cn';
+import { ROUTES } from '@/core/settings/routes';
 
 const NAVBAR_PADDING_ITEM = 15;
 const NAVBAR_TRANSITION_DURATION = 100;
@@ -130,7 +131,7 @@ const Navbar = () => {
     <div className="flex flex-col">
       <div className="flex gap-4 p-4 justify-between">
         <SidebarButton asChild variant="ghost" className="flex-1">
-          <Link href="/">
+          <Link href={ROUTES.HOME.path}>
             <Logo className="w-6 h-6" />
             <p>{process.env.APP_NAME}</p>
           </Link>
