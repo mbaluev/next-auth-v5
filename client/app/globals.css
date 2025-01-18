@@ -49,9 +49,9 @@ svg.lucide {
     --success: 170 63% 44%;
     --success-foreground: 0 0% 100%;
 
-    --border: 60 4% 91%;
-    --input: 60 4% 91%;
-    --ring: 60 4% 91%;
+    --border: 60 4% 88%;
+    --input: 60 4% 88%;
+    --ring: 60 4% 88%;
 
     --radius: 0.5rem;
   }
@@ -89,7 +89,7 @@ svg.lucide {
     --success: 170 63% 64%;
     --success-foreground: 0 0% 10%;
 
-    --border: 0 0% 20%;
+    --border: 0 0% 22%;
     --input: 0 0% 22%;
     --ring: 0 0% 22%;
   }

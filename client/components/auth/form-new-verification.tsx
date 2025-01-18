@@ -45,7 +45,7 @@ export const FormNewVerification = () => {
       backButtonHref="/auth/login"
     >
       <div className="flex flex-col space-y-6 items-center w-full justify-center">
-        {!success && !error && <AlertInfo message="verificatoin in progress..." />}
+        {!success && !error && <AlertInfo message="verificatoin in progress..." loading />}
         <AlertSuccess message={success} />
         {!success && <AlertError message={error} />}
       </div>

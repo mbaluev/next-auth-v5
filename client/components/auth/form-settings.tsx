@@ -14,7 +14,6 @@ import {
   FormControl,
   FormItem,
   FormLabel,
-  FormDescription,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -65,7 +64,7 @@ export const FormSettings = () => {
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 gap-4">
+        <div className="space-y-6">
           <FormField
             control={form.control}
             name="name"
@@ -172,7 +171,7 @@ export const FormSettings = () => {
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
-                    <FormDescription>enable two factor authentication</FormDescription>
+                    {/*<FormLabel>enable two factor authentication</FormLabel>*/}
                   </div>
                   <FormMessage />
                 </FormItem>

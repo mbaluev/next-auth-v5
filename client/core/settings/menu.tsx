@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
 import { CTree } from '@/core/utils/tree';
 import {
+  AppWindowMac,
   LayoutDashboard,
   MonitorSmartphone,
+  OctagonX,
   Server,
   SwatchBook,
-  TriangleAlert,
 } from 'lucide-react';
 import { ROUTES } from '@/core/settings/routes';
 
@@ -21,11 +22,6 @@ menuTree.insert(ROUTES.DASHBOARD.name, menuTree.root.id, {
   label: ROUTES.DASHBOARD.label,
   icon: <LayoutDashboard />,
 });
-menuTree.insert(ROUTES.NOT_FOUND.name, menuTree.root.id, {
-  path: ROUTES.NOT_FOUND.path,
-  label: ROUTES.NOT_FOUND.label,
-  icon: <TriangleAlert className="w-6 h-6" />,
-});
 menuTree.insert(ROUTES.SAMPLES.name, menuTree.root.id, {
   label: ROUTES.SAMPLES.label,
   icon: <SwatchBook />,
@@ -39,6 +35,15 @@ menuTree.insert(ROUTES.SAMPLE_SERVER.name, ROUTES.SAMPLES.name, {
   path: ROUTES.SAMPLE_SERVER.path,
   label: ROUTES.SAMPLE_SERVER.label,
   icon: <Server />,
+});
+menuTree.insert(ROUTES.ERRORS.name, menuTree.root.id, {
+  label: ROUTES.ERRORS.label,
+  icon: <AppWindowMac />,
+});
+menuTree.insert(ROUTES.NOT_FOUND.name, ROUTES.ERRORS.name, {
+  path: ROUTES.NOT_FOUND.path,
+  label: ROUTES.NOT_FOUND.label,
+  icon: <OctagonX />,
 });
 
 export { menuTree };

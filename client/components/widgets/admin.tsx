@@ -40,51 +40,51 @@ export const WidgetAdmin = (props: WidgetProps) => {
   const error = () => toast.error('error');
   const info = () => toast.info('info');
   return (
-    <Widget variant="border" {...props}>
+    <Widget {...props}>
       <WidgetHeader variant="background">
         <WidgetIcon>
           <Shield />
         </WidgetIcon>
         <WidgetTitle>admin</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent variant="padding" className="space-y-6">
+      <WidgetContent variant="background" className="space-y-6">
         <RoleGate allowedRole={UserRole.ADMIN}>
           <AlertSuccess message="you are allowed to see this content" />
         </RoleGate>
-        <div className="flex flex-row items-center justify-between rounded-md p-4 gap-4 border">
-          <p>admin-only api route</p>
-          <Button variant="ghost" onClick={onApiRouteClick}>
-            click to test
-          </Button>
+        <div className="space-y-6">
+          <div className="flex flex-row items-center justify-between rounded-md p-4 gap-4 border-2">
+            <p>admin-only api route</p>
+            <Button onClick={onApiRouteClick}>click to test</Button>
+          </div>
+          <div className="flex flex-row items-center justify-between rounded-md p-4 gap-4 border-2">
+            <p>admin-only server action</p>
+            <Button onClick={onServerActionClick}>click to test</Button>
+          </div>
         </div>
-        <div className="flex flex-row items-center justify-between rounded-md p-4 gap-4 border">
-          <p>admin-only server action</p>
-          <Button variant="ghost" onClick={onServerActionClick}>
-            click to test
-          </Button>
-        </div>
-        <div>
-          <Button variant="destructive" onClick={error}>
-            click to error
-          </Button>
-        </div>
-        <div>
-          <Button variant="warning" onClick={warning}>
-            click to warning
-          </Button>
-        </div>
-        <div>
-          <Button variant="success" onClick={success}>
-            click to success
-          </Button>
-        </div>
-        <div>
-          <Button variant="default" onClick={info}>
-            click to info
-          </Button>
+        <div className="space-y-6">
+          <div>
+            <Button variant="destructive" onClick={error}>
+              click to error
+            </Button>
+          </div>
+          <div>
+            <Button variant="warning" onClick={warning}>
+              click to warning
+            </Button>
+          </div>
+          <div>
+            <Button variant="success" onClick={success}>
+              click to success
+            </Button>
+          </div>
+          <div>
+            <Button variant="default" onClick={info}>
+              click to info
+            </Button>
+          </div>
         </div>
       </WidgetContent>
-      <WidgetHeader className="p-4 justify-end">
+      <WidgetHeader variant="background" className="justify-end">
         <TooltipText title="more actions" side="left">
           <Button variant="ghost" size="icon">
             <Ellipsis />

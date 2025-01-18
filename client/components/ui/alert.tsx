@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/core/utils/cn';
-import { Check, TriangleAlert } from 'lucide-react';
+import { Check, Info, OctagonX, TriangleAlert } from 'lucide-react';
 import { Spinner } from '@/components/ui/spinner';
 
-const alertVariants = cva('relative flex space-x-4 w-full rounded-md border px-4 py-3', {
+const alertVariants = cva('relative flex space-x-4 w-full rounded-md border-2 px-4 py-3', {
   variants: {
     variant: {
       default: 'bg-background text-foreground',
@@ -51,43 +51,44 @@ AlertDescription.displayName = 'AlertDescription';
 
 interface AlertProps {
   message?: string;
+  loading?: boolean;
 }
 
-const AlertError = ({ message }: AlertProps) => {
-  if (!message) return null;
-  return (
-    <Alert variant="destructive">
-      <TriangleAlert />
-      <AlertDescription>{message}</AlertDescription>
-    </Alert>
-  );
-};
-
-const AlertInfo = ({ message }: AlertProps) => {
-  if (!message) return null;
-  return (
-    <Alert variant="info">
-      <Spinner />
-      <AlertDescription>{message}</AlertDescription>
-    </Alert>
-  );
-};
-
-const AlertSuccess = ({ message }: AlertProps) => {
+const AlertSuccess = ({ message, loading }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="success">
-      <Check />
+      {loading ? <Spinner /> : <Check />}
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
 };
 
-const AlertWarning = ({ message }: AlertProps) => {
+const AlertInfo = ({ message, loading }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="info">
+      {loading ? <Spinner /> : <Info />}
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+const AlertWarning = ({ message, loading }: AlertProps) => {
   if (!message) return null;
   return (
     <Alert variant="warning">
-      <Check />
+      {loading ? <Spinner /> : <TriangleAlert />}
+      <AlertDescription>{message}</AlertDescription>
+    </Alert>
+  );
+};
+
+const AlertError = ({ message, loading }: AlertProps) => {
+  if (!message) return null;
+  return (
+    <Alert variant="destructive">
+      {loading ? <Spinner /> : <OctagonX />}
       <AlertDescription>{message}</AlertDescription>
     </Alert>
   );

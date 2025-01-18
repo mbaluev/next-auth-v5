@@ -13,17 +13,17 @@ import { TooltipText } from '@/components/ui/tooltip';
 
 export const WidgetSettings = (props: WidgetProps) => {
   return (
-    <Widget variant="border" {...props}>
+    <Widget {...props}>
       <WidgetHeader variant="background">
         <WidgetIcon>
           <Cog />
         </WidgetIcon>
         <WidgetTitle>settings</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent variant="padding" className="space-y-4">
+      <WidgetContent variant="background">
         <FormSettings />
       </WidgetContent>
-      <WidgetHeader className="p-4 justify-end">
+      <WidgetHeader variant="background" className="justify-end">
         <TooltipText title="more actions" side="left">
           <Button variant="ghost" size="icon">
             <Ellipsis />

@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
 import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
-import { Separator } from '@/components/ui/separator';
 import { BreadCrumbs } from '@/components/layout/bread-crumbs';
 
 const HeaderRightThemeBtn = () => {
@@ -70,12 +69,10 @@ const HeaderRightBar = () => {
 
 const HeaderBreadCrumbs = () => {
   const pathname = usePathname();
-  const user = useCurrentUser();
   const breadCrumbs = BREAD_CRUMBS[pathname as keyof typeof BREAD_CRUMBS];
   return (
     <div className="flex-grow flex flex-wrap gap-4">
       <SidebarTrigger />
-      {user && <Separator orientation="vertical" className="h-auto" />}
       <BreadCrumbs breadCrumbs={breadCrumbs} home />
     </div>
   );

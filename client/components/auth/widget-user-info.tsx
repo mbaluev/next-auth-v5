@@ -23,32 +23,28 @@ interface UserInfoProps extends WidgetProps {
 const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) => {
   const { user, icon, label, ..._props } = props;
   return (
-    <Widget ref={ref} variant="border" {..._props}>
+    <Widget ref={ref} {..._props}>
       <WidgetHeader variant="background">
         {icon && <WidgetIcon>{icon}</WidgetIcon>}
         <WidgetTitle>{label}</WidgetTitle>
       </WidgetHeader>
-      <WidgetContent variant="padding" className="space-y-4">
+      <WidgetContent variant="background" className="space-y-6">
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">id</p>
           <p>{user?.id}</p>
         </div>
-        <Separator />
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">name</p>
           <p>{user?.name}</p>
         </div>
-        <Separator />
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">email</p>
           <p>{user?.email}</p>
         </div>
-        <Separator />
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">role</p>
           <p>{user?.role}</p>
         </div>
-        <Separator />
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">two factor authentication</p>
           <Badge variant={user?.isTwoFactorEnabled ? 'success' : 'destructive'}>
@@ -56,7 +52,7 @@ const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) =>
           </Badge>
         </div>
       </WidgetContent>
-      <WidgetHeader className="p-4 justify-end">
+      <WidgetHeader variant="background" className="justify-end">
         <TooltipText title="more actions" side="left">
           <Button variant="ghost" size="icon">
             <Ellipsis />
