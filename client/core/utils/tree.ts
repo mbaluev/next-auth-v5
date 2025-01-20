@@ -29,15 +29,15 @@ export class CTreeNode<T> {
 
   data?: T;
 
-  items: CTreeNode<T>[];
-
   state: TTreeState;
 
-  constructor(id: string, pid: string | null, state: TTreeState, data?: T) {
+  items: CTreeNode<T>[];
+
+  constructor(id: string, pid: string | null, state: TTreeState, data?: T, items?: CTreeNode<T>[]) {
     this.id = id;
     this.pid = pid;
     this.data = data;
-    this.items = [];
+    this.items = items || [];
     this.state = state;
   }
 
@@ -49,10 +49,14 @@ export class CTreeNode<T> {
 export class CTree<T> {
   root: CTreeNode<T>;
 
-  constructor(key?: string, data?: T, state?: TTreeState) {
+  constructor(key?: string, state?: TTreeState, data?: T, items?: CTreeNode<T>[]) {
     const _key = key || guid();
     const _state: TTreeState = { ...DEFAULT_STATE, ...state };
-    this.root = new CTreeNode(_key, null, _state, data);
+    this.root = new CTreeNode(_key, null, _state, data, items);
+  }
+
+  public clone(): CTree<T> {
+    return new CTree<T>(this.root.id, this.root.state, this.root.data, this.root.items);
   }
 
   *preOrderTraversal(node = this.root): Generator<CTreeNode<T>, any, undefined> {

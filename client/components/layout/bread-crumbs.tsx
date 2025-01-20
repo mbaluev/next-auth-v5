@@ -3,11 +3,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
-import { IBreadCrumbDTO } from '@/core/settings/bread-crumbs';
 import { Logo } from '@/components/layout/logo';
 import { ReactNode } from 'react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { ROUTES } from '@/core/settings/routes';
+import { IS_PATH, TRouteDTO, ROUTES } from '@/core/settings/routes';
 
 interface IBreadCrumbWrapperProps {
   children: ReactNode;
@@ -42,16 +41,15 @@ const BreadCrumbHome = (props: IBreadCrumbHomeProps) => {
 };
 
 interface IBreadCrumbProps {
-  key: number;
-  data: IBreadCrumbDTO;
+  data: TRouteDTO;
   divider: boolean;
 }
 const BreadCrumbLabel = (props: IBreadCrumbProps) => {
-  const { key, data, divider } = props;
+  const { data, divider } = props;
   const { icon, label } = data;
   if (!label) return null;
   return (
-    <BreadCrumbWrapper key={key} divider={divider}>
+    <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="bread-crumb" disabled>
         {icon}
         <p className="flex-1 text-left">{label}</p>
@@ -60,11 +58,11 @@ const BreadCrumbLabel = (props: IBreadCrumbProps) => {
   );
 };
 const BreadCrumbIcon = (props: IBreadCrumbProps) => {
-  const { key, data, divider } = props;
+  const { data, divider } = props;
   const { icon } = data;
   if (!icon) return null;
   return (
-    <BreadCrumbWrapper key={key} divider={divider}>
+    <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" disabled>
         {icon}
       </Button>
@@ -72,11 +70,11 @@ const BreadCrumbIcon = (props: IBreadCrumbProps) => {
   );
 };
 const BreadCrumbLabelLink = (props: IBreadCrumbProps) => {
-  const { key, data, divider } = props;
+  const { data, divider } = props;
   const { path, icon, label } = data;
   if (!path || !label) return null;
   return (
-    <BreadCrumbWrapper key={key} divider={divider}>
+    <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="bread-crumb" asChild>
         <Link href={path}>
           {icon}
@@ -87,11 +85,11 @@ const BreadCrumbLabelLink = (props: IBreadCrumbProps) => {
   );
 };
 const BreadCrumbIconLink = (props: IBreadCrumbProps) => {
-  const { key, data, divider } = props;
+  const { data, divider } = props;
   const { path, icon } = data;
   if (!path || !icon) return null;
   return (
-    <BreadCrumbWrapper key={key} divider={divider}>
+    <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" asChild>
         <Link href={path}>{icon}</Link>
       </Button>
@@ -101,7 +99,7 @@ const BreadCrumbIconLink = (props: IBreadCrumbProps) => {
 
 interface IBreadCrumbsComponentProps {
   home?: boolean;
-  breadCrumbs: IBreadCrumbDTO[];
+  breadCrumbs: TRouteDTO[];
 }
 const BreadCrumbs = (props: IBreadCrumbsComponentProps) => {
   const { home, breadCrumbs } = props;
@@ -110,10 +108,18 @@ const BreadCrumbs = (props: IBreadCrumbsComponentProps) => {
       {home && <BreadCrumbHome divider={breadCrumbs && breadCrumbs.length > 0} />}
       {breadCrumbs?.map((d, i, arr) => {
         const divider = i < arr.length - 1;
-        if (!d.path && d.label) return <BreadCrumbLabel key={i} data={d} divider={divider} />;
-        if (!d.path && d.icon) return <BreadCrumbIcon key={i} data={d} divider={divider} />;
-        if (d.path && d.label) return <BreadCrumbLabelLink key={i} data={d} divider={divider} />;
-        if (d.path && d.icon) return <BreadCrumbIconLink key={i} data={d} divider={divider} />;
+        if (!IS_PATH(d.path) && d.label) {
+          return <BreadCrumbLabel key={d.name} data={d} divider={divider} />;
+        }
+        if (!IS_PATH(d.path) && d.icon) {
+          return <BreadCrumbIcon key={d.name} data={d} divider={divider} />;
+        }
+        if (IS_PATH(d.path) && d.label) {
+          return <BreadCrumbLabelLink key={d.name} data={d} divider={divider} />;
+        }
+        if (IS_PATH(d.path) && d.icon) {
+          return <BreadCrumbIconLink key={d.name} data={d} divider={divider} />;
+        }
         return null;
       })}
     </div>

@@ -18,6 +18,11 @@ import { Button } from '@/components/ui/button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
+import { CTree, TTreeDTO } from '@/core/utils/tree';
+import { menuTree } from '@/core/settings/menu';
+import { Menu } from '@/components/layout/sidebar-menu';
+import { usePathname } from 'next/navigation';
+import { TRouteDTO } from '@/core/settings/routes';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -26,16 +31,17 @@ const SIDEBAR_TRANSITION_DURATION = 100;
 const SIDEBAR_EVENT_START = 'sidebar-start';
 const SIDEBAR_EVENT_END = 'sidebar-end';
 
-type SidebarContext = {
-  state: 'expanded' | 'collapsed';
+interface SidebarContext<T> {
   open: boolean;
   setOpen: (open: boolean) => void;
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
-};
-const SidebarContext = createContext<SidebarContext | null>(null);
+  data?: CTree<T>;
+  toggleNode: (node: TTreeDTO<T>) => void;
+}
+const SidebarContext = createContext<SidebarContext<TRouteDTO> | null>(null);
 function useSidebar() {
   const context = useContext(SidebarContext);
   if (!context) throw new Error('useSidebar must be used within a Sidebar.');
@@ -43,9 +49,10 @@ function useSidebar() {
 }
 
 type SidebarProviderBaseProps = {
-  defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  defaultOpen?: boolean;
+  collapsed?: boolean;
 };
 type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
 const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
@@ -54,40 +61,40 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   _defaultOpen = _defaultOpen ? _defaultOpen === 'true' : SIDEBAR_DEFAULT_OPEN;
 
   const {
-    defaultOpen = _defaultOpen,
     open: openProp,
     onOpenChange: setOpenProp,
+    defaultOpen = _defaultOpen,
+    collapsed,
     className,
     children,
     ..._props
   } = props;
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = useState(false);
+  const pathname = usePathname();
 
-  // This is the internal state of the sidebar.
-  // We use openProp and setOpenProp for control from outside the component.
+  // internal state of the sidebar.
   const [_open, _setOpen] = useState(defaultOpen);
   const open = openProp ?? _open;
-  const setOpen = useCallback(
-    (value: boolean | ((value: boolean) => boolean)) => {
-      const res = typeof value === 'function' ? value(open) : value;
-      if (setOpenProp) return setOpenProp?.(res);
-      cookies.set(SIDEBAR_STORAGE_NAME, String(res));
-      _setOpen(value);
-    },
-    [setOpenProp, open, cookies]
-  );
+  const setOpenCallback = (value: boolean | ((value: boolean) => boolean)) => {
+    const res = typeof value === 'function' ? value(open) : value;
+    if (setOpenProp) return setOpenProp?.(res);
+    cookies.set(SIDEBAR_STORAGE_NAME, String(res));
+    _setOpen(value);
+  };
+  const setOpen = useCallback(setOpenCallback, [setOpenProp, open, cookies]);
 
-  // Helper to toggle the sidebar.
-  const toggleSidebar = useCallback(() => {
+  // toggle the sidebar.
+  const toggleCallback = () => {
     window.dispatchEvent(new Event(SIDEBAR_EVENT_START));
     setTimeout(() => {
       window.dispatchEvent(new Event(SIDEBAR_EVENT_END));
     }, SIDEBAR_TRANSITION_DURATION * 2);
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
-  }, [isMobile, setOpen, setOpenMobile]);
+  };
+  const toggleSidebar = useCallback(toggleCallback, [isMobile, setOpen, setOpenMobile]);
 
-  // Adds a keyboard shortcut to toggle the sidebar.
+  // keyboard shortcut to toggle the sidebar.
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
@@ -99,22 +106,48 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [toggleSidebar]);
 
-  // We add a state so that we can do data-state="expanded" or "collapsed".
-  // This makes it easier to style the sidebar with Tailwind classes.
-  const state = open ? 'expanded' : 'collapsed';
+  // init data
+  const [data, setData] = useState<CTree<TRouteDTO>>(menuTree);
+  const toggleNodeCallback = (node: TTreeDTO<TRouteDTO>) => {
+    const _data = data.clone();
+    _data.toggle(node.id);
+    setData(_data);
+  };
+  const toggleNode = useCallback(toggleNodeCallback, []);
+  useEffect(() => {
+    const _data = data.clone();
+    if (collapsed) _data.collapseTo(1);
+    setData(_data);
+  }, [collapsed]);
+  useEffect(() => {
+    const _data = data.clone();
+    const node = _data.find((d) => d.data?.path === pathname);
+    if (node) _data.select(node.id, true);
+    else _data.deselect();
+    setData(_data);
+  }, [pathname]);
 
-  const contextValue = useMemo<SidebarContext>(
-    () => ({
-      state,
-      open,
-      setOpen,
-      isMobile,
-      openMobile,
-      setOpenMobile,
-      toggleSidebar,
-    }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
-  );
+  // context value
+  const contextValueMemo = (): SidebarContext<TRouteDTO> => ({
+    open,
+    setOpen,
+    isMobile,
+    openMobile,
+    setOpenMobile,
+    toggleSidebar,
+    data,
+    toggleNode,
+  });
+  const contextValue = useMemo<SidebarContext<TRouteDTO>>(contextValueMemo, [
+    open,
+    setOpen,
+    isMobile,
+    openMobile,
+    setOpenMobile,
+    toggleSidebar,
+    toggleNode,
+    data,
+  ]);
 
   return (
     <SidebarContext.Provider value={contextValue}>
@@ -125,52 +158,6 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   );
 });
 SidebarProvider.displayName = 'SidebarProvider';
-
-type SidebarBaseProps = {};
-type SidebarProps = ComponentProps<'div'> & SidebarBaseProps;
-const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
-  const { className, children, ..._props } = props;
-  const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
-
-  const user = useCurrentUser();
-  if (!user) return null;
-
-  const classNavDesktop = cn(
-    'w-[240px] min-h-full flex-grow-0 flex-shrink-0 flex-basis-auto',
-    !open && 'ml-[-240px]'
-  );
-  const classNavMobile = cn(
-    'w-[calc(100%-12px)] max-w-[300px] fixed top-0 bottom-0 z-[10]',
-    openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
-  );
-  const classNav = cn(
-    `transition-all duration-${SIDEBAR_TRANSITION_DURATION}`,
-    isMobile ? classNavMobile : classNavDesktop,
-    className
-  );
-
-  const classDivMobile = cn('h-full shadow-md rounded-r-lg');
-  const classDivDesktop = cn('fixed w-[240px] h-full');
-  const classDiv = cn(
-    'bg-sidebar text-sidebar-foreground',
-    isMobile ? classDivMobile : classDivDesktop
-  );
-
-  return (
-    <Fragment>
-      <nav className={classNav} ref={ref} {..._props}>
-        <div className={classDiv}>{children}</div>
-      </nav>
-      {isMobile && openMobile && (
-        <div
-          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/25')}
-          onClick={toggleSidebar}
-        />
-      )}
-    </Fragment>
-  );
-});
-Sidebar.displayName = 'Sidebar';
 
 type SidebarTriggerProps = ComponentProps<typeof Button>;
 const SidebarTrigger = forwardRef<ElementRef<typeof Button>, SidebarTriggerProps>((props, ref) => {
@@ -211,6 +198,54 @@ const SidebarButton = forwardRef<ElementRef<typeof Button>, SidebarButtonProps>(
   );
 });
 SidebarButton.displayName = 'SidebarButton';
+
+type SidebarBaseProps = {};
+type SidebarProps = ComponentProps<'nav'> & SidebarBaseProps;
+const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
+  const { className, ..._props } = props;
+  const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
+
+  const user = useCurrentUser();
+  if (!user) return null;
+
+  const classNavDesktop = cn(
+    'w-[240px] min-h-full flex-grow-0 flex-shrink-0 flex-basis-auto',
+    !open && 'ml-[-240px]'
+  );
+  const classNavMobile = cn(
+    'w-[calc(100%-12px)] max-w-[300px] fixed top-0 bottom-0 z-[10]',
+    openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
+  );
+  const classNav = cn(
+    `transition-all duration-${SIDEBAR_TRANSITION_DURATION}`,
+    isMobile ? classNavMobile : classNavDesktop,
+    className
+  );
+
+  const classDivMobile = cn('h-full shadow-md rounded-r-lg');
+  const classDivDesktop = cn('fixed w-[240px] h-full');
+  const classDiv = cn(
+    'bg-sidebar text-sidebar-foreground',
+    isMobile ? classDivMobile : classDivDesktop
+  );
+
+  return (
+    <Fragment>
+      <nav className={classNav} ref={ref} {..._props}>
+        <div className={classDiv}>
+          <Menu />
+        </div>
+      </nav>
+      {isMobile && openMobile && (
+        <div
+          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/25')}
+          onClick={toggleSidebar}
+        />
+      )}
+    </Fragment>
+  );
+});
+Sidebar.displayName = 'Sidebar';
 
 export {
   SidebarProvider,

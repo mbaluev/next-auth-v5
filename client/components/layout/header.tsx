@@ -101,7 +101,7 @@ const HeaderRightBar = () => {
 
 const HeaderBreadCrumbs = () => {
   const pathname = usePathname();
-  const breadCrumbs = BREAD_CRUMBS[pathname as keyof typeof BREAD_CRUMBS];
+  const breadCrumbs = BREAD_CRUMBS[pathname];
   return (
     <div className="flex-grow flex flex-wrap gap-4">
       <SidebarTrigger />
