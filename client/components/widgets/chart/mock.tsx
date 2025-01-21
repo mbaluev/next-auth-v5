@@ -23,7 +23,7 @@ export interface IChartLegendItem {
 
 const length = 50;
 
-export const DEFAULT_CHART_TYPE = EChartType.stackedAreaChart;
+export const DEFAULT_CHART_TYPE = EChartType.stackedBarChart;
 
 export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) => {
   return {
