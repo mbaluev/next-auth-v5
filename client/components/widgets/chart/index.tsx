@@ -23,7 +23,6 @@ import {
   ChartArea,
   ChartColumn,
   ChartColumnStacked,
-  ChartLine,
   ChartSpline,
   LayoutDashboard,
   RefreshCw,
@@ -85,22 +84,13 @@ export const WidgetChart = (props: WidgetProps) => {
         </WidgetIcon>
         <WidgetTitle>dashboard</WidgetTitle>
         <WidgetButtons>
-          <TooltipText title="stacked area chart" side="top">
+          <TooltipText title="stacked bar chart" side="top">
             <Button
-              variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
+              variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
               size="icon"
-              onClick={() => handleChange(EChartType.stackedAreaChart)}
+              onClick={() => handleChange(EChartType.stackedBarChart)}
             >
-              <ChartArea />
-            </Button>
-          </TooltipText>
-          <TooltipText title="area bar chart" side="top">
-            <Button
-              variant={type === EChartType.areaChart ? 'default' : 'ghost'}
-              size="icon"
-              onClick={() => handleChange(EChartType.areaChart)}
-            >
-              <ChartSpline />
+              <ChartColumnStacked />
             </Button>
           </TooltipText>
           <TooltipText title="grouped bar chart" side="top">
@@ -112,22 +102,22 @@ export const WidgetChart = (props: WidgetProps) => {
               <ChartColumn />
             </Button>
           </TooltipText>
-          <TooltipText title="stacked bar chart" side="top">
+          <TooltipText title="area bar chart" side="top">
             <Button
-              variant={!type || type === EChartType.stackedBarChart ? 'default' : 'ghost'}
+              variant={type === EChartType.areaChart ? 'default' : 'ghost'}
               size="icon"
-              onClick={() => handleChange(EChartType.stackedBarChart)}
+              onClick={() => handleChange(EChartType.areaChart)}
             >
-              <ChartColumnStacked />
+              <ChartSpline />
             </Button>
           </TooltipText>
-          <TooltipText title="line chart" side="top">
+          <TooltipText title="stacked area chart" side="top">
             <Button
-              variant={type === EChartType.lineChart ? 'default' : 'ghost'}
+              variant={type === EChartType.stackedAreaChart ? 'default' : 'ghost'}
               size="icon"
-              onClick={() => handleChange(EChartType.lineChart)}
+              onClick={() => handleChange(EChartType.stackedAreaChart)}
             >
-              <ChartLine />
+              <ChartArea />
             </Button>
           </TooltipText>
           <Button variant="ghost" size="icon" asChild>
