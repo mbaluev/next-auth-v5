@@ -92,6 +92,8 @@ svg.lucide {
     --border: 0 0% 22%;
     --input: 0 0% 22%;
     --ring: 0 0% 22%;
+
+    --radius: 0.5rem;
   }
 }
 
