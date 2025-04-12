@@ -13,7 +13,7 @@ import {
   useState,
 } from 'react';
 import { cn } from '@/core/utils/cn';
-import { useIsMobile } from '@/core/hooks/use-mobile';
+import { useMatchMedia } from '@/core/hooks/use-match-media';
 import { Button } from '@/components/ui/button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
@@ -23,11 +23,12 @@ import { menuTree } from '@/core/settings/menu';
 import { Menu } from '@/components/layout/sidebar-menu';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
+import { MEDIA_MD } from '@/core/hooks/use-window-resize';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const SIDEBAR_DEFAULT_OPEN = true;
-const SIDEBAR_TRANSITION_DURATION = 100;
+const SIDEBAR_TRANSITION_DURATION = 200;
 const SIDEBAR_EVENT_START = 'sidebar-start';
 const SIDEBAR_EVENT_END = 'sidebar-end';
 
@@ -69,7 +70,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     children,
     ..._props
   } = props;
-  const isMobile = useIsMobile();
+  const isMobile = useMatchMedia(MEDIA_MD);
   const [openMobile, setOpenMobile] = useState(false);
   const pathname = usePathname();
 
@@ -231,7 +232,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
 
   return (
     <Fragment>
-      <nav className={classNav} ref={ref} {..._props}>
+      <nav id="_sidebar" className={classNav} ref={ref} {..._props}>
         <div className={classDiv}>
           <Menu />
         </div>
