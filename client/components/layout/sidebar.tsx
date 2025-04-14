@@ -13,7 +13,7 @@ import {
   useState,
 } from 'react';
 import { cn } from '@/core/utils/cn';
-import { useMatchMedia } from '@/core/hooks/use-match-media';
+import { MEDIA_MD, useMatchMedia } from '@/core/hooks/use-match-media';
 import { Button } from '@/components/ui/button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
@@ -23,7 +23,6 @@ import { menuTree } from '@/core/settings/menu';
 import { Menu } from '@/components/layout/sidebar-menu';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
-import { MEDIA_MD } from '@/core/hooks/use-window-resize';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';

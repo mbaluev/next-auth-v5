@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
 
-export const MEDIA_XS = 0;
-export const MEDIA_SM = 640;
-export const MEDIA_MD = 768;
-export const MEDIA_LG = 1024;
-export const MEDIA_XL = 1280;
-
 interface Dimensions {
   width: number;
   height: number;
