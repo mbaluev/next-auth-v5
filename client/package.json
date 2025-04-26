@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
-    "prisma": "prisma generate --schema=./prisma/schema.prisma"
+    "prisma-deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "prisma-generate": "prisma generate --schema=./prisma/schema.prisma",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.5.0",
     "@hookform/resolvers": "^3.9.0",
+    "@opennextjs/cloudflare": "^1.0.0-beta.3",
     "@prisma/client": "^5.19.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -47,6 +52,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^10.0.0",
+    "wrangler": "^4.13.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

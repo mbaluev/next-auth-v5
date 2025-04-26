@@ -5,6 +5,9 @@ node_modules
 /client/.next/
 /client/out/
 
+# cloudflare
+/client/.open-next
+
 # production
 /build
 
@@ -16,6 +19,7 @@ client.cert
 client.key
 /data
 /backups
+/patches
 
 # debug
 npm-debug.log*
@@ -28,3 +32,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
