@@ -2,11 +2,8 @@
 node_modules
 
 # next.js
-/client/.next/
-/client/out/
-
-# cloudflare
-/client/.open-next
+/.next/
+/out/
 
 # production
 /build

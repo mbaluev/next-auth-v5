@@ -8,16 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "prisma-deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
-    "prisma-generate": "prisma generate --schema=./prisma/schema.prisma",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "prisma-generate": "prisma generate --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.5.0",
     "@hookform/resolvers": "^3.9.0",
-    "@opennextjs/cloudflare": "^1.0.0-beta.3",
     "@prisma/client": "^5.19.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -37,7 +32,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.453.0",
     "moment": "^2.30.1",
-    "next": "14.2.11",
+    "next": "15.2.4",
     "next-auth": "5.0.0-beta.18",
     "next-client-cookies": "^2.0.0",
     "next-themes": "^0.3.0",
@@ -52,7 +47,6 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^10.0.0",
-    "wrangler": "^4.13.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
