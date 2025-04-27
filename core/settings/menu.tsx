@@ -1,5 +1,6 @@
 import {
   AppWindowMac,
+  Code,
   LayoutDashboard,
   MonitorSmartphone,
   OctagonX,
@@ -10,6 +11,7 @@ import { CTree } from '@/core/utils/tree';
 import { TRouteDTO, ROUTES } from '@/core/settings/routes';
 
 const MENU: Record<string, TRouteDTO> = {
+  DEBUG: { ...ROUTES.DEBUG, icon: <Code /> },
   DASHBOARD: { ...ROUTES.DASHBOARD, icon: <LayoutDashboard /> },
   SAMPLES: { ...ROUTES.SAMPLES, icon: <SwatchBook /> },
   SAMPLE_CLIENT: { ...ROUTES.SAMPLE_CLIENT, icon: <MonitorSmartphone /> },
@@ -18,6 +20,7 @@ const MENU: Record<string, TRouteDTO> = {
   NOT_FOUND: { ...ROUTES.NOT_FOUND, icon: <OctagonX /> },
 };
 const menuTree = new CTree<TRouteDTO>();
+menuTree.insert(ROUTES.DEBUG.name, menuTree.root.id, MENU.DEBUG);
 menuTree.insert(ROUTES.DASHBOARD.name, menuTree.root.id, MENU.DASHBOARD);
 menuTree.insert(ROUTES.SAMPLES.name, menuTree.root.id, MENU.SAMPLES);
 menuTree.insert(ROUTES.SAMPLE_CLIENT.name, ROUTES.SAMPLES.name, MENU.SAMPLE_CLIENT);

@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   description: 'authentication service',
   icons: {
     icon: {
-      url: '/assets/favicon.ico',
-      href: '/assets/favicon.ico',
+      url: '/favicon.ico',
+      href: '/favicon.ico',
     },
   },
 };

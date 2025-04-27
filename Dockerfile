@@ -13,15 +13,14 @@ WORKDIR /app
 COPY package.json yarn.lock* ./
 RUN yarn --frozen-lockfile;
 
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY .. .
 
-RUN yarn prisma;
-RUN yarn run build;
+RUN yarn prisma-generate;
+RUN yarn build;
 
 # Production image, copy all the files and run next
 FROM base AS runner
