@@ -2,7 +2,7 @@
 
 import * as z from 'zod';
 import { loginSchema } from '@/core/auth/schemas';
-import { signIn } from '@/auth';
+import { signIn } from '@/core/auth/auth';
 import { DEFAULT_LOGIN_REDIRECT } from '@/core/auth/routes';
 import { AuthError } from 'next-auth';
 import { getUserByEmail } from '@/core/auth/data/user';

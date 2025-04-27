@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import { auth } from '@/auth';
+import { auth } from '@/core/auth/auth';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/layout/theme';
 import { Spinner } from '@/components/ui/spinner';
