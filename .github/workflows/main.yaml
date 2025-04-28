@@ -29,8 +29,8 @@ jobs:
           echo AUTH_GITHUB_CLIENT_SECRET=${{ secrets.AUTH_GITHUB_CLIENT_SECRET }} >> .env
           echo AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }} >> .env
           echo AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }} >> .env
-          echo POSTGRES_DB=${{ vars.POSTGRES_DB }} >> .env
-          echo POSTGRES_USER=${{ vars.POSTGRES_USER }} >> .env
+          echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
           echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
           cat .env
       - name: Login to DockerHub
