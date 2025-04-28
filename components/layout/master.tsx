@@ -10,7 +10,6 @@ const MasterDefault = (props: MasterProps) => {
     </section>
   );
 };
-
 const MasterFullHeight = (props: MasterProps) => {
   const { children, className, ..._props } = props;
   return (
@@ -19,7 +18,6 @@ const MasterFullHeight = (props: MasterProps) => {
     </section>
   );
 };
-
 const MasterCenter = (props: MasterProps) => {
   const { children, className, ..._props } = props;
   return (

@@ -1,9 +1,11 @@
+import { ROUTES } from '@/core/settings/routes';
+
 /**
  * an array of routes that are accessible to the public
  * these routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = ['/', '/auth/new-verification'];
+export const publicRoutes: string[] = ['/', '/auth/new-verification', ROUTES.DEBUG.path];
 
 /**
  * an array of routes that are used for authentication

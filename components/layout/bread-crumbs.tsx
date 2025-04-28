@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { Logo } from '@/components/layout/logo';
 import { ReactNode } from 'react';
-import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { IS_PATH, TRouteDTO, ROUTES } from '@/core/settings/routes';
 
 interface IBreadCrumbWrapperProps {
@@ -27,8 +26,6 @@ interface IBreadCrumbHomeProps {
 }
 const BreadCrumbHome = (props: IBreadCrumbHomeProps) => {
   const { divider } = props;
-  const user = useCurrentUser();
-  if (!user) return null;
   return (
     <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" asChild>
