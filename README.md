@@ -22,6 +22,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 3. `docker image prune -a --force` - clean up
 4. `docker compose pull` - pull containers
 5. `docker compose up --build -d` - up containers
+---
+6. `docker image prune -a` - remove all images without at least one container associated to them.
 
 ### Docker build
 
