@@ -2,7 +2,7 @@ services:
 
   auth-postgres-service:
     container_name: auth-postgres
-    image: postgres
+    image: postgres:16
     restart: always
     tty: true
     env_file:
