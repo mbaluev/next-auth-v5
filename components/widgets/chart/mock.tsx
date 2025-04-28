@@ -42,7 +42,6 @@ export const MOCK_CHART_DATA: IChartItem[] = Array.from({ length }).map((_, i) =
       .format('YYYY-MM-DD'),
   };
 });
-// .sort((a, b) => a.a + a.b + a.c - b.a - b.b - b.c);
 
 export const MOCK_CHART_LEGEND: IChartLegendItem[] = [
   {
