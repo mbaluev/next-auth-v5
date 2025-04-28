@@ -37,7 +37,7 @@ services:
   auth-nginx-service:
     build:
       context: nginx
-    container_name: auth-nginx-container
+    container_name: auth-nginx
     restart: always
     tty: true
     ports:
