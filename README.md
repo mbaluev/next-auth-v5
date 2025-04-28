@@ -75,3 +75,7 @@ sudo docker run hello-world
 ### count lines of code
 `brew install cloc`
 `cloc $(git ls-files)`
+
+## commands
+`docker ps -a` - list of dockers
+`df -h` - disk space in human format
