@@ -79,3 +79,11 @@ sudo docker run hello-world
 ## commands
 `docker ps -a` - list of dockers
 `df -h` - disk space in human format
+
+## postgres services
+```
+brew uninstall postgresql
+brew install postgresql@16 #I wanted 16 version
+brew services start postgresql@16 #start the postgres service
+brew link postgresql@16 --force #this will make 16 your default version
+```
