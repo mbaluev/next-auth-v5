@@ -78,7 +78,11 @@ sudo docker run hello-world
 
 ## commands
 `docker ps -a` - list of dockers
+`sudo su -` - root user
+`lsblk` - show partitions
 `df -h` - disk space in human format
+`sudo growpart /dev/nvme0n1 1` - resize partition to max
+`sudo resize2fs /dev/nvme0n1p1` - resize file system to max
 
 ## postgres services
 ```
