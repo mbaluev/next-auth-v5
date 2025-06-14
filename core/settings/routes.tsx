@@ -14,6 +14,8 @@ const ROUTES: Record<string, TRouteDTO> = {
   HOME: { name: 'home', label: 'home', path: '/' },
   PROFILE: { name: 'profile', label: 'profile', path: '/profile' },
   DASHBOARD: { name: 'dashboard', label: 'dashboard', path: '/dashboard' },
+  DEPOSITORY: { name: 'depository', label: 'depository', path: '/depository' },
+  FILES: { name: 'files', label: 'files', path: '/files' },
   DEBUG: { name: 'debug', label: 'debug', path: '/debug' },
   SAMPLES: { name: 'samples', label: 'samples', path: EMPTY_PATH },
   SAMPLE_CLIENT: { name: 'sample-client', label: 'client component', path: '/client' },
