@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
 import { Separator } from '@/components/ui/separator';
-import { Logo } from '@/components/layout/logo';
+import { SvgLogo } from '@/components/svg/components/logo';
 import { ChevronRight, X } from 'lucide-react';
 import { TTreeDTO } from '@/core/utils/tree';
 import { Fragment } from 'react';
@@ -89,7 +89,7 @@ const Menu = () => {
       <div className="flex gap-4 p-4 justify-between">
         <SidebarButton asChild variant="ghost" className="flex-1">
           <Link href={ROUTES.HOME.path}>
-            <Logo className="w-6 h-6" />
+            <SvgLogo className="w-6 h-6" />
             <p>{process.env.APP_NAME}</p>
           </Link>
         </SidebarButton>

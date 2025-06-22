@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
-import { Logo } from '@/components/layout/logo';
+import { SvgLogo } from '@/components/svg/components/logo';
 import { ReactNode } from 'react';
 import { IS_PATH, TRouteDTO, ROUTES } from '@/core/settings/routes';
 
@@ -30,7 +30,7 @@ const BreadCrumbHome = (props: IBreadCrumbHomeProps) => {
     <BreadCrumbWrapper divider={divider}>
       <Button variant="ghost" size="icon" asChild>
         <Link href={ROUTES.HOME.path}>
-          <Logo />
+          <SvgLogo />
         </Link>
       </Button>
     </BreadCrumbWrapper>

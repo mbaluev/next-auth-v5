@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Spinner } from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';
-import { Logo } from '@/components/layout/logo';
+import { SvgLogo } from '@/components/svg/components/logo';
 import { ROUTES } from '@/core/settings/routes';
 
 interface HeaderProps {
@@ -14,7 +14,11 @@ export const WidgetHeaderContent = ({ label, loading }: HeaderProps) => {
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <Button variant="ghost" size="flex-start" className="text-3xl font-semibold" asChild>
         <Link href={ROUTES.HOME.path}>
-          {loading ? <Spinner className="h-8 w-8 animate-spin" /> : <Logo className="h-8 w-8" />}
+          {loading ? (
+            <Spinner className="text-2xl animate-spin" />
+          ) : (
+            <SvgLogo className="text-2xl" />
+          )}
           {process.env.APP_NAME}
         </Link>
       </Button>

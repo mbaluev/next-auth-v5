@@ -1,17 +1,19 @@
 'use client';
 
 import { SVGProps } from 'react';
+import { cn } from '@/core/utils/cn';
 
-const Logo = (props: SVGProps<any>) => {
+const SvgLogo = (props: SVGProps<any>) => {
+  const { className, ...rest } = props;
   return (
     <svg
-      className="icon"
+      className={cn('icon', className)}
       width="24"
       height="24"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
+      {...rest}
     >
       <path
         fillRule="evenodd"
@@ -22,4 +24,4 @@ const Logo = (props: SVGProps<any>) => {
   );
 };
 
-export { Logo };
+export { SvgLogo };

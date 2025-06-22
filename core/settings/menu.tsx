@@ -7,8 +7,8 @@ import {
   Server,
   SwatchBook,
   UserPen,
-  BanknoteArrowDown,
   FolderClosed,
+  Banknote,
 } from 'lucide-react';
 import { CTree } from '@/core/utils/tree';
 import { TRouteDTO, ROUTES } from '@/core/settings/routes';
@@ -17,7 +17,7 @@ const MENU: Record<string, TRouteDTO> = {
   DEBUG: { ...ROUTES.DEBUG, icon: <Code /> },
   PROFILE: { ...ROUTES.PROFILE, icon: <UserPen /> },
   DASHBOARD: { ...ROUTES.DASHBOARD, icon: <LayoutDashboard /> },
-  DEPOSITORY: { ...ROUTES.DEPOSITORY, icon: <BanknoteArrowDown /> },
+  DEPOSITORY: { ...ROUTES.DEPOSITORY, icon: <Banknote /> },
   FILES: { ...ROUTES.FILES, icon: <FolderClosed /> },
   SAMPLES: { ...ROUTES.SAMPLES, icon: <SwatchBook /> },
   SAMPLE_CLIENT: { ...ROUTES.SAMPLE_CLIENT, icon: <MonitorSmartphone /> },
