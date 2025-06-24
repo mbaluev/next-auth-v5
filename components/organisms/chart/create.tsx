@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
 import moment from 'moment/moment';
 import { MutableRefObject } from 'react';
-import { EChartType, IChartItem, IChartLegendItem } from '@/components/widgets/chart/mock';
+import { EChartType, IChartItem, IChartLegendItem } from '@/components/organisms/chart/mock';
 import { JetBrains_Mono } from 'next/font/google';
 
 const font = JetBrains_Mono({ subsets: ['latin'] });
 
-export const WidgetChartCreate = (
+export const ChartCreate = (
   ref: MutableRefObject<any>,
   id: string,
   data: IChartItem[],

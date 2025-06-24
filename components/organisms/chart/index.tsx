@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { WidgetChartCreate } from '@/components/widgets/chart/create';
+import { ChartCreate } from '@/components/organisms/chart/create';
 import {
   EChartType,
   MOCK_CHART_DATA,
   MOCK_CHART_LEGEND,
   DEFAULT_CHART_TYPE,
-} from '@/components/widgets/chart/mock';
+} from '@/components/organisms/chart/mock';
 import {
   Widget,
   WidgetContent,
@@ -17,7 +17,7 @@ import {
   WidgetButtons,
   WidgetIcon,
   WidgetProps,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 import { Button } from '@/components/ui/button';
 import {
   ChartArea,
@@ -35,7 +35,7 @@ import { TooltipText } from '@/components/ui/tooltip';
 import { ROUTES } from '@/core/settings/routes';
 import { h } from 'preact';
 
-export const WidgetChart = (props: WidgetProps) => {
+export const Chart = (props: WidgetProps) => {
   const ref = useRef<any>(null);
   const [chart, setChart] = useState<any>();
   const router = useRouter();
@@ -54,7 +54,7 @@ export const WidgetChart = (props: WidgetProps) => {
   };
   const create = useCallback(() => {
     if (ref.current) {
-      const obj = WidgetChartCreate(ref, id, MOCK_CHART_DATA, MOCK_CHART_LEGEND, type, formatValue);
+      const obj = ChartCreate(ref, id, MOCK_CHART_DATA, MOCK_CHART_LEGEND, type, formatValue);
       setChart(obj);
     }
   }, [ref, type]);

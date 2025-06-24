@@ -13,7 +13,7 @@ import {
   WidgetIcon,
   WidgetProps,
   WidgetTitle,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 
 export const WidgetAdmin = (props: WidgetProps) => {
   const onApiRouteClick = () => {

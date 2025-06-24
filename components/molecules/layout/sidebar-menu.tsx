@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { SidebarButton, useSidebar } from '@/components/layout/sidebar';
+import { SidebarButton, useSidebar } from '@/components/molecules/layout/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { SvgLogo } from '@/components/svg/components/logo';
 import { ChevronRight, X } from 'lucide-react';

@@ -9,7 +9,7 @@ import {
   WidgetIcon,
   WidgetProps,
   WidgetTitle,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 import { Button } from '@/components/ui/button';
 import { Ellipsis } from 'lucide-react';
 import { TooltipText } from '@/components/ui/tooltip';

@@ -1,9 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Footer } from '@/components/layout/footer';
-import { SidebarProvider, Sidebar } from '@/components/layout/sidebar';
-import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/molecules/layout/footer';
+import { SidebarProvider, Sidebar } from '@/components/molecules/layout/sidebar';
+import { Header } from '@/components/molecules/layout/header';
 
 export const Layout = ({ children }: { children: ReactNode }) => {
   return (

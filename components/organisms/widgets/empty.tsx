@@ -8,7 +8,7 @@ import {
   WidgetTitle,
   WidgetIcon,
   WidgetProps,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 
 export const WidgetEmpty = (props: WidgetProps) => {
   return (

@@ -6,7 +6,7 @@ import {
   WidgetIcon,
   WidgetProps,
   WidgetTitle,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 import { TooltipText } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 

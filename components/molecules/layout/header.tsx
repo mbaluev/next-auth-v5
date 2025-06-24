@@ -1,7 +1,7 @@
 'use client';
 
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { SidebarTrigger } from '@/components/layout/sidebar';
+import { SidebarTrigger } from '@/components/molecules/layout/sidebar';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
 import { TooltipText } from '@/components/ui/tooltip';
@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
 import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
-import { BreadCrumbs } from '@/components/layout/bread-crumbs';
+import { BreadCrumbs } from '@/components/molecules/layout/bread-crumbs';
 import { Badge } from '@/components/ui/badge';
 import { UserRole } from '@prisma/client';
 import { Separator } from '@/components/ui/separator';

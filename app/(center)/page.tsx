@@ -12,10 +12,6 @@ export default function Home() {
     <div className="space-y-10 text-center">
       <div className="text-6xl flex gap-8 flex-row flex-wrap items-center justify-center">
         <SvgLogo />
-        {/*<SvgFiles className="text-[12rem]" />*/}
-        {/*<SvgSpam className="text-[12rem]" />*/}
-        {/*<SvgSync className="text-[12rem]" />*/}
-        {/*<SvgTrash className="text-[12rem]" />*/}
         <h1 className="text-6xl font-semibold">{process.env.APP_NAME}</h1>
       </div>
       <div className="flex gap-1 flex-col items-center text-lg text-muted-foreground">

@@ -1,6 +1,6 @@
 'use client';
 
-import { WidgetClient } from '@/components/widgets/client';
+import { WidgetClient } from '@/components/organisms/widgets/client';
 
 const ClientPage = () => {
   return (

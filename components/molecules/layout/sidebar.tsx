@@ -20,7 +20,7 @@ import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
 import { CTree, TTreeDTO } from '@/core/utils/tree';
 import { menuTree } from '@/core/settings/menu';
-import { Menu } from '@/components/layout/sidebar-menu';
+import { Menu } from '@/components/molecules/layout/sidebar-menu';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
 
