@@ -12,12 +12,14 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <div className="flex-grow flex flex-col">
         <Header />
         <main className="flex flex-grow">
+          {/*  */}
           <Menu2>
             <div className="p-4">
               <SidebarTrigger />
             </div>
             {children}
           </Menu2>
+          {/*  */}
         </main>
         <Footer />
       </div>
