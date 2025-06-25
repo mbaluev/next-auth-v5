@@ -3,12 +3,17 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { SidebarButton, useSidebar } from '@/components/molecules/layout/sidebar';
+import {
+  Sidebar,
+  SidebarButton,
+  SidebarProvider,
+  useSidebar,
+} from '@/components/molecules/layout/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { SvgLogo } from '@/components/svg/components/logo';
 import { ChevronRight, X } from 'lucide-react';
 import { TTreeDTO } from '@/core/utils/tree';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { cn } from '@/core/utils/cn';
 import { TRouteDTO, IS_PATH, ROUTES } from '@/core/settings/routes';
 
@@ -80,7 +85,7 @@ const MenuItem = (props: IMenuItemProps<TRouteDTO>) => {
 };
 MenuItem.displayName = 'MenuItem';
 
-const Menu = () => {
+const MenuContent = () => {
   const user = useCurrentUser();
   const { toggleSidebar, data } = useSidebar();
   if (!user) return null;
@@ -107,6 +112,41 @@ const Menu = () => {
     </div>
   );
 };
+MenuContent.displayName = 'MenuContent';
+
+interface IMenuProps {
+  children: ReactNode;
+}
+const Menu = (props: IMenuProps) => {
+  const { children } = props;
+  const user = useCurrentUser();
+  if (!user) return null;
+  return (
+    <Fragment>
+      <SidebarProvider id="menu" collapsed>
+        <Sidebar id="menu" className="z-20">
+          <MenuContent />
+        </Sidebar>
+        {children}
+      </SidebarProvider>
+    </Fragment>
+  );
+};
 Menu.displayName = 'Menu';
 
-export { Menu };
+const Menu2 = (props: IMenuProps) => {
+  const { children } = props;
+  const user = useCurrentUser();
+  if (!user) return null;
+  return (
+    <SidebarProvider id="menu2" collapsed>
+      <Sidebar id="menu2" className="z-10">
+        <MenuContent />
+      </Sidebar>
+      {children}
+    </SidebarProvider>
+  );
+};
+Menu2.displayName = 'Menu2';
+
+export { Menu, Menu2 };

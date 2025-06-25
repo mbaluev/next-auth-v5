@@ -20,7 +20,7 @@ import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
 import { CTree, TTreeDTO } from '@/core/utils/tree';
 import { menuTree } from '@/core/settings/menu';
-import { Menu } from '@/components/molecules/layout/sidebar-menu';
+import { Menu } from '@/components/molecules/layout/menu';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
 
@@ -57,7 +57,7 @@ type SidebarProviderBaseProps = {
 type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
 const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
   const cookies = useCookies();
-  let _defaultOpen: any = cookies.get(SIDEBAR_STORAGE_NAME);
+  let _defaultOpen: any = cookies.get(`${SIDEBAR_STORAGE_NAME}_${props.id}`);
   _defaultOpen = _defaultOpen ? _defaultOpen === 'true' : SIDEBAR_DEFAULT_OPEN;
 
   const {
@@ -79,7 +79,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   const setOpenCallback = (value: boolean | ((value: boolean) => boolean)) => {
     const res = typeof value === 'function' ? value(open) : value;
     if (setOpenProp) return setOpenProp?.(res);
-    cookies.set(SIDEBAR_STORAGE_NAME, String(res));
+    cookies.set(`${SIDEBAR_STORAGE_NAME}_${props.id}`, String(res));
     _setOpen(value);
   };
   const setOpen = useCallback(setOpenCallback, [setOpenProp, open, cookies]);
@@ -151,7 +151,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <div className={cn('flex min-h-full relative', className)} ref={ref} {..._props}>
+      <div className={cn('flex flex-grow min-h-full relative', className)} ref={ref} {..._props}>
         {children}
       </div>
     </SidebarContext.Provider>
@@ -202,7 +202,7 @@ SidebarButton.displayName = 'SidebarButton';
 type SidebarBaseProps = {};
 type SidebarProps = ComponentProps<'nav'> & SidebarBaseProps;
 const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
-  const { className, ..._props } = props;
+  const { className, children, ..._props } = props;
   const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
 
   const user = useCurrentUser();
@@ -232,9 +232,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   return (
     <Fragment>
       <nav id="_sidebar" className={classNav} ref={ref} {..._props}>
-        <div className={classDiv}>
-          <Menu />
-        </div>
+        <div className={classDiv}>{children}</div>
       </nav>
       {isMobile && openMobile && (
         <div
