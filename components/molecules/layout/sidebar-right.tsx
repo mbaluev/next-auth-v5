@@ -18,11 +18,9 @@ import { Button } from '@/components/ui/button';
 import { SlidersHorizontal } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
-import { CTree, TTreeDTO } from '@/core/utils/tree';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
 import { useWindowResize } from '@/core/hooks/use-window-resize';
-import { menuTree } from '@/core/settings/menu';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar-right';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'h';
@@ -39,8 +37,6 @@ interface SidebarRightContext<T> {
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
-  data?: CTree<T>;
-  toggleNode: (node: TTreeDTO<T>) => void;
 }
 const SidebarRightContext = createContext<SidebarRightContext<TRouteDTO> | null>(null);
 function useSidebarRight() {
@@ -110,27 +106,6 @@ const SidebarRightProvider = forwardRef<HTMLDivElement, SidebarRightProviderProp
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [toggleSidebar]);
 
-  // init data
-  const [data, setData] = useState<CTree<TRouteDTO>>(menuTree);
-  const toggleNodeCallback = (node: TTreeDTO<TRouteDTO>) => {
-    const _data = data.clone();
-    _data.toggle(node.id);
-    setData(_data);
-  };
-  const toggleNode = useCallback(toggleNodeCallback, []);
-  useEffect(() => {
-    const _data = data.clone();
-    if (collapsed) _data.collapseTo(1);
-    setData(_data);
-  }, [collapsed]);
-  useEffect(() => {
-    const _data = data.clone();
-    const node = _data.find((d) => d.data?.path === pathname);
-    if (node) _data.select(node.id, true);
-    else _data.deselect();
-    setData(_data);
-  }, [pathname]);
-
   // context value
   const contextValueMemo = (): SidebarRightContext<TRouteDTO> => ({
     name,
@@ -140,8 +115,6 @@ const SidebarRightProvider = forwardRef<HTMLDivElement, SidebarRightProviderProp
     openMobile,
     setOpenMobile,
     toggleSidebar,
-    data,
-    toggleNode,
   });
   const contextValue = useMemo<SidebarRightContext<TRouteDTO>>(contextValueMemo, [
     name,
@@ -151,8 +124,6 @@ const SidebarRightProvider = forwardRef<HTMLDivElement, SidebarRightProviderProp
     openMobile,
     setOpenMobile,
     toggleSidebar,
-    toggleNode,
-    data,
   ]);
 
   return (
@@ -189,24 +160,6 @@ const SidebarRightTrigger = forwardRef<ElementRef<typeof Button>, SidebarRightTr
   }
 );
 SidebarRightTrigger.displayName = 'SidebarRightTrigger';
-
-type SidebarRightButtonProps = ComponentProps<typeof Button>;
-const SidebarRightButton = forwardRef<ElementRef<typeof Button>, SidebarRightButtonProps>(
-  (props, ref) => {
-    const { onClick, children, ..._props } = props;
-    const { toggleSidebar, isMobile } = useSidebarRight();
-    const handleClick = (e: any) => {
-      if (onClick) onClick(e);
-      if (isMobile) toggleSidebar();
-    };
-    return (
-      <Button ref={ref} size="flex-start" onClick={handleClick} {..._props}>
-        {children}
-      </Button>
-    );
-  }
-);
-SidebarRightButton.displayName = 'SidebarRightButton';
 
 type SidebarRightBaseProps = {};
 type SidebarRightProps = ComponentProps<'nav'> & SidebarRightBaseProps;
@@ -262,7 +215,6 @@ export {
   SidebarRightProvider,
   SidebarRight,
   SidebarRightTrigger,
-  SidebarRightButton,
   useSidebarRight,
   SIDEBAR_EVENT_START,
   SIDEBAR_EVENT_END,

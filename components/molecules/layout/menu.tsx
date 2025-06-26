@@ -18,7 +18,6 @@ import {
 } from '@/components/molecules/layout/sidebar-left';
 import {
   SidebarRight,
-  SidebarRightButton,
   SidebarRightProvider,
   useSidebarRight,
 } from '@/components/molecules/layout/sidebar-right';
@@ -145,48 +144,6 @@ const MenuLeftContent = () => {
 MenuLeftContent.displayName = 'MenuLeftContent';
 
 // menu-right
-const MenuItemRight = (props: IMenuItemProps<TRouteDTO>) => {
-  const { node } = props;
-  const { toggleNode } = useSidebarRight();
-
-  if (!node.data) return null;
-
-  // item toggle
-  if (!IS_PATH(node.data.path)) {
-    const handleToggle = () => toggleNode(node);
-    return (
-      <div className="flex">
-        <MenuItemPadding node={node} />
-        <Button
-          size="flex-start"
-          variant={node.state.selected ? 'sidebar' : 'ghost'}
-          className="flex-1"
-          onClick={handleToggle}
-        >
-          <MenuItemContent node={node} />
-        </Button>
-      </div>
-    );
-  }
-
-  // item link
-  return (
-    <div className="flex">
-      <MenuItemPadding node={node} />
-      <SidebarRightButton
-        variant={node.state.selected ? 'sidebar' : 'ghost'}
-        className="flex-1"
-        asChild
-      >
-        <Link href={node.data.path}>
-          <MenuItemContent node={node} />
-        </Link>
-      </SidebarRightButton>
-    </div>
-  );
-};
-MenuItemRight.displayName = 'MenuItemRight';
-
 const MenuRight = (props: IMenuProps) => {
   const { children } = props;
   const user = useCurrentUser();
@@ -205,23 +162,14 @@ MenuRight.displayName = 'MenuRight';
 
 const MenuRightContent = () => {
   const user = useCurrentUser();
-  const { toggleSidebar, data } = useSidebarRight();
+  const { toggleSidebar } = useSidebarRight();
   if (!user) return null;
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-4 p-4 justify-between items-center">
-        <p className="pl-4">options</p>
-        <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-          <X />
-        </Button>
-      </div>
-      <Separator />
-      <div className="flex flex-col gap-4 p-4">
-        {data
-          ?.flat()
-          ?.filter((d) => !d.state.hidden)
-          .map((node, index) => <MenuItemRight key={index} node={node} />)}
-      </div>
+    <div className="flex gap-4 p-4 justify-between items-center">
+      <p className="pl-4">options</p>
+      <Button variant="ghost" size="icon" onClick={toggleSidebar}>
+        <X />
+      </Button>
     </div>
   );
 };
