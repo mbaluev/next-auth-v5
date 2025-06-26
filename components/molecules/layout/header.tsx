@@ -1,7 +1,8 @@
 'use client';
 
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
-import { SidebarTrigger } from '@/components/molecules/layout/sidebar';
+import { SidebarLeftTrigger } from '@/components/molecules/layout/sidebar-left';
+import { SidebarRightTrigger } from '@/components/molecules/layout/sidebar-right';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
 import { TooltipText } from '@/components/ui/tooltip';
@@ -95,6 +96,7 @@ const HeaderRightBar = () => {
     <nav className="flex-grow-0 flex gap-4">
       <HeaderRightThemeBtn />
       <HeaderRightUserBtn />
+      <SidebarRightTrigger />
     </nav>
   );
 };
@@ -104,7 +106,7 @@ const HeaderBreadCrumbs = () => {
   const breadCrumbs = BREAD_CRUMBS[pathname];
   return (
     <div className="flex-grow flex flex-wrap gap-4">
-      <SidebarTrigger />
+      <SidebarLeftTrigger />
       <BreadCrumbs breadCrumbs={breadCrumbs} home />
     </div>
   );

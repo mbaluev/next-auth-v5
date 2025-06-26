@@ -15,23 +15,24 @@ import {
 import { cn } from '@/core/utils/cn';
 import { MEDIA_MD, useMatchMedia } from '@/core/hooks/use-match-media';
 import { Button } from '@/components/ui/button';
-import { ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
 import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
 import { CTree, TTreeDTO } from '@/core/utils/tree';
-import { menuTree } from '@/core/settings/menu';
-import { Menu } from '@/components/molecules/layout/menu';
 import { usePathname } from 'next/navigation';
 import { TRouteDTO } from '@/core/settings/routes';
+import { useWindowResize } from '@/core/hooks/use-window-resize';
+import { menuTree } from '@/core/settings/menu';
 
-const SIDEBAR_STORAGE_NAME = 'sidebar';
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
+const SIDEBAR_STORAGE_NAME = 'sidebar-right';
+const SIDEBAR_KEYBOARD_SHORTCUT = 'h';
 const SIDEBAR_DEFAULT_OPEN = true;
 const SIDEBAR_TRANSITION_DURATION = 200;
 const SIDEBAR_EVENT_START = 'sidebar-start';
 const SIDEBAR_EVENT_END = 'sidebar-end';
 
-interface SidebarContext<T> {
+interface SidebarRightContext<T> {
+  name?: string;
   open: boolean;
   setOpen: (open: boolean) => void;
   openMobile: boolean;
@@ -41,26 +42,29 @@ interface SidebarContext<T> {
   data?: CTree<T>;
   toggleNode: (node: TTreeDTO<T>) => void;
 }
-const SidebarContext = createContext<SidebarContext<TRouteDTO> | null>(null);
-function useSidebar() {
-  const context = useContext(SidebarContext);
-  if (!context) throw new Error('useSidebar must be used within a Sidebar.');
+const SidebarRightContext = createContext<SidebarRightContext<TRouteDTO> | null>(null);
+function useSidebarRight() {
+  const context = useContext(SidebarRightContext);
+  if (!context) throw new Error('useSidebarRight must be used within a SidebarRight.');
   return context;
 }
 
-type SidebarProviderBaseProps = {
+type SidebarRightProviderBaseProps = {
+  name?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   defaultOpen?: boolean;
   collapsed?: boolean;
 };
-type SidebarProviderProps = ComponentProps<'div'> & SidebarProviderBaseProps;
-const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props, ref) => {
+type SidebarRightProviderProps = ComponentProps<'div'> & SidebarRightProviderBaseProps;
+const SidebarRightProvider = forwardRef<HTMLDivElement, SidebarRightProviderProps>((props, ref) => {
+  const { name } = props;
   const cookies = useCookies();
-  let _defaultOpen: any = cookies.get(`${SIDEBAR_STORAGE_NAME}_${props.id}`);
+  let _defaultOpen: any = cookies.get(name || SIDEBAR_STORAGE_NAME);
   _defaultOpen = _defaultOpen ? _defaultOpen === 'true' : SIDEBAR_DEFAULT_OPEN;
 
   const {
+    name: _name,
     open: openProp,
     onOpenChange: setOpenProp,
     defaultOpen = _defaultOpen,
@@ -79,7 +83,7 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   const setOpenCallback = (value: boolean | ((value: boolean) => boolean)) => {
     const res = typeof value === 'function' ? value(open) : value;
     if (setOpenProp) return setOpenProp?.(res);
-    cookies.set(`${SIDEBAR_STORAGE_NAME}_${props.id}`, String(res));
+    cookies.set(name || SIDEBAR_STORAGE_NAME, String(res));
     _setOpen(value);
   };
   const setOpen = useCallback(setOpenCallback, [setOpenProp, open, cookies]);
@@ -128,7 +132,8 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   }, [pathname]);
 
   // context value
-  const contextValueMemo = (): SidebarContext<TRouteDTO> => ({
+  const contextValueMemo = (): SidebarRightContext<TRouteDTO> => ({
+    name,
     open,
     setOpen,
     isMobile,
@@ -138,7 +143,8 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
     data,
     toggleNode,
   });
-  const contextValue = useMemo<SidebarContext<TRouteDTO>>(contextValueMemo, [
+  const contextValue = useMemo<SidebarRightContext<TRouteDTO>>(contextValueMemo, [
+    name,
     open,
     setOpen,
     isMobile,
@@ -150,71 +156,77 @@ const SidebarProvider = forwardRef<HTMLDivElement, SidebarProviderProps>((props,
   ]);
 
   return (
-    <SidebarContext.Provider value={contextValue}>
-      <div className={cn('flex flex-grow min-h-full relative', className)} ref={ref} {..._props}>
+    <SidebarRightContext.Provider value={contextValue}>
+      <div id={name} className={cn('flex flex-grow h-full', className)} ref={ref} {..._props}>
         {children}
       </div>
-    </SidebarContext.Provider>
+    </SidebarRightContext.Provider>
   );
 });
-SidebarProvider.displayName = 'SidebarProvider';
+SidebarRightProvider.displayName = 'SidebarRightProvider';
 
-type SidebarTriggerProps = ComponentProps<typeof Button>;
-const SidebarTrigger = forwardRef<ElementRef<typeof Button>, SidebarTriggerProps>((props, ref) => {
-  const { onClick, ..._props } = props;
-  const { toggleSidebar, isMobile, open, openMobile } = useSidebar();
-  const user = useCurrentUser();
-  if (!user) return null;
-  return (
-    <Button
-      ref={ref}
-      variant="ghost"
-      size="icon"
-      onClick={(event) => {
-        onClick?.(event);
-        toggleSidebar();
-      }}
-      {..._props}
-    >
-      {!(isMobile ? openMobile : open) && <ChevronsRight />}
-      {(isMobile ? openMobile : open) && <ChevronsLeft />}
-    </Button>
-  );
-});
-SidebarTrigger.displayName = 'SidebarTrigger';
+type SidebarRightTriggerProps = ComponentProps<typeof Button>;
+const SidebarRightTrigger = forwardRef<ElementRef<typeof Button>, SidebarRightTriggerProps>(
+  (props, ref) => {
+    const { onClick, ..._props } = props;
+    const { toggleSidebar } = useSidebarRight();
+    const user = useCurrentUser();
+    if (!user) return null;
+    return (
+      <Button
+        ref={ref}
+        variant="ghost"
+        size="icon"
+        onClick={(event) => {
+          onClick?.(event);
+          toggleSidebar();
+        }}
+        {..._props}
+      >
+        <SlidersHorizontal />
+      </Button>
+    );
+  }
+);
+SidebarRightTrigger.displayName = 'SidebarRightTrigger';
 
-type SidebarButtonProps = ComponentProps<typeof Button>;
-const SidebarButton = forwardRef<ElementRef<typeof Button>, SidebarButtonProps>((props, ref) => {
-  const { onClick, children, ..._props } = props;
-  const { toggleSidebar, isMobile } = useSidebar();
-  const handleClick = (e: any) => {
-    if (onClick) onClick(e);
-    if (isMobile) toggleSidebar();
-  };
-  return (
-    <Button ref={ref} size="flex-start" onClick={handleClick} {..._props}>
-      {children}
-    </Button>
-  );
-});
-SidebarButton.displayName = 'SidebarButton';
+type SidebarRightButtonProps = ComponentProps<typeof Button>;
+const SidebarRightButton = forwardRef<ElementRef<typeof Button>, SidebarRightButtonProps>(
+  (props, ref) => {
+    const { onClick, children, ..._props } = props;
+    const { toggleSidebar, isMobile } = useSidebarRight();
+    const handleClick = (e: any) => {
+      if (onClick) onClick(e);
+      if (isMobile) toggleSidebar();
+    };
+    return (
+      <Button ref={ref} size="flex-start" onClick={handleClick} {..._props}>
+        {children}
+      </Button>
+    );
+  }
+);
+SidebarRightButton.displayName = 'SidebarRightButton';
 
-type SidebarBaseProps = {};
-type SidebarProps = ComponentProps<'nav'> & SidebarBaseProps;
-const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
+type SidebarRightBaseProps = {};
+type SidebarRightProps = ComponentProps<'nav'> & SidebarRightBaseProps;
+const SidebarRight = forwardRef<HTMLDivElement, SidebarRightProps>((props, ref) => {
   const { className, children, ..._props } = props;
-  const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
+  const { isMobile, open, openMobile, toggleSidebar } = useSidebarRight();
+  const { width } = useWindowResize();
 
   const user = useCurrentUser();
   if (!user) return null;
 
   const classNavDesktop = cn(
-    'w-[240px] min-h-full flex-grow-0 flex-shrink-0 flex-basis-auto',
-    !open && 'ml-[-240px]'
+    'w-[240px] h-full flex-grow-0 flex-shrink-0 flex-basis-auto',
+    !open && 'mr-[-240px]'
   );
   const classNavMobile = cn(
     'w-[calc(100%-12px)] max-w-[300px] fixed top-0 bottom-0 z-[10]',
-    openMobile ? 'left-0 right-4' : 'left-[-100%] right-[100%]'
+    openMobile && width > 312 && 'right-0 left-[calc(100%-300px)]',
+    openMobile && width <= 312 && 'right-0 left-auto',
+    !openMobile && 'right-[-100%] left-[100%]'
   );
   const classNav = cn(
     `transition-all duration-${SIDEBAR_TRANSITION_DURATION}`,
@@ -222,35 +234,36 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     className
   );
 
-  const classDivMobile = cn('h-full shadow-md rounded-r-lg');
+  const classDivMobile = cn('h-full shadow-md', 'rounded-l-lg');
   const classDivDesktop = cn('fixed w-[240px] h-full');
   const classDiv = cn(
     'bg-sidebar text-sidebar-foreground',
     isMobile ? classDivMobile : classDivDesktop
   );
 
+  const classMobile = cn(
+    'absolute top-0 left-0 w-full h-full z-[9] bg-black/25',
+    'right-0',
+    classDivMobile
+  );
+
   return (
     <Fragment>
-      <nav id="_sidebar" className={classNav} ref={ref} {..._props}>
+      <nav className={classNav} ref={ref} {..._props}>
         <div className={classDiv}>{children}</div>
       </nav>
-      {isMobile && openMobile && (
-        <div
-          className={cn('absolute top-0 left-0 w-full h-full z-[9] bg-black/25')}
-          onClick={toggleSidebar}
-        />
-      )}
+      {isMobile && openMobile && <div className={classMobile} onClick={toggleSidebar} />}
     </Fragment>
   );
 });
-Sidebar.displayName = 'Sidebar';
+SidebarRight.displayName = 'SidebarRight';
 
 export {
-  SidebarProvider,
-  Sidebar,
-  SidebarTrigger,
-  SidebarButton,
-  useSidebar,
+  SidebarRightProvider,
+  SidebarRight,
+  SidebarRightTrigger,
+  SidebarRightButton,
+  useSidebarRight,
   SIDEBAR_EVENT_START,
   SIDEBAR_EVENT_END,
 };
