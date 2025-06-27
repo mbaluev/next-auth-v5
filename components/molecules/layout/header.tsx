@@ -65,8 +65,8 @@ const HeaderRightUserBtn = () => {
               <p>{user?.name}</p>
               <p>{user?.email}</p>
             </div>
-            {user.role === UserRole.USER && <Badge variant="default">{UserRole.USER}</Badge>}
-            {user.role === UserRole.ADMIN && <Badge variant="success">{UserRole.ADMIN}</Badge>}
+            {user.role === UserRole.USER && <Badge variant="default">user</Badge>}
+            {user.role === UserRole.ADMIN && <Badge variant="success">admin</Badge>}
           </div>
         </div>
         <div className="p-4">
