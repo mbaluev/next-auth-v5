@@ -1,4 +1,4 @@
-import { ROUTES } from '@/core/settings/routes';
+import { ROUTES } from '@/lib/settings/routes';
 
 /**
  * an array of routes that are accessible to the public

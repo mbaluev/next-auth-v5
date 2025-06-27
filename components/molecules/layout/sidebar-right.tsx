@@ -12,15 +12,15 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { cn } from '@/core/utils/cn';
-import { MEDIA_MD, useMatchMedia } from '@/core/hooks/use-match-media';
+import { cn } from '@/lib/utils/cn';
+import { MEDIA_MD, useMatchMedia } from '@/lib/hooks/use-match-media';
 import { Button } from '@/components/ui/button';
 import { SlidersHorizontal } from 'lucide-react';
-import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { useCurrentUser } from '@/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
 import { usePathname } from 'next/navigation';
-import { TRouteDTO } from '@/core/settings/routes';
-import { useWindowResize } from '@/core/hooks/use-window-resize';
+import { TRouteDTO } from '@/lib/settings/routes';
+import { useWindowResize } from '@/lib/hooks/use-window-resize';
 
 const SIDEBAR_STORAGE_NAME = 'sidebar-right';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'h';

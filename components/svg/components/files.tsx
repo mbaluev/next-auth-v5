@@ -1,7 +1,7 @@
 'use client';
 
 import { SVGProps } from 'react';
-import { cn } from '@/core/utils/cn';
+import { cn } from '@/lib/utils/cn';
 
 const SvgFiles = (props: SVGProps<any>) => {
   const { className, ...rest } = props;

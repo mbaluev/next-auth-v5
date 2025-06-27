@@ -10,8 +10,8 @@ import {
   FolderClosed,
   Banknote,
 } from 'lucide-react';
-import { CTree } from '@/core/utils/tree';
-import { TRouteDTO, ROUTES } from '@/core/settings/routes';
+import { CTree } from '@/lib/utils/tree';
+import { TRouteDTO, ROUTES } from '@/lib/settings/routes';
 
 const MENU: Record<string, TRouteDTO> = {
   DEBUG: { ...ROUTES.DEBUG, icon: <Code /> },

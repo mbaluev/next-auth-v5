@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Dot } from 'lucide-react';
-import { ROUTES } from '@/core/settings/routes';
+import { ROUTES } from '@/lib/settings/routes';
 
 export const Footer = () => {
   return (

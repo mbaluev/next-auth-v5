@@ -2,11 +2,11 @@
 
 import * as z from 'zod';
 import bcrypt from 'bcryptjs';
-import { db } from '@/core/utils/db';
-import { registerSchema } from '@/core/auth/schemas';
-import { getUserByEmail } from '@/core/auth/data/user';
-import { generateVerificationToken } from '@/core/utils/tokens';
-import { sendVerificationEmail } from '@/core/utils/mail';
+import { db } from '@/lib/utils/db';
+import { registerSchema } from '@/auth/schemas';
+import { getUserByEmail } from '@/auth/data/user';
+import { generateVerificationToken } from '@/lib/utils/tokens';
+import { sendVerificationEmail } from '@/lib/utils/mail';
 
 export const register = async (values: z.infer<typeof registerSchema>) => {
   const validatedFields = registerSchema.safeParse(values);

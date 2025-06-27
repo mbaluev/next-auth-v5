@@ -1,6 +1,6 @@
 'use client';
 
-import { useIsAuth } from '@/core/auth/hooks/use-is-auth';
+import { useIsAuth } from '@/auth/hooks/use-is-auth';
 import { SvgLogo } from '@/components/svg/components/logo';
 import { ButtonLogin } from '@/components/auth/button-login';
 import { Button } from '@/components/ui/button';

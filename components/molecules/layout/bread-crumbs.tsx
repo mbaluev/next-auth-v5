@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { SvgLogo } from '@/components/svg/components/logo';
 import { ReactNode } from 'react';
-import { IS_PATH, TRouteDTO, ROUTES } from '@/core/settings/routes';
+import { IS_PATH, TRouteDTO, ROUTES } from '@/lib/settings/routes';
 
 interface IBreadCrumbWrapperProps {
   children: ReactNode;

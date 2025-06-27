@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '@/core/utils/cn';
+import { cn } from '@/lib/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const widgetVariants = cva('flex flex-col flex-grow max-h-full rounded-lg overflow-hidden', {

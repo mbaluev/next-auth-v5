@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { useCurrentUser } from '@/auth/hooks/use-current-user';
 import { Separator } from '@/components/ui/separator';
 import { SvgLogo } from '@/components/svg/components/logo';
 import { ChevronRight, X } from 'lucide-react';
-import { TTreeDTO } from '@/core/utils/tree';
+import { TTreeDTO } from '@/lib/utils/tree';
 import { Fragment, ReactNode } from 'react';
-import { cn } from '@/core/utils/cn';
-import { TRouteDTO, IS_PATH, ROUTES } from '@/core/settings/routes';
+import { cn } from '@/lib/utils/cn';
+import { TRouteDTO, IS_PATH, ROUTES } from '@/lib/settings/routes';
 import {
   SidebarLeft,
   SidebarLeftButton,

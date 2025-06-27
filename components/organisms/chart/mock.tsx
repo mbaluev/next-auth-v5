@@ -1,4 +1,4 @@
-import { randomInt } from '@/core/utils/random';
+import { randomInt } from '@/lib/utils/random';
 import moment from 'moment';
 
 export enum EChartType {

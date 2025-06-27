@@ -1,5 +1,5 @@
 import { WidgetUserInfo } from '@/components/auth/widget-user-info';
-import { currentUser } from '@/core/auth/lib/current-user';
+import { currentUser } from '@/auth/lib/current-user';
 import { HardDrive } from 'lucide-react';
 
 export const WidgetServer = async () => {

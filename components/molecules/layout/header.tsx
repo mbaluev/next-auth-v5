@@ -1,6 +1,6 @@
 'use client';
 
-import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { useCurrentUser } from '@/auth/hooks/use-current-user';
 import { SidebarLeftTrigger } from '@/components/molecules/layout/sidebar-left';
 import { SidebarRightTrigger } from '@/components/molecules/layout/sidebar-right';
 import { Button } from '@/components/ui/button';
@@ -16,12 +16,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
-import { BREAD_CRUMBS } from '@/core/settings/bread-crumbs';
+import { BREAD_CRUMBS } from '@/lib/settings/bread-crumbs';
 import { BreadCrumbs } from '@/components/molecules/layout/bread-crumbs';
 import { Badge } from '@/components/ui/badge';
 import { UserRole } from '@prisma/client';
 import { Separator } from '@/components/ui/separator';
-import { ROUTES } from '@/core/settings/routes';
+import { ROUTES } from '@/lib/settings/routes';
 import Link from 'next/link';
 
 const HeaderRightThemeBtn = () => {

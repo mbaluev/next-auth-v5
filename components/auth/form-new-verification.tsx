@@ -3,7 +3,7 @@
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { newVerification } from '@/core/auth/actions/new-verification';
+import { newVerification } from '@/auth/actions/new-verification';
 import { AlertSuccess, AlertError, AlertInfo } from '@/components/ui/alert';
 import { router } from 'next/client';
 

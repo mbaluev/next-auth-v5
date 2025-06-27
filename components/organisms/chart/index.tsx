@@ -29,10 +29,10 @@ import {
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spinner } from '@/components/ui/spinner';
-import { useResizeObserver } from '@/core/hooks/use-resize-observer';
+import { useResizeObserver } from '@/lib/hooks/use-resize-observer';
 import { v4 } from 'uuid';
 import { TooltipText } from '@/components/ui/tooltip';
-import { ROUTES } from '@/core/settings/routes';
+import { ROUTES } from '@/lib/settings/routes';
 import { h } from 'preact';
 
 export const Chart = (props: WidgetProps) => {

@@ -1,4 +1,4 @@
-import { guid } from '@/core/utils/guid';
+import { guid } from '@/lib/utils/guid';
 
 export type TTreeState = {
   level?: number;

@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { cn } from '@/core/utils/cn';
+import { cn } from '@/lib/utils/cn';
 
 type MasterProps = ComponentProps<'div'>;
 const MasterDefault = (props: MasterProps) => {

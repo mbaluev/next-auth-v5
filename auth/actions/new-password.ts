@@ -1,11 +1,11 @@
 'use server';
 
 import * as z from 'zod';
-import { newPasswordSchema } from '@/core/auth/schemas';
-import { getPasswordResetTokenByToken } from '@/core/auth/data/password-reset-token';
-import { getUserByEmail } from '@/core/auth/data/user';
+import { newPasswordSchema } from '@/auth/schemas';
+import { getPasswordResetTokenByToken } from '@/auth/data/password-reset-token';
+import { getUserByEmail } from '@/auth/data/user';
 import bcrypt from 'bcryptjs';
-import { db } from '@/core/utils/db';
+import { db } from '@/lib/utils/db';
 
 export const newPassword = async (values: z.infer<typeof newPasswordSchema>, token: string) => {
   if (!token) {
