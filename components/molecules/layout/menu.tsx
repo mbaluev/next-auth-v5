@@ -119,8 +119,8 @@ const MenuLeftContent = () => {
   const { toggleSidebar, data } = useSidebarLeft();
   if (!user) return null;
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-4 p-4 justify-between">
+    <div className="flex flex-col gap-4 p-4">
+      <div className="flex gap-4 justify-between">
         <SidebarLeftButton asChild variant="ghost" className="flex-1">
           <Link href={ROUTES.HOME.path}>
             <SvgLogo className="w-6 h-6" />
@@ -131,13 +131,10 @@ const MenuLeftContent = () => {
           <X />
         </Button>
       </div>
-      <Separator />
-      <div className="flex flex-col gap-4 p-4">
-        {data
-          ?.flat()
-          ?.filter((d) => !d.state.hidden)
-          .map((node, index) => <MenuItemLeft key={index} node={node} />)}
-      </div>
+      {data
+        ?.flat()
+        ?.filter((d) => !d.state.hidden)
+        .map((node, index) => <MenuItemLeft key={index} node={node} />)}
     </div>
   );
 };
@@ -165,11 +162,13 @@ const MenuRightContent = () => {
   const { toggleSidebar } = useSidebarRight();
   if (!user) return null;
   return (
-    <div className="flex gap-4 p-4 justify-between items-center">
-      <p className="pl-4">options</p>
-      <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-        <X />
-      </Button>
+    <div className="flex flex-col gap-4 p-4">
+      <div className="flex gap-4 justify-between items-center">
+        <p className="pl-4">options</p>
+        <Button variant="ghost" size="icon" onClick={toggleSidebar}>
+          <X />
+        </Button>
+      </div>
     </div>
   );
 };
