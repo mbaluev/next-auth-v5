@@ -10,11 +10,11 @@ export default function Home() {
   const auth = useIsAuth();
   return (
     <div className="space-y-10 text-center">
-      <div className="text-6xl flex gap-8 flex-row flex-wrap items-center justify-center">
-        <SvgLogo />
-        <h1 className="text-6xl font-semibold">{process.env.APP_NAME}</h1>
+      <div className="flex gap-8 flex-col items-center justify-center">
+        <SvgLogo className="text-5xl" />
+        <h1 className="text-5xl font-semibold">{process.env.APP_NAME}</h1>
       </div>
-      <div className="flex gap-1 flex-col items-center text-lg text-muted-foreground">
+      <div className="flex gap-1 flex-col items-center text-muted-foreground">
         <p>authentication service</p>
         <div className="flex gap-2 flex-wrap justify-center">
           <p>next.js</p>
