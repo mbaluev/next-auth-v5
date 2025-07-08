@@ -163,7 +163,7 @@ const MenuRightContent = () => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex gap-4 justify-between items-center">
-        <p className="pl-4">metadata</p>
+        <p className="pl-4">settings</p>
         <Button variant="ghost" size="icon" onClick={toggleSidebar}>
           <X />
         </Button>

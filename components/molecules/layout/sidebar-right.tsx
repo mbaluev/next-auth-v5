@@ -15,7 +15,7 @@ import {
 import { cn } from '@/lib/utils/cn';
 import { MEDIA_MD, useMatchMedia } from '@/lib/hooks/use-match-media';
 import { Button } from '@/components/ui/button';
-import { Database } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
 import { useCurrentUser } from '@/auth/hooks/use-current-user';
 import { useCookies } from 'next-client-cookies';
 import { usePathname } from 'next/navigation';
@@ -154,7 +154,7 @@ const SidebarRightTrigger = forwardRef<ElementRef<typeof Button>, SidebarRightTr
         }}
         {..._props}
       >
-        <Database />
+        <SlidersHorizontal />
       </Button>
     );
   }
