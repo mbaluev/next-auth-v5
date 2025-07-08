@@ -4,13 +4,13 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { newPasswordSchema } from '@/core/auth/schemas';
+import { newPasswordSchema } from '@/auth/schemas';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { newPassword } from '@/core/auth/actions/new-password';
+import { newPassword } from '@/auth/actions/new-password';
 import { InputPassword } from '@/components/ui/input-password';
 
 export const FormNewPassword = () => {

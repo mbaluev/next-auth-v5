@@ -1,4 +1,4 @@
-import { WidgetServer } from '@/components/widgets/server';
+import { WidgetServer } from '@/components/organisms/widgets/server';
 
 const ServerPage = () => {
   return (

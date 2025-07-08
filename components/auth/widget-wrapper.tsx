@@ -3,7 +3,12 @@
 import { ReactNode } from 'react';
 import { ButtonsSocial } from '@/components/auth/buttons-social';
 import { ButtonBack } from '@/components/auth/button-back';
-import { Widget, WidgetContent, WidgetHeader, WidgetProps } from '@/components/layout/widget';
+import {
+  Widget,
+  WidgetContent,
+  WidgetHeader,
+  WidgetProps,
+} from '@/components/molecules/layout/widget';
 import { WidgetHeaderContent } from '@/components/auth/widget-header-content';
 
 interface WidgetWrapperProps extends WidgetProps {

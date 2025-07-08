@@ -1,7 +1,7 @@
 'use client';
 
-import { WidgetDebug } from '@/components/widgets/debug';
-import { WidgetProfile } from '@/components/widgets/profile';
+import { WidgetDebug } from '@/components/organisms/widgets/debug';
+import { WidgetProfile } from '@/components/organisms/widgets/profile';
 
 export default function Debug() {
   return (

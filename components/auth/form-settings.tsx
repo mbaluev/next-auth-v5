@@ -4,10 +4,10 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
-import { settings } from '@/core/auth/actions/settings';
+import { settings } from '@/auth/actions/settings';
 import { Fragment, useState, useTransition } from 'react';
 import { useSession } from 'next-auth/react';
-import { settingsSchema } from '@/core/auth/schemas';
+import { settingsSchema } from '@/auth/schemas';
 import {
   Form,
   FormField,
@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useCurrentUser } from '@/core/auth/hooks/use-current-user';
+import { useCurrentUser } from '@/auth/hooks/use-current-user';
 import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import {
   Select,

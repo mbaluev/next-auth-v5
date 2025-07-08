@@ -4,13 +4,13 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { resetSchema } from '@/core/auth/schemas';
+import { resetSchema } from '@/auth/schemas';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { AlertSuccess, AlertError } from '@/components/ui/alert';
 import { useState, useTransition } from 'react';
-import { reset } from '@/core/auth/actions/reset';
+import { reset } from '@/auth/actions/reset';
 
 export const FormReset = () => {
   const [error, setError] = useState<string | undefined>();

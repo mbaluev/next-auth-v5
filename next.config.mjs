@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'standalone',
   experimental: {
     serverActions: {
-      allowedOrigins: ['localhost', 'auth-client', 'mbaluev.com'],
+      allowedOrigins: ['localhost', 'auth-frontend', 'mbaluev.com'],
     },
   },
   env: {

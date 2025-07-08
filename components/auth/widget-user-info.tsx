@@ -1,7 +1,6 @@
 import { ExtendedUser } from '@/next-auth';
 import { Badge } from '@/components/ui/badge';
 import { forwardRef, ReactElement } from 'react';
-import { Separator } from '@/components/ui/separator';
 import {
   Widget,
   WidgetContent,
@@ -9,7 +8,7 @@ import {
   WidgetIcon,
   WidgetProps,
   WidgetTitle,
-} from '@/components/layout/widget';
+} from '@/components/molecules/layout/widget';
 import { Button } from '@/components/ui/button';
 import { Ellipsis } from 'lucide-react';
 import { TooltipText } from '@/components/ui/tooltip';
@@ -43,7 +42,7 @@ const WidgetUserInfo = forwardRef<HTMLDivElement, UserInfoProps>((props, ref) =>
         </div>
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">role</p>
-          <p>{user?.role}</p>
+          <p>{user?.role.toLowerCase()}</p>
         </div>
         <div className="flex flex-row gap-4 items-center justify-between">
           <p className="font-medium">two factor authentication</p>

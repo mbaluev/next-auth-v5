@@ -1,17 +1,11 @@
-import { WidgetWrapper } from '@/components/auth/widget-wrapper';
-import { AlertError } from '@/components/ui/alert';
-import { MasterCenter } from '@/components/layout/master';
+import { MasterCenter } from '@/components/molecules/layout/master';
+import { SvgTrash } from '@/components/svg/components/trash';
+import { ErrorBlock } from '@/components/molecules/layout/error-block';
 
 export default function NotFound() {
   return (
     <MasterCenter>
-      <WidgetWrapper
-        headerLabel="authentication service"
-        backButtonLabel="back home"
-        backButtonHref="/"
-      >
-        <AlertError message="page not found" />
-      </WidgetWrapper>
+      <ErrorBlock icon={<SvgTrash />} code="404" name="page not found" />
     </MasterCenter>
   );
 }

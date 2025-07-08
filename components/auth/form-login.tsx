@@ -4,7 +4,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { WidgetWrapper } from '@/components/auth/widget-wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '@/core/auth/schemas';
+import { loginSchema } from '@/auth/schemas';
 import { Input } from '@/components/ui/input';
 import {
   Form,
@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { AlertSuccess, AlertError } from '@/components/ui/alert';
-import { login } from '@/core/auth/actions/login';
+import { login } from '@/auth/actions/login';
 import { Fragment, useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { InputPassword } from '@/components/ui/input-password';
